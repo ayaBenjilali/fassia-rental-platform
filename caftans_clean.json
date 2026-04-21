@@ -1,0 +1,407 @@
+[
+    {
+        "titre": "consequatur magnam veritatis",
+        "description": "Vel qui ipsa numquam. Aliquam molestias cupiditate dolorem est. Voluptates quae similique ut et laboriosam aut omnis. Ut ipsum ea aliquam consequuntur rem.",
+        "prix": "578.16",
+        "localisation": "South Juliana",
+        "taille": "Unique",
+        "couleur": "lime",
+        "tissu": "Velours",
+        "photos": []
+    },
+    {
+        "titre": "quia aut aliquam",
+        "description": "Doloremque veritatis nostrum eum similique. Aut officia id laboriosam molestias. Quis unde a veritatis nihil.",
+        "prix": "1060.75",
+        "localisation": "Nicolasshire",
+        "taille": "Unique",
+        "couleur": "navy",
+        "tissu": "Dentelle",
+        "photos": []
+    },
+    {
+        "titre": "libero dolorum corrupti",
+        "description": "Nihil et corrupti doloribus asperiores. Laborum qui nemo distinctio consequatur rerum modi repellat sed. Omnis pariatur ad soluta.",
+        "prix": "4995.00",
+        "localisation": "Muhammadchester",
+        "taille": "S",
+        "couleur": "gray",
+        "tissu": "Soie",
+        "photos": []
+    },
+    {
+        "titre": "et quia eius",
+        "description": "Eos consequatur voluptatem voluptatum et sapiente quos aut voluptatibus. Pariatur consequatur qui et itaque voluptatem sunt labore. Quo quod impedit eos maiores.",
+        "prix": "4108.04",
+        "localisation": "Port Kevenchester",
+        "taille": "L",
+        "couleur": "navy",
+        "tissu": "Soie",
+        "photos": []
+    },
+    {
+        "titre": "Caftan \"Majesté Pourpre\"",
+        "description": "Incarnez la grâce et le mystère avec ce caftan d'un prune profond absolument envoûtant. Réalisé dans un satin de soie luxueux.",
+        "prix": "550.00",
+        "localisation": "FES",
+        "taille": "Standard",
+        "couleur": "Prune",
+        "tissu": "Satin de soie haute couture",
+        "photos": [
+            "photos\/QaMlls8tqsFSemCgyIEw3wsBevQbrqzTl1iD8y1f.jpg",
+            "photos\/GQKfOyCn2TLIRD8n3TdvKp2rX96WnJ6w85HqGM6f.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Sauge Royale\"",
+        "description": "Alliez noblesse et fraîcheur avec ce caftan en satin de soie vert sauge. Sublimé par des broderies artisanales ton sur ton.",
+        "prix": "500.00",
+        "localisation": "MEKNES",
+        "taille": "Standard",
+        "couleur": "Vert d'eau",
+        "tissu": "Satin de soie",
+        "photos": [
+            "photos\/Mhq2FTWxtE6t21UyRZnQZG8MCSyDwsdBnkIcIcZI.jpg",
+            "photos\/1h0MeYPZKr1Va1Fabqv3b1KI7xNpdL9sn5ZJv5RB.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Émeraude & Or\"",
+        "description": "L'alliance parfaite de la tradition et du luxe absolu. Velours émeraude épais orné de broderies dorées Maalem.",
+        "prix": "600.00",
+        "localisation": "FES",
+        "taille": "Standard",
+        "couleur": "Vert Émeraude \/ Or",
+        "tissu": "Velours de soie (Mobra) haut de gamme",
+        "photos": [
+            "photos\/BiCkDbv1wNc4EGzRKLnUk0UFWmo3oVxrRtPwgjIu.jpg",
+            "photos\/EkIm7gPYlSN4dninWvrpjJHtolXjts1K18uBdNzt.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Fleur de Menthe\"",
+        "description": "Douceur absolue en crêpe de soie vert menthe. Broderies florales ton sur ton et perlage délicat.",
+        "prix": "450.00",
+        "localisation": "FES",
+        "taille": "Standard",
+        "couleur": "Vert Menthe",
+        "tissu": "Crêpe de soie",
+        "photos": [
+            "photos\/Q5H3zJ3R481doTqgDhMZFSZ8nlrH39Q5iHXmW5Lp.jpg",
+            "photos\/8VjQudBLL4zinM8ST37Z4cgruRafRgSSGByQkKwU.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Bronze Impérial\"",
+        "description": "Élégance à l'état pur en velours chocolat profond. Broderies dorées Maalem majestueuses.",
+        "prix": "650.00",
+        "localisation": "MEKNES",
+        "taille": "Standard",
+        "couleur": "Chocolat profond \/ Bronze doré",
+        "tissu": "Velours de soie (Mobra) de première qualité",
+        "photos": [
+            "photos\/6AdRnrucRs9f9FvUMUJ7XYL4TxkYbDfkYfMGWGp5.jpg",
+            "photos\/masjtQxEcCMcxxq5YOtxvAi0VTFTFxMBR5dLDb6z.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Nuit Boréale\"",
+        "description": "Élégance contemporaine en satin vert paon avec broderies argentées géométriques.",
+        "prix": "500.00",
+        "localisation": "CASA",
+        "taille": "Standard",
+        "couleur": "Vert Paon",
+        "tissu": "Satin de soie de luxe",
+        "photos": [
+            "photos\/ediiYgFPfff4CVuJqoQlOq3jAbV6AlXKJEKhEq2H.jpg",
+            "photos\/8tLSSMm5HwMcx4ShMYqsr44J38nAUMCGXwi09Hgi.jpg"
+        ]
+    },
+    {
+        "titre": "Takchita \"Éclat d'Améthyste\"",
+        "description": "Luxe et raffinement en duo velours violet profond et satin améthyste.",
+        "prix": "700.00",
+        "localisation": "CASA",
+        "taille": "Standard",
+        "couleur": "Violet Royal",
+        "tissu": "Duo Velours de soie et Satin lourd",
+        "photos": [
+            "photos\/9QlEx9AJOjQxHViC6y43JipooxY3n34BsPpBeHWA.jpg",
+            "photos\/6TMA3cyBAyKfPfA0SUrONvgvBIog4hvZphN35Vhd.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Lumière Pastel\"",
+        "description": "Jaune pastel délicat et solaire en crêpe de soie léger. Broderies florales dorées.",
+        "prix": "450.00",
+        "localisation": "MEKNES",
+        "taille": "Standard",
+        "couleur": "Jaune Pastel",
+        "tissu": "Crêpe de soie",
+        "photos": [
+            "photos\/QXQQicUpLT7uCVjIOt7FDDAQa9VorG0g7LYLGyLx.jpg",
+            "photos\/EiGITUNxemssdrdWvwfmucHibzkmhHPKZfDZS7tt.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Éclat de Bronze\"",
+        "description": "Satin de soie bronze noble. Buste recouvert de broderies dorées Maalem rappelant les parures antiques.",
+        "prix": "550.00",
+        "localisation": "RABAT",
+        "taille": "Standard",
+        "couleur": "Bronze",
+        "tissu": "Satin de soie lourd au fini métallique",
+        "photos": [
+            "photos\/9EIbnWkc9XbFd6HGaf6YYcTIF94VHBA9LqammSMn.jpg",
+            "photos\/j0Qw0QT0gEcy9WujHIIYSFIrqz4GjYkuSAiNvNzW.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Café de Nuit\"",
+        "description": "Velours chocolat noir avec col officier et ceinture dorée sculpturale. Élégance minimaliste.",
+        "prix": "600.00",
+        "localisation": "RABAT",
+        "taille": "Standard",
+        "couleur": "Chocolat Noir",
+        "tissu": "Velours de soie (Mobra) fini miroitant",
+        "photos": [
+            "photos\/i4vECOGPi953rwCJC7Km5SHtzVre8EMJhbfLoLaJ.jpg",
+            "photos\/l8u8zD0PIU03cvt6TI0HKh1T7YgGP1YtPHEobmm0.jpg"
+        ]
+    },
+    {
+        "titre": "Takchita \"Aube Dorée\"",
+        "description": "Vieux rose délicat et satin cuivré. Broderies or Maalem et ceinture sculpturale.",
+        "prix": "500.00",
+        "localisation": "FES",
+        "taille": "Standard",
+        "couleur": "Vieux Rose",
+        "tissu": "Duo Crêpe de soie et Satin irisé",
+        "photos": [
+            "photos\/hin0PCA9A5Icbz9cy6xxyk3pQulHzukocqxDaue5.jpg",
+            "photos\/qw2m1rZaHHvxzOVlM1jzylzooUTq6HS2cMboBQms.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Rouge Rubis\"",
+        "description": "Rouge incandescent en soie jacquard avec motifs floraux tissés. Allure incendiaire.",
+        "prix": "500.00",
+        "localisation": "TANGER",
+        "taille": "Standard",
+        "couleur": "Rouge Rubis",
+        "tissu": "Soie Jacquard",
+        "photos": [
+            "photos\/YR00Y1Ld8ASXv0z42GoKlWWMAXek4afse6yCz8aa.jpg",
+            "photos\/uXcAfTTp8CJqiXkNn7yN2rO2RY0u6vv1bV3ZW5P4.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Soleil d'Orient\"",
+        "description": "Jaune canari vibrant en crêpe de soie avec broderies florales blanc écru.",
+        "prix": "450.00",
+        "localisation": "KENITRA",
+        "taille": "Standard",
+        "couleur": "Jaune Vif",
+        "tissu": "Crêpe de soie",
+        "photos": [
+            "photos\/jWOV2S9rag42oeMXoF6HKsDF9fm96maNWu2jEECX.jpg",
+            "photos\/SYaEcdAeWNv3Eo03PzoeyN6mQtlIRGvtwVUYRAUQ.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Champagne Impérial\"",
+        "description": "Velours de soie champagne avec broderies artisanales dorées et ceinture sculpturale.",
+        "prix": "600.00",
+        "localisation": "KENITRA",
+        "taille": "Standard",
+        "couleur": "Champagne",
+        "tissu": "Velours de soie (Mobra) au fini miroitant",
+        "photos": [
+            "photos\/DeOm5jpQ1XWYRbXZgVleMcCyv4GObMsp9L90k3RP.jpg",
+            "photos\/8GHBMEmY9EuMSy0Sw6TcbQfrTiMSJSvzZJTg1kby.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Aurore de Velours\"",
+        "description": "Fusion velours fuchsia et jupe plissée soleil dorée. Silhouette modernité absolue.",
+        "prix": "750.00",
+        "localisation": "CASA",
+        "taille": "Standard",
+        "couleur": "Fuchsia Profond",
+        "tissu": "Velours de soie et Tissu métallique plissé",
+        "photos": [
+            "photos\/zT2w4L19zWTHFQrYVTof7NMua5ni4pUGIwtCFxTU.jpg",
+            "photos\/uiqJeUxd2mcth20YDw5ahKcyH2UuHauzi5RwJGmf.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Jardin d'Oasis\"",
+        "description": "Velours de soie vert mousse avec broderies florales ton sur ton d'une finesse incomparable.",
+        "prix": "600.00",
+        "localisation": "MEKNES",
+        "taille": "Standard",
+        "couleur": "Vert Mousse",
+        "tissu": "Velours de soie (Mobra) haut de gamme",
+        "photos": [
+            "photos\/EjbRKpWy35BDsg0bAnL13cC2vwgv73wbKGyvQNVx.jpg",
+            "photos\/Xr6s1qBa1EfItjjKto2UUAKdfJgjNB4zXyfrrkty.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Éclipse Royale\"",
+        "description": "\"L'incarnation du glamour absolu et de la puissance. Ce caftan fusion 'Éclipse Royale' marie un velours noir intense à une spectaculaire jupe plissée soleil aux reflets bronze antique. Orné de broderies Maalem dorées d'une précision chirurgicale sur le buste et les manches, il offre un contraste saisissant entre ombre et lumière. Sa coupe majestueuse et son mouvement théâtral en font la pièce maîtresse idéale pour les femmes qui souhaitent marquer les esprits lors d'un gala ou d'un mariage de prestige, sans faire aucune concession sur l'élégance et la force de leur allure.\"",
+        "prix": "750.00",
+        "localisation": "RABAT",
+        "taille": "Standard",
+        "couleur": "Noir Intense",
+        "tissu": "Velours de soie (Mobra) et Tissu métallique plissé haute performance",
+        "photos": [
+            "photos\/WoR6O3kJgzN7ttBBeEb2KAUaVlW9F980PCeGW6Np.jpg",
+            "photos\/UmyaNAZOoRKrX9ogvjCYdRa9Fy5ulc3zVNnxCBSP.jpg"
+        ]
+    },
+    {
+        "titre": "Takchita \"Rêve d'Azur\"",
+        "description": "Chiffon de soie bleu aqua l\\u00e9ger avec broderies multicolores et dor\\u00e9es.",
+        "prix": "500.00",
+        "localisation": "FES",
+        "taille": "Standard",
+        "couleur": "Bleu Aqua",
+        "tissu": "Duo Chiffon de soie et Satin fluide",
+        "photos": [
+            "photos\/Qkt4KOlBcMgML3L0BGcAMkFuwMqKy01adKEQ7kt9.jpg",
+            "photos\/B5dikgyuvrNO7Kvu1DSaLEIDldKGWsGNnzdj2xy1.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Rubis d'Orient\"",
+        "description": "Cr\\u00eape de soie lourd bordeaux avec broderies or Maalem. Noblesse et distinction.",
+        "prix": "500.00",
+        "localisation": "TANGER",
+        "taille": "Standard",
+        "couleur": "Bordeaux",
+        "tissu": "Cr\\u00eape de soie lourd fini mat",
+        "photos": [
+            "photos\/0y7YNM2fFIYsMSgoSNdDxSEtumoK8mvIDF3NATZ3.jpg",
+            "photos\/Z3bIouiBPKNrxk9LPOm6JivaAqbIc3TPAmEM7eNk.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Éclat d'Améthyste\"",
+        "description": "Soie satinée violet électrique avec broderies argentées géométriques et florales.",
+        "prix": "500.00",
+        "localisation": "AGADIR",
+        "taille": "Standard",
+        "couleur": "Violet \\u00c9lectrique",
+        "tissu": "Soie Satin\\u00e9e",
+        "photos": [
+            "photos\/FsxgwngLnWBchOgyhFQodTENXKk2L4JAllQUROAE.jpg",
+            "photos\/Ahb3uVxE63P3xwPDXQNhifi88cWA9G1tWHA2mkTu.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Douceur d'Ivoire\"",
+        "description": "Cr\\u00eape de soie cr\\u00e8me avec broderies magenta et bordeaux. Subtilit\\u00e9 et raffin\\u00e9ment.",
+        "prix": "450.00",
+        "localisation": "AGADIR",
+        "taille": "Standard",
+        "couleur": "Cr\\u00e8me",
+        "tissu": "Cr\\u00eape de soie l\\u00e9ger",
+        "photos": [
+            "photos\/kVRmnJHWJ9rD5m3PjabVET5mnJiGuThgfYJgAORL.jpg",
+            "photos\/uzSS7t74QMuY0vRZkuI4rBBiMpwlbd6x4HSJ3bkS.jpg",
+            "photos\/3voVWJFjzxRreR4UmmgmpX58bm2sFQLYnBDU7i0Q.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Éclat de Corail\"",
+        "description": "\"Rayonnez de fraîcheur et de joie avec ce caftan d'un corail vibrant, couleur de l'optimisme par excellence. Confectionné dans un crêpe de soie d’une légèreté divine, il s'orne de broderies géométriques ton sur ton et d'un perlage délicat sur le buste et les manches. Sa ceinture ornée de perles assorties et sa coupe fluide en font une pièce à la fois dynamique et sophistiquée. Idéal pour une cérémonie en journée, un baptême ou un mariage printanier où vous souhaitez incarner une élégance moderne, joyeuse et lumineuse.\"",
+        "prix": "450.00",
+        "localisation": "MARRAKECH",
+        "taille": "Standard",
+        "couleur": "Corail",
+        "tissu": "Crêpe de soie premium",
+        "photos": [
+            "photos\/YmaazZO4NZ5DAko7eLdvErWXE8eDmw2RrR3Js4qY.jpg",
+            "photos\/hfOziRWdlObpKxCkf6mz9GKdHTfDERwfmylqK4Jr.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Brise Argentée\"",
+        "description": "\"Incarnant une élégance discrète et majestueuse, ce caftan bleu glacé séduit par sa coupe longue et fluide, rehaussée de broderies raffinées aux nuances argentées et lilas. Son décolleté en V structuré, ses manches amples finement travaillées et sa ceinture assortie soulignent la silhouette avec délicatesse. Confectionné dans un tissu léger au tombé noble, il convient parfaitement aux soirées, fiançailles, mariages et cérémonies où l’on recherche une allure sophistiquée, moderne et intemporelle.\"",
+        "prix": "450.00",
+        "localisation": "FES",
+        "taille": "Standard",
+        "couleur": "Bleu glacé",
+        "tissu": "Crêpe de soie premium",
+        "photos": [
+            "photos\/v1K5Wz86CkFj9J8iyfVM3b2XOLhUdYLFBhQ540C1.jpg",
+            "photos\/QpTUTPoWP3Drwom3RL6TMF853EN4PpJd8G8z5xYl.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Lumière Safran\"",
+        "description": "\"Éclatant et majestueux, ce caftan jaune safran séduit par sa coupe longue et fluide, sublimée par de riches broderies aux nuances vertes et dorées. Sa ceinture assortie marque délicatement la taille, tandis que les finitions travaillées au niveau du buste, des manches et de l’ouverture centrale lui confèrent une allure précieuse et raffinée. Idéal pour une cérémonie, un mariage ou une soirée d’exception, ce modèle incarne une élégance audacieuse et solaire.\"",
+        "prix": "500.00",
+        "localisation": "MEKNES",
+        "taille": "Standard",
+        "couleur": "Jaune safran",
+        "tissu": "Crêpe de soie premium",
+        "photos": [
+            "photos\/WerURVMVX643eKPiavzyqqLh6BD6j2ItD8GXne79.jpg",
+            "photos\/z1BR98DPXH0lf7efS3K2qQGxNRez0pzTIFu5Hwgh.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Émeraude Royale\"",
+        "description": "\"Ce caftan vert émeraude allie fraîcheur, noblesse et raffinement à travers une silhouette fluide rehaussée de broderies dorées somptueuses. Son tombé élégant, sa ceinture structurée et ses manches délicatement ornées composent une tenue de cérémonie à la fois traditionnelle et contemporaine. Conçu pour mettre en valeur la silhouette avec finesse, il convient parfaitement aux mariages, fiançailles et grandes occasions.\"",
+        "prix": "480.00",
+        "localisation": "CASA",
+        "taille": "Standard",
+        "couleur": "Vert Émeraude",
+        "tissu": "Crêpe de soie premium",
+        "photos": [
+            "photos\/Lev0n5XeU9ZIXqV3hvDuj2SanckpvpYCS7ATvHCD.jpg",
+            "photos\/b1LVLs3wxChjhPFV9nEzd5TKFvtIxGBOAUdsxwMy.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Perle Dorée\"",
+        "description": "\"Sobre, chic et intemporel, ce caftan beige doré séduit par son éclat discret et sa coupe élégante. Les broderies fines ton sur ton au niveau du buste et la ceinture minimaliste créent un rendu sophistiqué, parfait pour celles qui recherchent une allure distinguée sans excès. Sa matière lumineuse et son tombé fluide en font une pièce idéale pour les cérémonies raffinées, les soirées habillées et les événements haut de gamme.\"",
+        "prix": "430.00",
+        "localisation": "RABAT",
+        "taille": "Standard",
+        "couleur": "Beige doré",
+        "tissu": "Satin de soie premium",
+        "photos": [
+            "photos\/3voVWJFjzxRreR4UmmgmpX58bm2sFQLYnBDU7i0Q.jpg",
+            "photos\/rJJpoF8xEZ8Q3IGzJMuibERLZJsvGXcSnHpYNTKk.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"Neige Impériale\"",
+        "description": "\"Pur et spectaculaire, ce caftan blanc incarne une élégance d’exception grâce à sa ligne sobre sublimée par de somptueux détails floraux en relief sur le bas de la robe. Sa coupe fluide, ses manches évasées et sa taille délicatement soulignée créent une silhouette noble et harmonieuse. Idéal pour une mariée, une cérémonie religieuse, des fiançailles ou un événement prestigieux, ce modèle se distingue par son raffinement moderne et sa présence remarquable.\"",
+        "prix": "550.00",
+        "localisation": "TANGER",
+        "taille": "Standard",
+        "couleur": "Blanc ivoire",
+        "tissu": "Crêpe premium avec finitions florales 3D",
+        "photos": [
+            "photos\/dDXe8YplTEPc5RVaBIYOctA508eepP90DwCw8KYp.jpg",
+            "photos\/VQkAR6vPeUdBA3T3RNhrLG7YcC70ItUxKbYj3CrO.jpg"
+        ]
+    },
+    {
+        "titre": "Caftan \"\\u00c9clipse Royale\"",
+        "description": "L'invitation au glamour. Velours noir et jupe plissée soleil bronze antique.",
+        "prix": "750.00",
+        "localisation": "RABAT",
+        "taille": "Standard",
+        "couleur": "Noir Intense",
+        "tissu": "Velours de soie et Tissu m\\u00e9tallique pliss\\u00e9",
+        "photos": [
+            "photos\/WoR6O3kJgzN7ttBBeEb2KAUaVlW9F980PCeGW6Np.jpg",
+            "photos\/UmyaNAZOoRKrX9ogvjCYdRa9Fy5ulc3zVNnxCBSP.jpg"
+        ]
+    }
+]
