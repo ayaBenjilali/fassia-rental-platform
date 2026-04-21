@@ -48,8 +48,7 @@
                 <!-- My Listings -->
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                        <h3 class="text-lg font-bold text-royal-dark font-heading">Mes Dernières Annonces</h3>
-                        <a href="{{ route('objets.index') }}" class="text-sm text-royal-gold hover:text-yellow-600 font-medium tracking-wide">Gérer tout &rarr;</a>
+                        <h3 class="text-lg font-bold text-royal-dark font-heading">Mes Annonces</h3>
                     </div>
                     <div class="p-6">
                         @forelse($objets as $objet)
@@ -118,6 +117,11 @@
                             </div>
                         @endforelse
                     </div>
+                    @if($objets->hasPages())
+                        <div class="px-6 py-4 border-t border-gray-100 bg-gray-50/50">
+                            {{ $objets->links() }}
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Recent Reservations -->

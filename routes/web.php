@@ -16,7 +16,7 @@ Route::resource('avis', AvisController::class)->only(['index', 'show']);
 
 Route::get('/dashboard', function () {
     $user = auth()->user();
-    $objets = \App\Models\ObjetLouable::where('user_id', $user->id)->latest()->take(4)->get();
+    $objets = \App\Models\ObjetLouable::where('user_id', $user->id)->latest()->paginate(5, ['*'], 'objets_page')->onEachSide(1);
     $reservations = \App\Models\Reservation::where('user_id', $user->id)->with('objetLouable')->latest()->take(4)->get();
     return view('dashboard', compact('objets', 'reservations'));
 })->middleware(['auth', 'verified'])->name('dashboard');

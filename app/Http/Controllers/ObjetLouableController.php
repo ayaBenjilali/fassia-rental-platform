@@ -140,7 +140,7 @@ class ObjetLouableController extends Controller
     public function destroy(ObjetLouable $objet)
     {
         $objet->delete();
-        return to_route('objets.index')->with('success', 'Objet supprimé avec succès.');
+        return back()->with('success', 'Objet supprimé avec succès.');
     }
 
     public function checkTitle(Request $request)
