@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CaftanSeeder::class,
             AccessoireSeeder::class,
+            SacSeeder::class,
+            TalonSeeder::class,
         ]);
     }
 }
