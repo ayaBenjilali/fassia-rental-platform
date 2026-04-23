@@ -16,8 +16,8 @@
                         <h3 class="text-xl opacity-90 mb-1">Bienvenue,</h3>
                         <p class="text-3xl font-heading font-bold">{{ Auth::user()->nom ?? Auth::user()->name }}</p>
                     </div>
-                    <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-1/4 translate-y-1/4">
-                        <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 3.5l7.5 14.5h-15L12 5.5z"/></svg>
+                    <div class="absolute right-6 bottom-6 opacity-30">
+                        <img src="{{ asset('images/logo_fassia.jpeg') }}" class="w-20 h-20 object-contain" alt="">
                     </div>
                 </div>
 
