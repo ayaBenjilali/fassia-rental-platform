@@ -40,22 +40,20 @@ class CartController extends Controller
         $objet = ObjetLouable::findOrFail($id);
         $cart = session()->get('cart', []);
 
+        // Vérifier si l'article est déjà dans le panier
+        if (isset($cart[$id])) {
+            return redirect()->back()->with('info', 'Cet article est déjà dans votre panier.');
+        }
+
         $taille = $request->input('taille_selectionnee');
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-            if ($taille) {
-                $cart[$id]['taille'] = $taille;
-            }
-        } else {
-            $cart[$id] = [
-                "name" => $objet->titre,
-                "quantity" => 1,
-                "price" => $objet->prix,
-                "photo" => $objet->photos->first() ? $objet->photos->first()->url_photo : null,
-                "taille" => $taille
-            ];
-        }
+        $cart[$id] = [
+            "name" => $objet->titre,
+            "quantity" => 1,
+            "price" => $objet->prix,
+            "photo" => $objet->photos->first() ? $objet->photos->first()->url_photo : null,
+            "taille" => $taille
+        ];
 
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Article ajouté au panier !');
