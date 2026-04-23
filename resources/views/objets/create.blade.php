@@ -16,7 +16,7 @@
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-royal-gold/5 rounded-full blur-3xl"></div>
 
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 relative z-10">
-            <div class="bg-white/70 backdrop-blur-md overflow-hidden shadow-2xl sm:rounded-[2.5rem] border border-white/50">
+            <div class="bg-white overflow-hidden shadow-2xl sm:rounded-[2.5rem] border border-white/50">
                 <div class="p-8 sm:p-12">
                     
                     <form method="POST" action="{{ route('objets.store') }}" enctype="multipart/form-data" x-data="productForm()" @submit="if(isValid()) { isSubmitting = true; return true; } else { $event.preventDefault(); return false; }">
@@ -75,22 +75,19 @@
                                         <template x-for="cat in categories" :key="cat.id">
                                             <button type="button" 
                                                 @click="type = cat.id; touched.type = true"
-                                                class="flex flex-col items-center justify-center aspect-square w-full max-w-[210px] mx-auto p-4 rounded-full border-2 transition-all duration-700 group relative"
-                                                :class="type === cat.id ? 'border-royal-gold bg-white shadow-2xl shadow-royal-gold/20 scale-105 -translate-y-2' : 'border-gray-50 bg-white hover:border-royal-gold/30 hover:shadow-2xl hover:-translate-y-3'">
+                                                class="flex flex-col items-center justify-center aspect-square w-full max-w-[210px] mx-auto p-4 rounded-full transition-all duration-700 group relative bg-white border-2 border-royal-gold/20"
+                                                :class="type === cat.id ? 'border-royal-gold ring-4 ring-royal-gold/10 scale-105 -translate-y-2' : 'hover:border-royal-gold/50 hover:-translate-y-1'">
                                                 
-                                                <div class="relative w-28 h-28 flex items-center justify-center transition-all duration-700 group-hover:scale-110 group-hover:rotate-3">
+                                                <div class="relative w-28 h-28 flex items-center justify-center transition-all duration-700 group-hover:scale-110">
                                                     <img :src="cat.img" :alt="cat.name" 
-                                                        class="object-contain transition-all duration-700 transform"
-                                                        :class="[
-                                                            cat.id === 'caftan' ? 'w-[85px] h-[85px]' : 'w-[105px] h-[105px]',
-                                                            type === cat.id ? 'drop-shadow-2xl scale-110' : 'drop-shadow-lg group-hover:drop-shadow-2xl'
-                                                        ]">
+                                                        class="object-contain transition-all duration-700 transform mix-blend-multiply"
+                                                        :class="cat.id === 'caftan' ? 'w-[85px] h-[85px]' : 'w-[105px] h-[105px]'">
                                                 </div>
                                                 <span class="mt-3 font-bold text-[10px] sm:text-[12px] uppercase tracking-[0.3em] text-center transition-all duration-500" 
                                                     :class="type === cat.id ? 'text-royal-gold' : 'text-gray-400 group-hover:text-royal-gold'" x-text="cat.name"></span>
                                                 
                                                 <!-- Selection/Hover Halo -->
-                                                <div class="absolute inset-0 rounded-full border-4 border-royal-gold/10 scale-110 transition-opacity duration-700 pointer-events-none"
+                                                <div class="absolute inset-0 rounded-full border-2 border-royal-gold/10 scale-105 transition-opacity duration-700 pointer-events-none"
                                                      :class="type === cat.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'"></div>
                                             </button>
                                         </template>
@@ -211,7 +208,7 @@
                                                     <svg class="w-10 h-10 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                                 </div>
                                             </div>
-                                            <h5 class="text-lg font-serif italic text-royal-dark mb-1">déposer les clichés</h5>
+                                            <h5 class="text-lg font-serif italic text-royal-dark mb-1">Déposer vos plus beaux clichés</h5>
                                             <p class="text-gray-400 text-[10px] uppercase tracking-widest mb-6">glisser ou cliquer pour parcourir</p>
                                             <label for="photos" class="inline-flex items-center px-8 py-3 bg-royal-emerald text-white font-bold rounded-full cursor-pointer hover:bg-emerald-800 transition active:scale-95 shadow-xl shadow-royal-emerald/20">
                                                 Sélectionner les Photos

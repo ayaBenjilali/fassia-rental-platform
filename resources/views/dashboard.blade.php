@@ -16,9 +16,6 @@
                         <h3 class="text-xl opacity-90 mb-1">Bienvenue,</h3>
                         <p class="text-3xl font-heading font-bold">{{ Auth::user()->nom ?? Auth::user()->name }}</p>
                     </div>
-                    <div class="absolute right-6 bottom-6 opacity-30">
-                        <img src="{{ asset('images/logo_fassia.jpeg') }}" class="w-20 h-20 object-contain" alt="">
-                    </div>
                 </div>
 
                 <!-- Stats 1 -->
