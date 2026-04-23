@@ -56,22 +56,24 @@
                         <div class="flex {{ $message->expediteur_id === auth()->id() ? 'justify-end' : 'justify-start' }}">
                             <div class="max-w-[75%] relative group">
                                 <!-- Message Bubble -->
-                                <div class="px-4 py-2 shadow-sm relative {{ $message->expediteur_id === auth()->id() ? 'bg-[#d9fdd3] text-gray-800 rounded-l-xl rounded-br-xl' : 'bg-white text-gray-800 rounded-r-xl rounded-bl-xl' }}">
-                                    <p class="text-sm leading-relaxed pr-10">{{ $message->contenu }}</p>
-                                    
-                                    <!-- Meta Info (Time + Checks) -->
-                                    <div class="absolute bottom-1 right-2 flex items-center gap-1">
-                                        <span class="text-[9px] text-gray-400 font-medium">{{ $message->created_at->format('H:i') }}</span>
-                                        @if($message->expediteur_id === auth()->id())
-                                            <div class="flex items-center -space-x-1.5">
-                                                <svg class="w-3 h-3 {{ $message->lu_a ? 'text-blue-500' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                                </svg>
-                                                <svg class="w-3 h-3 {{ $message->lu_a ? 'text-blue-500' : 'text-gray-400' }} -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                                                </svg>
-                                            </div>
-                                        @endif
+                                <div class="px-3 py-1.5 shadow-sm relative {{ $message->expediteur_id === auth()->id() ? 'bg-[#d9fdd3] text-gray-800 rounded-l-xl rounded-br-xl' : 'bg-white text-gray-800 rounded-r-xl rounded-bl-xl' }}">
+                                    <div class="flex flex-col">
+                                        <p class="text-sm leading-relaxed pr-14">{{ $message->contenu }}</p>
+                                        
+                                        <!-- Meta Info (Time + Checks) - Positioned at bottom right -->
+                                        <div class="flex items-center justify-end gap-1 mt-0.5 -mr-1">
+                                            <span class="text-[8px] text-gray-400/80 font-bold uppercase tracking-tighter">{{ $message->created_at->format('H:i') }}</span>
+                                            @if($message->expediteur_id === auth()->id())
+                                                <div class="flex items-center -space-x-1">
+                                                    <svg class="w-3 h-3 {{ $message->lu_a ? 'text-blue-500' : 'text-gray-400' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <svg class="w-3 h-3 {{ $message->lu_a ? 'text-blue-500' : 'text-gray-400' }} -ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <!-- Bubble Tail -->
@@ -98,18 +100,59 @@
                 </div>
 
                 <!-- Input Area -->
-                <div class="p-4 bg-[#f0f2f5] flex items-center gap-4">
-                    <button class="text-gray-500 hover:text-royal-gold transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div class="p-4 bg-[#f0f2f5] flex items-center gap-4 relative" x-data="{ 
+                    showEmojis: false,
+                    categories: {
+                        'Récents': ['❤️','✨','😊','👑','👗','👠','💎','💍','📸','🎉','🙏','😍','⭐','🔥','🇲🇦','🕌'],
+                        'Smileys & Personnes': ['😀','😃','😄','😁','😆','😅','😂','🤣','☺️','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🤩','🥳','😏','😒','😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵','🥶','😱','😨','😰','😥','😓','🤗','🤔','🤭','🥱','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','😴','🤤','😪','😵','🤐','🥴','🤢','🤮','🤧','😷','🤒','🤕','🤑','🤠','😈','👿','👹','👺','🤡','💩','👻','💀','☠️','👽','👾','🤖','🎃','😺','😸','😻','😼','😽','🙀','😿','😾'],
+                        'Luxe & Mode': ['👗','👘','🥻','🩱','👙','👚','👕','👖','🧣','🧤','🧥','🧦','👗','💍','💎','💄','💅','👜','💼','🎒','👟','👠','👡','👢','👑','👒','🎩','🎓','👒','👓','🕶','💍','💄','🧣','👜'],
+                        'L\'Fassia': ['🇲🇦','🕌','🥘','🍵','🏡','🤝','📍','📅','💰','✅','❌','⚠️','💡','📱','💬','🌙','🏮','🕍','🏰','🏛️','🏜️']
+                    }
+                }">
+                    <!-- Emoji Picker Popover - Final Robust Grid & Scroll Version -->
+                    <div x-show="showEmojis" @click.away="showEmojis = false" 
+                         class="absolute bottom-full left-4 mb-4 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 z-[100] w-[350px] overflow-hidden"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 translate-y-10"
+                         x-transition:enter-end="opacity-100 translate-y-0">
+                        
+                        <!-- Fixed Height Scrollable Area -->
+                        <div class="p-4 bg-white" style="height: 300px; overflow-y: scroll !important;">
+                            <template x-for="(list, name) in categories" :key="name">
+                                <div class="mb-6">
+                                    <h5 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4 ml-1" x-text="name"></h5>
+                                    <!-- Explicit Grid with Inline Style for absolute reliability -->
+                                    <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px;">
+                                        <template x-for="emoji in list" :key="emoji">
+                                            <button type="button" @click="$refs.messageInput.value += emoji; $refs.messageInput.focus()" 
+                                                    class="text-2xl hover:bg-gray-100 p-1.5 rounded-lg transition-transform hover:scale-125 flex items-center justify-center border-none bg-transparent cursor-pointer">
+                                                <span x-text="emoji"></span>
+                                            </button>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        
+                        <div class="bg-gray-50/80 backdrop-blur-sm p-3 flex justify-around border-t border-gray-100">
+                             <span class="text-lg opacity-40 hover:opacity-100 cursor-pointer transition" @click="$el.closest('.overflow-hidden').querySelector('.overflow-y-scroll').scrollTop = 0">🕒</span>
+                             <span class="text-lg opacity-40 hover:opacity-100 cursor-pointer transition">😀</span>
+                             <span class="text-lg opacity-40 hover:opacity-100 cursor-pointer transition">👗</span>
+                             <span class="text-lg opacity-40 hover:opacity-100 cursor-pointer transition">🇲🇦</span>
+                        </div>
+                    </div>
+
+                    <button type="button" @click="showEmojis = !showEmojis" class="text-gray-500 hover:text-royal-gold transition-transform hover:scale-110 active:scale-90">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </button>
-                    <button class="text-gray-500 hover:text-royal-gold transition">
+                    <button type="button" class="text-gray-500 hover:text-royal-gold transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
                     </button>
                     
                     <form action="{{ route('messages.store') }}" method="POST" class="flex-1 flex gap-3">
                         @csrf
                         <input type="hidden" name="destinataire_id" value="{{ $interlocuteur->id }}">
-                        <input type="text" name="contenu" placeholder="Écrivez votre message..." required
+                        <input type="text" name="contenu" placeholder="Écrivez votre message..." required x-ref="messageInput"
                                class="flex-1 bg-white border-none rounded-xl px-5 py-3 text-sm shadow-sm focus:ring-0 transition">
                         
                         <button type="submit" class="w-12 h-12 bg-royal-emerald text-white rounded-full flex items-center justify-center shadow-lg hover:brightness-110 active:scale-95 transition">
