@@ -28,6 +28,26 @@
 
             <!-- Settings Dropdown / Login -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Messages Icon -->
+                @auth
+                <a href="{{ route('messages.index') }}" class="mr-6 relative group text-royal-gold hover:text-royal-dark transition">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                    </svg>
+                    @php 
+                        $unreadMessages = \App\Models\Message::where('destinataire_id', auth()->id())->whereNull('lu_a')->count();
+                    @endphp
+                    @if($unreadMessages > 0)
+                        <span class="absolute -top-2.5 -right-2.5 flex h-6 w-6">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-6 w-6 bg-red-600 text-white text-[10px] font-black items-center justify-center shadow-lg border-2 border-white">
+                                {{ $unreadMessages }}
+                            </span>
+                        </span>
+                    @endif
+                </a>
+                @endauth
+
                 <!-- Cart Icon -->
                 <a href="{{ route('cart.index') }}" class="mr-6 relative group text-royal-gold hover:text-royal-dark transition">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,4 +164,18 @@
         </div>
         @endauth
     </div>
+    <script>
+        function updateUnreadCount() {
+            fetch('{{ route('messages.index') }}', {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(response => response.text())
+            .then(html => {
+                // On pourrait extraire le compte ici si on avait une API dédiée
+                // Mais pour faire simple, on va juste rafraîchir le badge si on est sur la page
+            });
+        }
+        // Poll every 30 seconds
+        // setInterval(updateUnreadCount, 30000);
+    </script>
 </nav>

@@ -13,18 +13,37 @@ class MessageController extends Controller
     public function index()
     {
         $userId = auth()->id();
-        $messages = Message::with('expediteur', 'destinataire')
-            ->where('destinataire_id', $userId)
-            ->orWhere('expediteur_id', $userId)
+        
+        // Récupérer les derniers messages groupés par interlocuteur
+        $conversations = Message::where('expediteur_id', $userId)
+            ->orWhere('destinataire_id', $userId)
             ->latest()
-            ->get();
+            ->get()
+            ->groupBy(function ($message) use ($userId) {
+                return $message->expediteur_id === $userId ? $message->destinataire_id : $message->expediteur_id;
+            });
 
-        return view('messages.index', compact('messages'));
+        return view('messages.index', compact('conversations'));
     }
 
-    public function create()
+    public function conversation($interlocuteurId)
     {
-        return view('messages.create');
+        $userId = auth()->id();
+        $interlocuteur = \App\Models\User::findOrFail($interlocuteurId);
+
+        $messages = Message::where(function($q) use ($userId, $interlocuteurId) {
+            $q->where('expediteur_id', $userId)->where('destinataire_id', $interlocuteurId);
+        })->orWhere(function($q) use ($userId, $interlocuteurId) {
+            $q->where('expediteur_id', $interlocuteurId)->where('destinataire_id', $userId);
+        })->oldest()->get();
+
+        // Marquer comme lus
+        Message::where('destinataire_id', $userId)
+            ->where('expediteur_id', $interlocuteurId)
+            ->whereNull('lu_a')
+            ->update(['lu_a' => now()]);
+
+        return view('messages.show', compact('messages', 'interlocuteur'));
     }
 
     public function store(Request $request)
@@ -38,30 +57,20 @@ class MessageController extends Controller
 
         Message::create($validated);
 
-        return back()->with('success', 'Message envoyé.');
-    }
-
-    public function show(Message $message)
-    {
-
-        if (!$message->lu_a && $message->destinataire_id == auth()->id()) {
-            $message->update(['lu_a' => now()]);
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
         }
-        return view('messages.show', compact('message'));
-    }
 
-    public function edit(Message $message)
-    {
-
-    }
-
-    public function update(Request $request, Message $message)
-    {
+        return back()->with('success', 'Message envoyé.');
     }
 
     public function destroy(Message $message)
     {
+        if ($message->expediteur_id !== auth()->id() && $message->destinataire_id !== auth()->id()) {
+            abort(403);
+        }
+        
         $message->delete();
-        return to_route('messages.index')->with('success', 'Message supprimé.');
+        return back()->with('success', 'Message supprimé.');
     }
 }

@@ -21,10 +21,23 @@ Route::get('/dashboard', function () {
     $user = auth()->user();
     $objets = \App\Models\ObjetLouable::where('user_id', $user->id)->latest()->paginate(5, ['*'], 'objets_page')->onEachSide(1);
     $reservations = \App\Models\Reservation::where('user_id', $user->id)->with('objetLouable')->latest()->take(4)->get();
-    return view('dashboard', compact('objets', 'reservations'));
+    
+    // Demandes de location reçues sur mes objets
+    $demandesRecues = \App\Models\Reservation::whereHas('objetLouable', function($query) use ($user) {
+        $query->where('user_id', $user->id);
+    })->with(['objetLouable', 'user'])->latest()->take(5)->get();
+
+    return view('dashboard', compact('objets', 'reservations', 'demandesRecues'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::patch('/reservations/{reservation}/accept', [\App\Http\Controllers\ReservationController::class, 'accept'])->name('reservations.accept');
+    Route::patch('/reservations/{reservation}/reject', [\App\Http\Controllers\ReservationController::class, 'reject'])->name('reservations.reject');
+    Route::get('/messages', [\App\Http\Controllers\MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{interlocuteur}', [\App\Http\Controllers\MessageController::class, 'conversation'])->name('messages.show');
+    Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
+    Route::delete('/messages/{message}', [\App\Http\Controllers\MessageController::class, 'destroy'])->name('messages.destroy');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -43,11 +43,12 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- My Listings -->
-                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
                     <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                         <h3 class="text-lg font-bold text-royal-dark font-heading">Mes Annonces</h3>
+                        <a href="{{ route('objets.create') }}" class="text-[10px] bg-royal-emerald text-white px-3 py-1 rounded-full hover:bg-green-800 transition font-bold uppercase tracking-tighter">Ajouter +</a>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 flex-1">
                         @forelse($objets as $objet)
                             <div class="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
                                 <div class="flex items-center">
@@ -60,11 +61,11 @@
                                     </div>
                                     <div class="ml-4">
                                         <a href="{{ route('objets.show', $objet) }}" class="font-bold text-royal-dark hover:text-royal-emerald transition">{{ $objet->titre }}</a>
-                                        <p class="text-sm text-gray-500">{{ number_format($objet->prix, 2) }} DH / jour</p>
+                                        <p class="text-sm text-gray-500 font-bold mt-0.5">{{ number_format($objet->prix, 0) }} DH/j</p>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-2 min-w-[100px]">
-                                    <a href="{{ route('objets.edit', $objet) }}" class="text-sm font-medium bg-white text-green-600 px-4 py-1.5 rounded-md border border-green-300 hover:bg-green-50 transition text-center shadow-sm w-full cursor-pointer">Modifier</a>
+                                    <a href="{{ route('objets.edit', $objet) }}" class="text-[10px] font-bold uppercase tracking-wider bg-white text-green-600 px-3 py-1.5 rounded-lg border border-green-200 hover:bg-green-50 transition text-center">Modifier</a>
                                     <div x-data="{ showModal: false }" class="w-full">
                                         <!-- Bouton déclencheur -->
                                         <button @click="showModal = true" type="button" title="Supprimer cette annonce" class="text-sm font-medium bg-white text-red-600 px-4 py-1.5 rounded-md border border-red-300 hover:bg-red-50 transition text-center shadow-sm w-full cursor-pointer">Supprimer</button>
@@ -121,10 +122,10 @@
                     @endif
                 </div>
 
-                <!-- Recent Reservations -->
+                <!-- Recent Reservations (MADE by me) -->
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                        <h3 class="text-lg font-bold text-royal-dark font-heading">Mes Réservations Récents</h3>
+                        <h3 class="text-lg font-bold text-royal-dark font-heading">Mes Locations (Mes demandes)</h3>
                         <a href="{{ route('reservations.index') }}" class="text-sm text-royal-gold hover:text-yellow-600 font-medium tracking-wide">Voir tout &rarr;</a>
                     </div>
                     <div class="p-6">
@@ -137,21 +138,184 @@
                                         au {{ \Carbon\Carbon::parse($reservation->date_fin)->format('d/m/Y') }}
                                     </p>
                                 </div>
-                                <div>
+                                <div class="text-right">
                                     @if($reservation->statut == 'en_attente')
-                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-100 text-yellow-800">En attente</span>
+                                        <span class="px-2 py-1 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 uppercase block mb-1">En attente</span>
+                                        <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" onsubmit="return confirm('Annuler cette demande ?')">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="text-[10px] text-red-500 hover:underline font-bold">Annuler</button>
+                                        </form>
                                     @elseif($reservation->statut == 'confirmee')
-                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800">Confirmée</span>
+                                        <span class="px-2 py-1 rounded text-[10px] font-bold bg-green-100 text-green-800 uppercase">Confirmée</span>
                                     @else
-                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-800">{{ ucfirst($reservation->statut) }}</span>
+                                        <span class="px-2 py-1 rounded text-[10px] font-bold bg-gray-100 text-gray-800 uppercase">{{ $reservation->statut }}</span>
                                     @endif
                                 </div>
                             </div>
                         @empty
                             <div class="text-center py-8 text-gray-500">
-                                Aucune réservation récente.
+                                Aucune location en cours.
                             </div>
                         @endforelse
+                    </div>
+                </div>
+
+            </div> <!-- End of the 2-column grid -->
+
+            <!-- Incoming Requests (RECEIVED on my items) - TRUE FULL WIDTH -->
+            <div class="bg-white rounded-3xl shadow-xl border border-royal-gold/10 overflow-hidden">
+                <div class="px-8 py-6 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center bg-royal-dark text-white gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-royal-gold rounded-2xl flex items-center justify-center text-royal-dark shadow-lg rotate-2">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold font-heading">Demandes de location reçues</h3>
+                            <p class="text-royal-gold/60 text-[10px] font-black tracking-[0.2em] uppercase mt-1">Gestion de votre catalogue</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                         <span class="bg-white/10 text-white text-[10px] font-black px-4 py-2 rounded-full border border-white/20 uppercase">
+                            {{ $demandesRecues->count() }} Total
+                        </span>
+                        <span class="bg-royal-gold text-royal-dark text-[10px] font-black px-4 py-2 rounded-full uppercase">
+                            {{ $demandesRecues->where('statut', 'en_attente')->count() }} À Traiter
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Animated Loading Line (Always present or only when empty) -->
+                @if($demandesRecues->isEmpty())
+                <div class="w-full h-[3px] relative overflow-hidden bg-gray-100">
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-royal-gold to-transparent w-1/2 animate-[shimmer_2s_infinite_linear]"></div>
+                </div>
+                <style>
+                    @keyframes shimmer {
+                        0% { transform: translateX(-100%); }
+                        100% { transform: translateX(200%); }
+                    }
+                </style>
+                @endif
+                
+                <div class="p-0">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[900px]">
+                            <thead>
+                                <tr class="bg-gray-50/50 text-gray-400 text-[10px] uppercase tracking-[0.2em] font-black border-b border-gray-100">
+                                    <th class="px-8 py-5">Locataire</th>
+                                    <th class="px-8 py-5">Article</th>
+                                    <th class="px-8 py-5">Période</th>
+                                    <th class="px-8 py-5">Montant</th>
+                                    <th class="px-8 py-5 text-center">Statut Actuel</th>
+                                    <th class="px-8 py-5 text-right">Décision</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                @forelse($demandesRecues as $demande)
+                                    <tr class="hover:bg-royal-sand/20 transition-colors">
+                                        <td class="px-8 py-6">
+                                            <div class="flex items-center gap-4">
+                                                <div class="w-10 h-10 rounded-xl bg-royal-gold/10 flex items-center justify-center text-royal-gold font-black border border-royal-gold/10">
+                                                    {{ substr($demande->user->name ?? $demande->user->nom, 0, 1) }}
+                                                </div>
+                                                <div>
+                                                    <div class="font-bold text-royal-dark text-sm">{{ $demande->user->name ?? $demande->user->nom }}</div>
+                                                    <div class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">{{ $demande->user->email }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-8 py-6">
+                                            <a href="{{ route('objets.show', $demande->objetLouable) }}" class="block">
+                                                <div class="text-sm font-black text-royal-emerald hover:underline">{{ $demande->objetLouable->titre }}</div>
+                                                <div class="text-[10px] text-gray-400 font-bold mt-1 uppercase">{{ $demande->objetLouable->localisation }}</div>
+                                            </a>
+                                        </td>
+                                        <td class="px-8 py-6">
+                                            <div class="inline-flex items-center px-3 py-1.5 rounded-lg bg-royal-sand text-royal-dark text-[11px] font-black gap-2 border border-royal-gold/5 shadow-sm">
+                                                <span>{{ \Carbon\Carbon::parse($demande->date_debut)->format('d/m/Y') }}</span>
+                                                <svg class="w-3 h-3 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                                <span>{{ \Carbon\Carbon::parse($demande->date_fin)->format('d/m/Y') }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-8 py-6">
+                                            <div class="text-lg font-black text-royal-dark tracking-tighter">{{ number_format($demande->montant_total, 0) }} <span class="text-[10px] text-royal-gold">DH</span></div>
+                                        </td>
+                                        <td class="px-8 py-6 text-center">
+                                            @if($demande->statut == 'en_attente')
+                                                <div class="flex flex-col items-center gap-1">
+                                                    <span class="px-3 py-1 rounded-full text-[9px] font-black bg-yellow-400 text-white uppercase shadow-sm">En attente</span>
+                                                    <span class="text-[8px] text-gray-300 font-bold uppercase italic">Action requise</span>
+                                                </div>
+                                            @elseif($demande->statut == 'confirmee')
+                                                <div class="flex flex-col items-center gap-1">
+                                                    <span class="px-3 py-1 rounded-full text-[9px] font-black bg-green-500 text-white uppercase shadow-sm">Confirmée</span>
+                                                    <span class="text-[8px] text-green-600 font-bold uppercase italic tracking-widest">Validé</span>
+                                                </div>
+                                            @else
+                                                <div class="flex flex-col items-center gap-1">
+                                                    <span class="px-3 py-1 rounded-full text-[9px] font-black bg-red-500 text-white uppercase shadow-sm">Refusée</span>
+                                                    <span class="text-[8px] text-red-400 font-bold uppercase italic tracking-widest">Annulé</span>
+                                                </div>
+                                            @endif
+                                        </td>
+                                        <td class="px-8 py-6 text-right">
+                                            @if($demande->statut == 'en_attente')
+                                                <div class="flex justify-end gap-3">
+                                                    <form action="{{ route('reservations.accept', $demande) }}" method="POST">
+                                                        @csrf @method('PATCH')
+                                                        <button type="submit" class="bg-royal-emerald text-white text-[10px] font-black px-5 py-2.5 rounded-xl hover:bg-green-800 transition shadow-lg shadow-green-100 active:scale-95 uppercase tracking-wider">Accepter</button>
+                                                    </form>
+                                                    <form action="{{ route('reservations.reject', $demande) }}" method="POST">
+                                                        @csrf @method('PATCH')
+                                                        <button type="submit" class="bg-white border-2 border-red-50 text-red-500 hover:bg-red-50 hover:border-red-100 text-[10px] font-black px-5 py-2.5 rounded-xl transition active:scale-95 uppercase tracking-wider">Refuser</button>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                <div class="flex justify-end items-center gap-2 text-gray-300">
+                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                                    <span class="text-[10px] font-black uppercase italic tracking-widest">Traité</span>
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="relative py-32 text-center overflow-hidden">
+                                            <!-- Animated Background Flow (Same as upload) -->
+                                            <div class="absolute inset-0 opacity-[0.03] pointer-events-none overflow-hidden">
+                                                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                                    <path d="M0,50 Q25,30 50,50 T100,50" stroke="#D4AF37" fill="none" class="animate-flow-dash"></path>
+                                                </svg>
+                                            </div>
+
+                                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                                <div class="relative mb-8">
+                                                    <!-- Ping Animation -->
+                                                    <div class="absolute inset-0 bg-royal-gold/20 rounded-full animate-ping scale-150"></div>
+                                                    
+                                                    <div class="relative w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-royal-gold border border-royal-gold/10 shadow-xl shadow-royal-gold/5 z-10">
+                                                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                                    </div>
+                                                </div>
+                                                <h4 class="text-2xl font-serif italic text-royal-dark mb-1">Aucune demande pour le moment</h4>
+                                                <p class="text-gray-400 text-[10px] uppercase tracking-[0.3em] font-bold">Votre catalogue est prêt à briller</p>
+                                            </div>
+
+                                            <style>
+                                                .animate-flow-dash {
+                                                    stroke-dasharray: 100;
+                                                    stroke-dashoffset: 100;
+                                                    animation: flow-dash 8s linear infinite;
+                                                }
+                                                @keyframes flow-dash {
+                                                    to { stroke-dashoffset: 0; }
+                                                }
+                                            </style>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

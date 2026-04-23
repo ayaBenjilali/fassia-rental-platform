@@ -65,6 +65,30 @@ class ReservationController extends Controller
         return to_route('reservations.show', $reservation->id)->with('success', 'Statut mis à jour.');
     }
 
+    public function accept(Reservation $reservation)
+    {
+        // Vérifier que l'utilisateur connecté est le propriétaire de l'objet
+        if ($reservation->objetLouable->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $reservation->update(['statut' => 'confirmee']);
+
+        return back()->with('success', 'La réservation a été acceptée.');
+    }
+
+    public function reject(Reservation $reservation)
+    {
+        // Vérifier que l'utilisateur connecté est le propriétaire de l'objet
+        if ($reservation->objetLouable->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $reservation->update(['statut' => 'annulee']);
+
+        return back()->with('success', 'La réservation a été refusée.');
+    }
+
     public function destroy(Reservation $reservation)
     {
         $reservation->delete();
