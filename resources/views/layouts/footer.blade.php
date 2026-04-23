@@ -4,7 +4,7 @@
             <!-- Brand Section -->
             <div class="col-span-1 md:col-span-1">
                 <a href="{{ url('/') }}" class="flex items-center mb-4">
-                    <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-10 w-auto brightness-0 invert opacity-90">
+                    <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-10 w-auto opacity-100">
                 </a>
                 <p class="text-white/60 text-sm leading-relaxed font-light italic">
                     L'excellence de la tradition marocaine au service de votre élégance. Louez des pièces d'exception pour vos moments inoubliables.
@@ -54,10 +54,10 @@
 
         <!-- Bottom bar -->
         <div class="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-[10px] font-medium tracking-widest uppercase">
-            <p>&copy; {{ date('Y') }} L'Fassia. Tous droits réservés.</p>
+            <p>&copy; {{ date('Y') }} <span class="text-royal-gold font-bold brightness-125">L'Fassia</span>. Tous droits réservés.</p>
             <div class="flex gap-8">
-                <a href="#" class="hover:text-royal-gold transition">Mentions légales</a>
-                <a href="#" class="hover:text-royal-gold transition">Confidentialité</a>
+                <a href="{{ route('mentions-legales') }}" class="hover:text-royal-gold transition">Mentions légales</a>
+                <a href="{{ route('confidentialite') }}" class="hover:text-royal-gold transition">Confidentialité</a>
             </div>
         </div>
     </div>

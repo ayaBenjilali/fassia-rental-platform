@@ -1,12 +1,12 @@
 <nav x-data="{ open: false }" class="bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm sticky top-0 z-50">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-[4.3rem]">
+        <div class="flex justify-between h-20">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}" class="flex items-center">
-                        <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-10 w-auto object-contain hover:opacity-80 transition">
+                        <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-14 w-auto object-contain hover:opacity-80 transition">
                     </a>
                 </div>
 

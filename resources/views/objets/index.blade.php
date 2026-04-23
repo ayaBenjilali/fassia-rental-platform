@@ -54,7 +54,7 @@
                                         <input type="checkbox" name="category[]" value="{{ $val }}" 
                                                @change="fetchResults()"
                                                class="rounded border-gray-300 text-royal-emerald shadow-sm focus:ring-royal-emerald" 
-                                               {{ in_array($val, request('category', [])) ? 'checked' : '' }}>
+                                               {{ (in_array($val, request('category', [])) || request('type') === $val) ? 'checked' : '' }}>
                                         <span class="ml-2 text-gray-600">{{ $label }}</span>
                                     </label>
                                     @endforeach

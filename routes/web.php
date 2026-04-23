@@ -12,6 +12,9 @@ Route::get('/', function () {
     $objets = \App\Models\ObjetLouable::with('photos')->latest()->take(6)->get();
     return view('welcome', compact('objets'));
 });
+
+Route::get('/mentions-legales', [\App\Http\Controllers\LegalController::class, 'mentionsLegales'])->name('mentions-legales');
+Route::get('/confidentialite', [\App\Http\Controllers\LegalController::class, 'confidentialite'])->name('confidentialite');
 Route::resource('avis', AvisController::class)->only(['index', 'show']);
 
 Route::get('/dashboard', function () {
