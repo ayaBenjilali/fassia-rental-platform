@@ -8,7 +8,7 @@
     <div class="py-16 bg-royal-sand">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white p-10 rounded-3xl shadow-sm border border-royal-gold/20 prose prose-royal max-w-none">
-                <h1 class="text-3xl font-serif italic text-royal-dark mb-8 border-b border-royal-gold/20 pb-4">Respect de la Vie Privée</h1>
+                <h1 class="text-4xl font-serif italic text-royal-gold mb-10 border-b-2 border-royal-gold/30 pb-6 text-center">Respect de la Vie Privée</h1>
                 
                 <section class="mb-10">
                     <h2 class="text-xl font-bold text-royal-emerald mb-4 uppercase tracking-widest">1. Collecte des données</h2>
