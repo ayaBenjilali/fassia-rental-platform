@@ -1,10 +1,10 @@
-<footer class="bg-royal-emerald text-white pt-16 pb-8 border-t border-royal-gold/20">
+<footer class="bg-royal-emerald text-white pt-8 pb-4 border-t border-royal-gold/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
             <!-- Brand Section -->
             <div class="col-span-1 md:col-span-1">
-                <a href="{{ url('/') }}" class="flex items-center mb-6">
-                    <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-12 w-auto brightness-0 invert opacity-90">
+                <a href="{{ url('/') }}" class="flex items-center mb-4">
+                    <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-10 w-auto brightness-0 invert opacity-90">
                 </a>
                 <p class="text-white/60 text-sm leading-relaxed font-light italic">
                     L'excellence de la tradition marocaine au service de votre élégance. Louez des pièces d'exception pour vos moments inoubliables.
@@ -13,8 +13,8 @@
 
             <!-- Quick Links -->
             <div>
-                <h4 class="font-serif text-lg font-bold text-royal-gold mb-6 uppercase tracking-widest">Navigation</h4>
-                <ul class="space-y-4">
+                <h4 class="font-serif text-base font-bold text-royal-gold mb-4 uppercase tracking-widest">Navigation</h4>
+                <ul class="space-y-2">
                     <li><a href="{{ route('objets.index') }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Le Catalogue</a></li>
                     <li><a href="{{ route('dashboard') }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Tableau de Bord</a></li>
                     <li><a href="{{ route('reservations.index') }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Mes Réservations</a></li>
@@ -23,18 +23,19 @@
 
             <!-- Categories -->
             <div>
-                <h4 class="font-serif text-lg font-bold text-royal-gold mb-6 uppercase tracking-widest">Collections</h4>
-                <ul class="space-y-4">
+                <h4 class="font-serif text-base font-bold text-royal-gold mb-4 uppercase tracking-widest">Collections</h4>
+                <ul class="space-y-2">
                     <li><a href="{{ route('objets.index', ['type' => 'caftan']) }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Caftans de Luxe</a></li>
                     <li><a href="{{ route('objets.index', ['type' => 'bijoux']) }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Bijoux & Parures</a></li>
-                    <li><a href="{{ route('objets.index', ['type' => 'sac']) }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Accessoires</a></li>
+                    <li><a href="{{ route('objets.index', ['type' => 'sac']) }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Sacs & Accessoires</a></li>
+                    <li><a href="{{ route('objets.index', ['type' => 'talon']) }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Chaussures & Talons</a></li>
                 </ul>
             </div>
 
             <!-- Contact & Social -->
             <div>
-                <h4 class="font-serif text-lg font-bold text-royal-gold mb-6 uppercase tracking-widest">Contact</h4>
-                <ul class="space-y-4 mb-8">
+                <h4 class="font-serif text-base font-bold text-royal-gold mb-4 uppercase tracking-widest">Contact</h4>
+                <ul class="space-y-2 mb-4">
                     <li class="flex items-center gap-3 text-white/70 text-sm">
                         <svg class="w-5 h-5 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         contact@lfassia.ma
@@ -52,7 +53,7 @@
         </div>
 
         <!-- Bottom bar -->
-        <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-xs font-medium tracking-widest uppercase">
+        <div class="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-[10px] font-medium tracking-widest uppercase">
             <p>&copy; {{ date('Y') }} L'Fassia. Tous droits réservés.</p>
             <div class="flex gap-8">
                 <a href="#" class="hover:text-royal-gold transition">Mentions légales</a>

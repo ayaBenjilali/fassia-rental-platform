@@ -19,6 +19,11 @@ class ObjetLouableController extends Controller
             $query->whereIn('type', $request->category);
         }
 
+        // Filtre par type unique (lien direct)
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
         // Filtre par prix maximum
         if ($request->filled('prix_max')) {
             $query->where('prix', '<=', $request->prix_max);
