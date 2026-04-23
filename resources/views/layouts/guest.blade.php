@@ -17,41 +17,23 @@
 
         <style>
             @keyframes fadeInUp {
-                from { opacity: 0; transform: translateY(20px); }
+                from { opacity: 0; transform: translateY(10px); }
                 to { opacity: 1; transform: translateY(0); }
             }
             @keyframes scaleIn {
-                from { opacity: 0; transform: scale(0.95); }
+                from { opacity: 0; transform: scale(0.98); }
                 to { opacity: 1; transform: scale(1); }
             }
             @keyframes slideRight {
-                from { opacity: 0; transform: translateX(-30px); }
+                from { opacity: 0; transform: translateX(-20px); }
                 to { opacity: 1; transform: translateX(0); }
             }
-            @keyframes kenBurns {
-                0% { transform: scale(1.1); }
-                50% { transform: scale(1.2); }
-                100% { transform: scale(1.1); }
-            }
-            @keyframes gradientMove {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
             .animate-royal-gradient {
-                background: linear-gradient(-45deg, 
-                    rgba(255, 255, 255, 0.6), 
-                    rgba(196, 160, 82, 0.2), 
-                    rgba(255, 255, 255, 0.7), 
-                    rgba(16, 75, 62, 0.15)
-                );
-                background-size: 400% 400%;
-                animation: gradientMove 8s ease-in-out infinite;
+                background: linear-gradient(-45deg, rgba(255, 255, 255, 0.8), rgba(243, 235, 215, 0.6));
             }
-            .animate-ken-burns { animation: kenBurns 20s ease-in-out infinite; }
-            .animate-fade-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-            .animate-scale-in { animation: scaleIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-            .animate-slide-right { animation: slideRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+            .animate-fade-up { animation: fadeInUp 0.5s ease-out forwards; }
+            .animate-scale-in { animation: scaleIn 0.6s ease-out forwards; }
+            .animate-slide-right { animation: slideRight 0.6s ease-out forwards; }
             .stagger-1 { animation-delay: 0.1s; }
             .stagger-2 { animation-delay: 0.2s; }
             .stagger-3 { animation-delay: 0.3s; }
@@ -62,12 +44,12 @@
         <div class="min-h-screen flex items-center justify-center py-8 px-4 md:py-12 md:px-10 relative">
             <!-- 1. Arrière-plan flou géant (Full Page) -->
             <div class="fixed inset-0 z-0 overflow-hidden">
-                <img src="{{ asset('images/logo_fassia.jpeg') }}" class="w-full h-full object-cover opacity-20 blur-3xl saturate-50 animate-ken-burns" alt="">
+                <img src="{{ asset('images/logo_fassia.jpeg') }}" class="w-full h-full object-cover opacity-10 blur-xl saturate-50" alt="">
                 <div class="absolute inset-0 bg-royal-sand/40"></div>
             </div>
 
             <!-- 2. La Carte Centrée et Divisée -->
-            <div class="relative z-10 w-full max-w-4xl bg-white/70 backdrop-blur-2xl rounded-2xl shadow-[0_30px_60px_rgba(42,11,26,0.12)] border border-white overflow-hidden flex flex-col md:flex-row animate-scale-in">
+            <div class="relative z-10 w-full max-w-4xl bg-white/90 rounded-2xl shadow-xl border border-white overflow-hidden flex flex-col md:flex-row animate-scale-in">
                 
                 <!-- ZONE GAUCHE : L'IMAGE DU CAFTAN -->
                 <div class="hidden md:flex md:w-1/2 relative bg-white items-center justify-center overflow-hidden opacity-0 animate-slide-right">
@@ -78,9 +60,6 @@
 
                 <!-- ZONE DROITE : LE FORMULAIRE -->
                 <div class="w-full md:w-1/2 flex flex-col px-8 py-8 md:px-12 md:py-12 justify-center relative overflow-hidden animate-royal-gradient">
-                    <!-- Orbes Décoratives Internes (Plus visibles) -->
-                    <div class="absolute -top-10 -right-10 w-80 h-80 bg-royal-gold/20 rounded-full blur-[80px] animate-pulse"></div>
-                    <div class="absolute -bottom-10 -left-10 w-80 h-80 bg-royal-emerald/15 rounded-full blur-[80px] animate-pulse" style="animation-delay: 2s;"></div>
 
                     <!-- Branding -->
                     <div class="mb-2 text-center md:text-left opacity-0 animate-fade-up stagger-1 relative z-10">
