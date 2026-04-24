@@ -38,6 +38,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
     Route::delete('/messages/{message}', [\App\Http\Controllers\MessageController::class, 'destroy'])->name('messages.destroy');
     Route::delete('/messages/discussion/{user}', [\App\Http\Controllers\MessageController::class, 'destroyDiscussion'])->name('messages.destroyDiscussion');
+    
+    // Admin Management
+    Route::get('/admin/objets', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.objets.index');
+    Route::post('/admin/objets/{objet}/approuver', [\App\Http\Controllers\AdminController::class, 'approuver'])->name('admin.objets.approuver');
+    Route::post('/admin/objets/{objet}/rejeter', [\App\Http\Controllers\AdminController::class, 'rejeter'])->name('admin.objets.rejeter');
+
+    Route::get('/notifications/mark-as-read', function() {
+        auth()->user()->unreadNotifications->markAsRead();
+        return back();
+    })->name('notifications.markAllRead');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

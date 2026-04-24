@@ -61,7 +61,18 @@
                                     </div>
                                     <div class="ml-4">
                                         <a href="{{ route('objets.show', $objet) }}" class="font-bold text-royal-dark hover:text-royal-emerald transition">{{ $objet->titre }}</a>
-                                        <p class="text-sm text-gray-500 font-bold mt-0.5">{{ number_format($objet->prix, 0) }} DH/j</p>
+                                        <div class="flex items-center gap-3 mt-0.5">
+                                            <p class="text-sm text-gray-500 font-bold">{{ number_format($objet->prix, 0) }} DH/j</p>
+                                            
+                                            <!-- Status Badge -->
+                                            @if($objet->statut === \App\Models\ObjetLouable::STATUT_APPROUVE)
+                                                <span class="px-2 py-0.5 rounded-md text-[8px] font-black bg-green-100 text-green-700 uppercase tracking-widest">Publiée</span>
+                                            @elseif($objet->statut === \App\Models\ObjetLouable::STATUT_REJETE)
+                                                <span class="px-2 py-0.5 rounded-md text-[8px] font-black bg-red-100 text-red-700 uppercase tracking-widest">Refusée</span>
+                                            @else
+                                                <span class="px-2 py-0.5 rounded-md text-[8px] font-black bg-amber-100 text-amber-700 uppercase tracking-widest animate-pulse">En cours de traitement</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col gap-2 min-w-[100px]">

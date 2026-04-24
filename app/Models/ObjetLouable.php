@@ -11,10 +11,19 @@ class ObjetLouable extends Model
 {
     use HasFactory;
 
+    const STATUT_EN_ATTENTE = 'en_attente';
+    const STATUT_APPROUVE = 'approuve';
+    const STATUT_REJETE = 'rejete';
+
     protected $fillable = [
         'titre', 'description', 'prix', 'localisation', 'user_id', 
         'type', 'taille', 'couleur', 'tissu', 'marque', 'matiere', 'statut'
     ];
+
+    public function scopeApprouve($query)
+    {
+        return $query->where('statut', self::STATUT_APPROUVE);
+    }
 
     public function user(): BelongsTo
     {

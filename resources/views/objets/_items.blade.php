@@ -6,6 +6,11 @@
                     <span class="px-3 py-1 bg-white/90 backdrop-blur-sm text-royal-dark text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">
                         {{ $objet->type_objet ?? $objet->type }}
                     </span>
+                    @if($objet->statut === \App\Models\ObjetLouable::STATUT_EN_ATTENTE)
+                        <span class="ml-2 px-3 py-1 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest rounded-md shadow-lg animate-pulse">
+                            En cours de traitement
+                        </span>
+                    @endif
                 </div>
                 <a href="{{ route('objets.show', $objet) }}" class="block overflow-hidden relative">
                     <div class="aspect-[3/4] max-h-96 bg-gray-50 flex items-center justify-center overflow-hidden">

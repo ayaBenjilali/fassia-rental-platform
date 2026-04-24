@@ -12,24 +12,23 @@ class ObjetLouableController extends Controller
      */
     public function index(Request $request)
     {
-        $query = ObjetLouable::with('user', 'photos')->latest();
+        // Strict visibility: only approved ads are shown to everyone
+        $query = ObjetLouable::approuve()->with('user', 'photos')->latest();
 
         // Filtre par catégorie (tableau)
         if ($request->has('category') && is_array($request->category)) {
             $query->whereIn('type', $request->category);
         }
-
-        // Filtre par type unique (lien direct)
+        
+        // ... (rest of the filters)
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
 
-        // Filtre par prix maximum
         if ($request->filled('prix_max')) {
             $query->where('prix', '<=', $request->prix_max);
         }
 
-        // Recherche par mot-clé (Titre, Description, Couleur, Type, Tissu)
         if ($request->filled('search')) {
             $searchTerm = $request->search;
             $query->where(function($q) use ($searchTerm) {
@@ -76,8 +75,25 @@ class ObjetLouableController extends Controller
         ]);
 
         $validated['user_id'] = auth()->id();
+        
+        // Admin posts are approved automatically, users need moderation
+        $validated['statut'] = auth()->user()->role === 'admin' 
+            ? ObjetLouable::STATUT_APPROUVE 
+            : ObjetLouable::STATUT_EN_ATTENTE;
 
         $objet = ObjetLouable::create($validated);
+
+        // Notify Admins if a normal user posts
+        if ($validated['statut'] === ObjetLouable::STATUT_EN_ATTENTE) {
+            $admins = \App\Models\User::where('role', 'admin')->get();
+            foreach ($admins as $admin) {
+                $admin->notify(new \App\Notifications\AdStatusChanged(
+                    "Une nouvelle annonce '{$objet->titre}' attend votre approbation.",
+                    $objet->id,
+                    'pending'
+                ));
+            }
+        }
 
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photoFile) {
@@ -91,7 +107,7 @@ class ObjetLouableController extends Controller
             }
         }
 
-        return to_route('objets.index')->with('success', 'Annonce publiée avec succès !');
+        return to_route('dashboard')->with('success', 'Annonce créée ! Elle sera visible dès qu\'un administrateur l\'aura approuvée.');
     }
 
     public function show(ObjetLouable $objet)
@@ -125,6 +141,11 @@ class ObjetLouableController extends Controller
             'titre.unique' => 'Ce nom de produit existe déjà. Veuillez choisir un titre unique.',
         ]);
 
+        // Admin edits remain approved, user edits need re-approval
+        $validated['statut'] = auth()->user()->role === 'admin' 
+            ? ObjetLouable::STATUT_APPROUVE 
+            : ObjetLouable::STATUT_EN_ATTENTE;
+
         $objet->update($validated);
 
         // Upload new photos if any
@@ -139,7 +160,7 @@ class ObjetLouableController extends Controller
             }
         }
 
-        return to_route('objets.show', $objet->id)->with('success', 'Annonce mise à jour avec succès.');
+        return to_route('dashboard')->with('success', 'Annonce mise à jour. Elle doit être de nouveau approuvée par un administrateur.');
     }
 
     public function destroy(ObjetLouable $objet)
