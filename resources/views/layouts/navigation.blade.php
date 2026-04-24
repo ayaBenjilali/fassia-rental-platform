@@ -88,7 +88,7 @@
                         </div>
                         <div class="max-h-96 overflow-y-auto">
                             @forelse(auth()->user()->notifications->take(5) as $notification)
-                                <div class="px-8 py-5 hover:bg-gray-50 transition border-b border-gray-50 last:border-0 {{ $notification->unread() ? 'bg-amber-50/20' : '' }}">
+                                <a href="{{ route('notifications.read', $notification->id) }}" class="block px-8 py-5 hover:bg-gray-50 transition border-b border-gray-50 last:border-0 {{ $notification->unread() ? 'bg-amber-50/20' : '' }}">
                                     <div class="flex gap-4">
                                         <div class="shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center {{ $notification->data['type'] === 'success' ? 'bg-green-100 text-green-600' : ($notification->data['type'] === 'error' ? 'bg-red-100 text-red-600' : 'bg-amber-100 text-amber-600') }}">
                                             @if($notification->data['type'] === 'success')
@@ -104,7 +104,7 @@
                                             <p class="text-[10px] text-gray-400 mt-1 font-bold uppercase tracking-tight">{{ $notification->created_at->diffForHumans() }}</p>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             @empty
                                 <div class="px-8 py-12 text-center">
                                     <p class="text-sm text-gray-400 italic">Aucune notification pour le moment.</p>

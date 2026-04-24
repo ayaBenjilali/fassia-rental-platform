@@ -49,6 +49,18 @@ Route::middleware('auth')->group(function () {
         return back();
     })->name('notifications.markAllRead');
 
+    Route::get('/notifications/{id}/read', function($id) {
+        $notification = auth()->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+        
+        // Redirect based on type or data
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.objets.index');
+        }
+        
+        return redirect()->route('dashboard');
+    })->name('notifications.read');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
