@@ -106,12 +106,13 @@
                         'Récents': ['❤️','✨','😊','👑','👗','👠','💎','💍','📸','🎉','🙏','😍','⭐','🔥','🇲🇦','🕌'],
                         'Smileys & Personnes': ['😀','😃','😄','😁','😆','😅','😂','🤣','☺️','😊','😇','🙂','🙃','😉','😌','😍','🥰','😘','😗','😙','😚','😋','😛','😝','😜','🤪','🤨','🧐','🤓','😎','🤩','🥳','😏','😒','😞','😔','😟','😕','🙁','☹️','😣','😖','😫','😩','🥺','😢','😭','😤','😠','😡','🤬','🤯','😳','🥵','🥶','😱','😨','😰','😥','😓','🤗','🤔','🤭','🥱','🤫','🤥','😶','😐','😑','😬','🙄','😯','😦','😧','😮','😲','😴','🤤','😪','😵','🤐','🥴','🤢','🤮','🤧','😷','🤒','🤕','🤑','🤠','😈','👿','👹','👺','🤡','💩','👻','💀','☠️','👽','👾','🤖','🎃','😺','😸','😻','😼','😽','🙀','😿','😾'],
                         'Luxe & Mode': ['👗','👘','🥻','🩱','👙','👚','👕','👖','🧣','🧤','🧥','🧦','👗','💍','💎','💄','💅','👜','💼','🎒','👟','👠','👡','👢','👑','👒','🎩','🎓','👒','👓','🕶','💍','💄','🧣','👜'],
-                        'L\'Fassia': ['🇲🇦','🕌','🥘','🍵','🏡','🤝','📍','📅','💰','✅','❌','⚠️','💡','📱','💬','🌙','🏮','🕍','🏰','🏛️','🏜️']
+                        'L\'Fassia': ['🇲🇦','🕌','🥘','🍵','🏡','🤝','📍','📅','💰','✅','❌','⚠️','💡','📱','💬','🌙','🏮','🕍','🏰','🏛️','墜','🏜️']
                     }
                 }">
                     <!-- Emoji Picker Popover - Final Robust Grid & Scroll Version -->
                     <div x-show="showEmojis" @click.away="showEmojis = false" 
-                         class="absolute bottom-full left-4 mb-4 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 z-[100] w-[350px] overflow-hidden"
+                         class="absolute left-4 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 z-[100] w-[350px] overflow-hidden"
+                         style="bottom: 100% !important; margin-bottom: 2px !important;"
                          x-transition:enter="transition ease-out duration-300"
                          x-transition:enter-start="opacity-0 translate-y-10"
                          x-transition:enter-end="opacity-100 translate-y-0">
@@ -160,9 +161,6 @@
                         </button>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
             </div>
         </div>
     </div>
