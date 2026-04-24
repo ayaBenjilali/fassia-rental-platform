@@ -147,7 +147,7 @@ class AccessoireSeeder extends Seeder
                 'couleur' => $item['couleur'],
                 'user_id' => $userId,
                 'type' => 'bijoux',
-                'statut' => 'actif',
+                'statut' => 'approuve',
                 'localisation' => 'Fès, Maroc',
             ]);
 

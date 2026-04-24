@@ -7,11 +7,7 @@
 
     <div class="py-12 bg-royal-sand min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if(session('success'))
-                <div class="mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm" role="alert">
-                    <p>{{ session('success') }}</p>
-                </div>
-            @endif
+
 
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
                 <div class="p-8 lg:p-12 mb-4" x-data="cartManager()">

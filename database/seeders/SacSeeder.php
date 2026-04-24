@@ -154,7 +154,7 @@ class SacSeeder extends Seeder
                 'localisation' => $villes[array_rand($villes)],
                 'user_id' => $userId,
                 'type' => 'sac',
-                'statut' => 'actif',
+                'statut' => 'approuve',
             ]));
 
             Photo::create([

@@ -163,7 +163,7 @@ class TalonSeeder extends Seeder
                 'taille' => '36,37,38,39,40', 
                 'user_id' => $userId,
                 'type' => 'talon',
-                'statut' => 'actif',
+                'statut' => 'approuve',
             ]));
 
             // Lier la photo au talon

@@ -194,7 +194,7 @@ class CaftanSeeder extends Seeder
             $caftan = ObjetLouable::create(array_merge($data, [
                 'user_id' => $userId,
                 'type' => 'caftan',
-                'statut' => 'actif',
+                'statut' => 'approuve',
             ]));
 
             foreach ($photos as $url) {
