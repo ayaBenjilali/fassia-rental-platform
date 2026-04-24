@@ -73,4 +73,17 @@ class MessageController extends Controller
         $message->delete();
         return back()->with('success', 'Message supprimé.');
     }
+
+    public function destroyDiscussion($interlocuteurId)
+    {
+        \App\Models\Message::where(function($query) use ($interlocuteurId) {
+            $query->where('expediteur_id', auth()->id())
+                  ->where('destinataire_id', $interlocuteurId);
+        })->orWhere(function($query) use ($interlocuteurId) {
+            $query->where('expediteur_id', $interlocuteurId)
+                  ->where('destinataire_id', auth()->id());
+        })->delete();
+
+        return redirect()->route('messages.index')->with('success', 'Discussion supprimée.');
+    }
 }

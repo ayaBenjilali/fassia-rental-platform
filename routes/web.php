@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages/{interlocuteur}', [\App\Http\Controllers\MessageController::class, 'conversation'])->name('messages.show');
     Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
     Route::delete('/messages/{message}', [\App\Http\Controllers\MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::delete('/messages/discussion/{user}', [\App\Http\Controllers\MessageController::class, 'destroyDiscussion'])->name('messages.destroyDiscussion');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
