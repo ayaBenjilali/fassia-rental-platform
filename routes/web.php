@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/notifications/mark-as-read', function() {
         auth()->user()->unreadNotifications->markAsRead();
-        return back();
+        return redirect()->to(url()->previous() ?: '/');
     })->name('notifications.markAllRead');
 
     Route::get('/notifications/{id}/read', function($id) {

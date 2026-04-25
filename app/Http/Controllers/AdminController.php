@@ -26,6 +26,11 @@ class AdminController extends Controller
         if (auth()->user()->role !== 'admin') { abort(403); }
         $objet->update(['statut' => ObjetLouable::STATUT_APPROUVE]);
 
+        // Mark related admin notifications as read
+        auth()->user()->unreadNotifications
+            ->filter(fn($n) => isset($n->data['ad_id']) && $n->data['ad_id'] == $objet->id)
+            ->each->markAsRead();
+
         // Notify User
         $objet->user->notify(new \App\Notifications\AdStatusChanged(
             "Félicitations ! Votre annonce '{$objet->titre}' a été approuvée.",
@@ -40,6 +45,11 @@ class AdminController extends Controller
     {
         if (auth()->user()->role !== 'admin') { abort(403); }
         $objet->update(['statut' => ObjetLouable::STATUT_REJETE]);
+
+        // Mark related admin notifications as read
+        auth()->user()->unreadNotifications
+            ->filter(fn($n) => isset($n->data['ad_id']) && $n->data['ad_id'] == $objet->id)
+            ->each->markAsRead();
 
         // Notify User
         $objet->user->notify(new \App\Notifications\AdStatusChanged(
