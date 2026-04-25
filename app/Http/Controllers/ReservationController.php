@@ -34,14 +34,37 @@ class ReservationController extends Controller
             'montant_total' => 'required|numeric|min:0',
         ]);
 
+        // Check for availability
+        $overlap = Reservation::where('objet_louable_id', $validated['objet_louable_id'])
+            ->where('statut', 'confirmee')
+            ->where(function ($query) use ($validated) {
+                $query->whereBetween('date_debut', [$validated['date_debut'], $validated['date_fin']])
+                    ->orWhereBetween('date_fin', [$validated['date_debut'], $validated['date_fin']])
+                    ->orWhere(function ($q) use ($validated) {
+                        $q->where('date_debut', '<=', $validated['date_debut'])
+                          ->where('date_fin', '>=', $validated['date_fin']);
+                    });
+            })
+            ->exists();
+
+        if ($overlap) {
+            return back()->withInput()->withErrors(['dates' => 'Cet article est déjà réservé pour les dates sélectionnées.']);
+        }
+
         $validated['user_id'] = auth()->id();
         $validated['statut'] = 'en_attente';
 
         Reservation::create($validated);
 
+        // Notify Owner
+        $objet = \App\Models\ObjetLouable::find($validated['objet_louable_id']);
+        $objet->user->notify(new \App\Notifications\AdStatusChanged(
+            "Nouvelle demande de location pour votre article '{$objet->titre}'.",
+            $objet->id,
+            'info'
+        ));
 
-
-        return to_route('reservations.index')->with('success', 'Réservation effectuée avec succès.');
+        return to_route('reservations.index')->with('success', 'Demande de réservation envoyée avec succès.');
     }
 
     public function show(Reservation $reservation)
@@ -72,7 +95,32 @@ class ReservationController extends Controller
             abort(403);
         }
 
+        // Double check availability before confirming
+        $overlap = Reservation::where('objet_louable_id', $reservation->objet_louable_id)
+            ->where('statut', 'confirmee')
+            ->where('id', '!=', $reservation->id)
+            ->where(function ($query) use ($reservation) {
+                $query->whereBetween('date_debut', [$reservation->date_debut, $reservation->date_fin])
+                    ->orWhereBetween('date_fin', [$reservation->date_debut, $reservation->date_fin])
+                    ->orWhere(function ($q) use ($reservation) {
+                        $q->where('date_debut', '<=', $reservation->date_debut)
+                          ->where('date_fin', '>=', $reservation->date_fin);
+                    });
+            })
+            ->exists();
+
+        if ($overlap) {
+            return back()->with('error', 'Impossible d\'accepter cette réservation : l\'article est déjà loué aux dates demandées par une autre réservation confirmée.');
+        }
+
         $reservation->update(['statut' => 'confirmee']);
+
+        // Notify Renter
+        $reservation->user->notify(new \App\Notifications\AdStatusChanged(
+            "Bonne nouvelle ! Votre réservation pour '{$reservation->objetLouable->titre}' a été acceptée.",
+            $reservation->objet_louable_id,
+            'success'
+        ));
 
         return back()->with('success', 'La réservation a été acceptée.');
     }
@@ -85,6 +133,13 @@ class ReservationController extends Controller
         }
 
         $reservation->update(['statut' => 'annulee']);
+
+        // Notify Renter
+        $reservation->user->notify(new \App\Notifications\AdStatusChanged(
+            "Votre demande de réservation pour '{$reservation->objetLouable->titre}' a été refusée.",
+            $reservation->objet_louable_id,
+            'error'
+        ));
 
         return back()->with('success', 'La réservation a été refusée.');
     }
