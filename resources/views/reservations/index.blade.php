@@ -61,7 +61,14 @@
                                                     <span class="px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-800">{{ ucfirst($reservation->statut) }}</span>
                                                 @endif
                                             </td>
-                                            <td class="p-4 text-right">
+                                            <td class="p-4 text-right flex justify-end items-center gap-2">
+                                                @if($reservation->objetLouable)
+                                                    <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="text-royal-emerald hover:text-green-700 font-medium text-sm border border-royal-emerald hover:bg-green-50 px-3 py-1 rounded-md transition inline-flex items-center gap-1" title="Contacter le propriétaire">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                                                        Contacter
+                                                    </a>
+                                                @endif
+
                                                 @if($reservation->statut == 'en_attente')
                                                     <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="inline">
                                                         @csrf
