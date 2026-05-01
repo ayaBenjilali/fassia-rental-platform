@@ -19,22 +19,6 @@
             cursor: not-allowed;
             border-color: #fecaca !important;
         }
-        
-        .reserved-legend {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            color: #6b7280;
-            margin-top: 8px;
-        }
-        .reserved-box {
-            width: 12px;
-            height: 12px;
-            background: #fee2e2;
-            border: 1px solid #ef4444;
-            border-radius: 2px;
-        }
     </style>
 
     <div class="py-12 bg-royal-sand min-h-screen" x-data="reservationForm()">
@@ -97,10 +81,6 @@
                                 <x-input-label for="date_debut" :value="__('Date de retrait')" class="text-gray-700" />
                                 <x-text-input id="date_debut" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald bg-white" type="text" name="date_debut" x-model="dateDebut" placeholder="Sélectionner une date" required />
                                 <x-input-error :messages="$errors->get('date_debut')" class="mt-2" />
-                                <div class="reserved-legend">
-                                    <div class="reserved-box"></div>
-                                    <span>Dates déjà réservées</span>
-                                </div>
                             </div>
 
                             <div>
