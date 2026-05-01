@@ -121,7 +121,7 @@ class AdminController extends Controller
     {
         if (auth()->user()->role !== 'admin') { abort(403); }
         
-        $objets = $user->objets()->latest()->paginate(15);
+        $objets = $user->objetsLouables()->latest()->paginate(15);
         
         return view('admin.users.posts', compact('user', 'objets'));
     }

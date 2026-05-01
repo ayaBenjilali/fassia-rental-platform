@@ -154,7 +154,9 @@
                                             <span class="text-xl font-black text-royal-dark">{{ auth()->user()->objetsLouables()->count() }}</span>
                                         </div>
                                         <div class="text-center">
-                                            <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">Membre depuis</p>
+                                            <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">
+                                                {{ auth()->user()->role === 'admin' ? 'Admin depuis' : 'Membre depuis' }}
+                                            </p>
                                             <span class="text-xs font-bold text-royal-dark">{{ auth()->user()->created_at->format('M Y') }}</span>
                                         </div>
                                     </div>
