@@ -23,7 +23,7 @@
                             {{ __('Mes Réservations') }}
                         </x-nav-link>
                         @if(auth()->check() && auth()->user()->role === 'admin')
-                            <x-nav-link :href="route('admin.objets.index')" :active="request()->routeIs('admin.objets.index')" class="text-sm font-medium text-royal-gold hover:text-royal-dark transition">
+                            <x-nav-link :href="route('admin.objets.index')" :active="request()->routeIs('admin.objets.index')" class="text-sm font-medium text-royal-dark hover:text-royal-gold transition">
                                 {{ __('Modération') }}
                             </x-nav-link>
                         @endif
