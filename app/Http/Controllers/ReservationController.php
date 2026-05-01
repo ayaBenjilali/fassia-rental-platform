@@ -19,10 +19,32 @@ class ReservationController extends Controller
     public function create(\Illuminate\Http\Request $request)
     {
         $objet = null;
+        $reservedDates = [];
+
         if ($request->has('objet')) {
             $objet = \App\Models\ObjetLouable::with('photos')->find($request->query('objet'));
+            
+            if ($objet) {
+                // Get all confirmed or paid reservations for this object
+                $reservations = Reservation::where('objet_louable_id', $objet->id)
+                    ->whereIn('statut', ['confirmee', 'payee'])
+                    ->where('date_fin', '>=', now()->toDateString())
+                    ->get();
+
+                foreach ($reservations as $res) {
+                    $period = new \DatePeriod(
+                        new \DateTime($res->date_debut),
+                        new \DateInterval('P1D'),
+                        (new \DateTime($res->date_fin))->modify('+1 day')
+                    );
+                    foreach ($period as $date) {
+                        $reservedDates[] = $date->format('Y-m-d');
+                    }
+                }
+            }
         }
-        return view('reservations.create', compact('objet'));
+        
+        return view('reservations.create', compact('objet', 'reservedDates'));
     }
 
     public function store(Request $request)

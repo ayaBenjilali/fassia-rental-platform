@@ -5,6 +5,44 @@
         </h2>
     </x-slot>
 
+    <!-- Flatpickr Assets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_green.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+
+    <style>
+        .flatpickr-day.flatpickr-disabled, 
+        .flatpickr-day.flatpickr-disabled:hover {
+            background: #fee2e2 !important; /* light red */
+            color: #ef4444 !important; /* red */
+            text-decoration: line-through;
+            cursor: not-allowed;
+            border-color: #fecaca !important;
+        }
+        
+        /* Custom tooltip for disabled days (simplified version using title) */
+        .flatpickr-day.flatpickr-disabled::after {
+            content: attr(data-tooltip);
+        }
+
+        .reserved-legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+        .reserved-box {
+            width: 12px;
+            height: 12px;
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            border-radius: 2px;
+        }
+    </style>
+
     <div class="py-12 bg-royal-sand min-h-screen" x-data="reservationForm()">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-3xl border border-gray-100 flex flex-col md:flex-row">
@@ -60,16 +98,20 @@
                         </div>
                         @endif
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6" x-init="initDatepickers()">
                             <div>
                                 <x-input-label for="date_debut" :value="__('Date de retrait')" class="text-gray-700" />
-                                <x-text-input id="date_debut" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="date" name="date_debut" x-model="dateDebut" @change="calculateTotal" min="{{ date('Y-m-d') }}" required />
+                                <x-text-input id="date_debut" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald bg-white" type="text" name="date_debut" x-model="dateDebut" placeholder="Sélectionner une date" required />
                                 <x-input-error :messages="$errors->get('date_debut')" class="mt-2" />
+                                <div class="reserved-legend">
+                                    <div class="reserved-box"></div>
+                                    <span>Dates déjà réservées</span>
+                                </div>
                             </div>
 
                             <div>
                                 <x-input-label for="date_fin" :value="__('Date de retour')" class="text-gray-700" />
-                                <x-text-input id="date_fin" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="date" name="date_fin" x-model="dateFin" @change="calculateTotal" min="{{ date('Y-m-d') }}" required />
+                                <x-text-input id="date_fin" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald bg-white" type="text" name="date_fin" x-model="dateFin" placeholder="Sélectionner une date" required />
                                 <x-input-error :messages="$errors->get('date_fin')" class="mt-2" />
                             </div>
                         </div>
@@ -144,6 +186,47 @@
                 prixJour: {{ $objet ? $objet->prix : 0 }},
                 days: 0,
                 montantTotal: '{{ old('montant_total', 0) }}',
+                reservedDates: @json($reservedDates),
+                fpStart: null,
+                fpEnd: null,
+
+                initDatepickers() {
+                    const self = this;
+                    const config = {
+                        locale: "fr",
+                        dateFormat: "Y-m-d",
+                        minDate: "today",
+                        disable: this.reservedDates,
+                        onDayCreate: function(dObj, dStr, fp, dayElem) {
+                            if (self.reservedDates.includes(fp.formatDate(dayElem.dateObj, "Y-m-d"))) {
+                                dayElem.setAttribute("title", "Date déjà réservée");
+                            }
+                        },
+                        onChange: function() {
+                            self.calculateTotal();
+                        }
+                    };
+
+                    this.fpStart = flatpickr("#date_debut", {
+                        ...config,
+                        onChange: function(selectedDates) {
+                            if (selectedDates.length > 0) {
+                                self.fpEnd.set('minDate', selectedDates[0]);
+                            }
+                            self.calculateTotal();
+                        }
+                    });
+
+                    this.fpEnd = flatpickr("#date_fin", {
+                        ...config,
+                        onChange: function(selectedDates) {
+                            if (selectedDates.length > 0) {
+                                self.fpStart.set('maxDate', selectedDates[0]);
+                            }
+                            self.calculateTotal();
+                        }
+                    });
+                },
                 
                 calculateTotal() {
                     if (this.dateDebut && this.dateFin) {
