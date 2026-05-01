@@ -47,10 +47,10 @@
                                     </div>
                                     <div class="p-4 bg-gray-50 border-t border-gray-100 flex gap-2">
                                         <a href="{{ route('objets.show', $objet) }}" target="_blank" class="flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition">Voir</a>
-                                        <form action="{{ route('admin.objets.destroy', $objet->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')">
+                                        <form action="{{ route('admin.objets.destroy', $objet->id) }}" method="POST" class="flex-1">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-100 transition">Supprimer</button>
+                                            <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')" class="w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-100 transition">Supprimer</button>
                                         </form>
                                     </div>
                                 </div>
