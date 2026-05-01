@@ -12,18 +12,18 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-6 sm:-my-px sm:ms-6 sm:flex">
-                    <x-nav-link :href="route('objets.index')" :active="request()->routeIs('objets.index')" class="text-xs font-bold text-royal-dark hover:text-royal-gold transition uppercase tracking-widest">
+                    <x-nav-link :href="route('objets.index')" :active="request()->routeIs('objets.index')" class="text-sm font-medium text-royal-dark hover:text-royal-gold transition">
                         {{ __('Catalogue') }}
                     </x-nav-link>
                     @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-xs font-bold text-royal-dark hover:text-royal-gold transition uppercase tracking-widest">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-sm font-medium text-royal-dark hover:text-royal-gold transition">
                             {{ __('Tableau de bord') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.index')" class="text-xs font-bold text-royal-dark hover:text-royal-gold transition uppercase tracking-widest">
+                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.index')" class="text-sm font-medium text-royal-dark hover:text-royal-gold transition">
                             {{ __('Mes Réservations') }}
                         </x-nav-link>
                         @if(auth()->check() && auth()->user()->role === 'admin')
-                            <x-nav-link :href="route('admin.objets.index')" :active="request()->routeIs('admin.objets.index')" class="text-xs font-bold text-royal-gold hover:text-royal-dark transition uppercase tracking-widest">
+                            <x-nav-link :href="route('admin.objets.index')" :active="request()->routeIs('admin.objets.index')" class="text-sm font-medium text-royal-gold hover:text-royal-dark transition">
                                 {{ __('Modération') }}
                             </x-nav-link>
                         @endif
@@ -129,7 +129,7 @@
 
                 @auth
                     <!-- Publish Button -->
-                    <a href="{{ route('objets.create') }}" class="mr-4 inline-flex items-center px-4 py-2 bg-royal-gold border border-transparent rounded-full font-bold text-[10px] text-white uppercase tracking-widest hover:opacity-90 transition whitespace-nowrap">
+                    <a href="{{ route('objets.create') }}" class="mr-4 inline-flex items-center px-4 py-2 bg-royal-gold border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:opacity-90 transition whitespace-nowrap">
                         {{ __('Publier') }}
                     </a>
                     <x-dropdown align="right" width="48">
