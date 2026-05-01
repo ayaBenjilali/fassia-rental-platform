@@ -28,14 +28,18 @@ class ReservationController extends Controller
                 // Get all confirmed or paid reservations for this object
                 $reservations = Reservation::where('objet_louable_id', $objet->id)
                     ->whereIn('statut', ['confirmee', 'payee'])
-                    ->where('date_fin', '>=', now()->toDateString())
+                    ->where('date_fin', '>=', now()->subDays(3)->toDateString())
                     ->get();
 
                 foreach ($reservations as $res) {
+                    // Logistique: 1 jour avant (livraison), 2 jours après (retour + maintenance)
+                    $start = (new \DateTime($res->date_debut))->modify('-1 day');
+                    $end = (new \DateTime($res->date_fin))->modify('+2 days');
+
                     $period = new \DatePeriod(
-                        new \DateTime($res->date_debut),
+                        $start,
                         new \DateInterval('P1D'),
-                        (new \DateTime($res->date_fin))->modify('+1 day')
+                        $end->modify('+1 day')
                     );
                     foreach ($period as $date) {
                         $reservedDates[] = $date->format('Y-m-d');
@@ -61,21 +65,20 @@ class ReservationController extends Controller
             'cin' => 'required|string|max:50',
         ]);
 
-        // Check for availability
-        $overlap = Reservation::where('objet_louable_id', $validated['objet_louable_id'])
+        // Logic for logistics buffer: new_start must be > old_end + 2 days
+        // and new_end must be < old_start - 1 day
+        // Check for availability with buffer (1 day before, 2 days after)
+        $reservations = Reservation::where('objet_louable_id', $validated['objet_louable_id'])
             ->whereIn('statut', ['confirmee', 'payee'])
-            ->where(function ($query) use ($validated) {
-                $query->whereBetween('date_debut', [$validated['date_debut'], $validated['date_fin']])
-                    ->orWhereBetween('date_fin', [$validated['date_debut'], $validated['date_fin']])
-                    ->orWhere(function ($q) use ($validated) {
-                        $q->where('date_debut', '<=', $validated['date_debut'])
-                          ->where('date_fin', '>=', $validated['date_fin']);
-                    });
-            })
-            ->exists();
+            ->get();
 
-        if ($overlap) {
-            return back()->withInput()->withErrors(['dates' => 'Cet article est déjà réservé pour les dates sélectionnées.']);
+        foreach ($reservations as $res) {
+            $blocked_start = (new \DateTime($res->date_debut))->modify('-1 day')->format('Y-m-d');
+            $blocked_end = (new \DateTime($res->date_fin))->modify('+2 days')->format('Y-m-d');
+
+            if ($validated['date_debut'] <= $blocked_end && $blocked_start <= $validated['date_fin']) {
+                return back()->withInput()->withErrors(['dates' => 'Cet article est indisponible aux dates sélectionnées (incluant les délais de livraison et de maintenance).']);
+            }
         }
 
         $validated['user_id'] = auth()->id();
@@ -114,22 +117,19 @@ class ReservationController extends Controller
             abort(403);
         }
 
-        // Double check availability before confirming
-        $overlap = Reservation::where('objet_louable_id', $reservation->objet_louable_id)
+        // Double check availability before confirming with buffer
+        $reservations = Reservation::where('objet_louable_id', $reservation->objet_louable_id)
             ->where('statut', 'confirmee')
             ->where('id', '!=', $reservation->id)
-            ->where(function ($query) use ($reservation) {
-                $query->whereBetween('date_debut', [$reservation->date_debut, $reservation->date_fin])
-                    ->orWhereBetween('date_fin', [$reservation->date_debut, $reservation->date_fin])
-                    ->orWhere(function ($q) use ($reservation) {
-                        $q->where('date_debut', '<=', $reservation->date_debut)
-                          ->where('date_fin', '>=', $reservation->date_fin);
-                    });
-            })
-            ->exists();
+            ->get();
 
-        if ($overlap) {
-            return back()->with('error', 'Impossible d\'accepter cette réservation : l\'article est déjà loué aux dates demandées par une autre réservation confirmée.');
+        foreach ($reservations as $res) {
+            $blocked_start = (new \DateTime($res->date_debut))->modify('-1 day')->format('Y-m-d');
+            $blocked_end = (new \DateTime($res->date_fin))->modify('+2 days')->format('Y-m-d');
+
+            if ($reservation->date_debut <= $blocked_end && $blocked_start <= $reservation->date_fin) {
+                return back()->with('error', 'Impossible d\'accepter cette réservation : l\'article est indisponible à cause d\'une autre réservation et des délais logistiques.');
+            }
         }
 
         $reservation->update(['statut' => 'confirmee']);
