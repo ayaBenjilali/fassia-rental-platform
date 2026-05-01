@@ -17,7 +17,7 @@ class SyncSeeder extends Seeder
 
         // Users
         User::updateOrCreate(
-            ['email' => 'test@example.com'],
+            ['email' => 'test@gmail.com'],
             [
                 'name' => 'Admin',
                 'nom' => 'Admin',
@@ -73,7 +73,7 @@ class SyncSeeder extends Seeder
 
         // Objets
         ObjetLouable::truncate();
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 155,
@@ -94,7 +94,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 156,
@@ -115,7 +115,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 157,
@@ -136,7 +136,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 158,
@@ -157,7 +157,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 159,
@@ -178,7 +178,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 160,
@@ -199,7 +199,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 161,
@@ -220,7 +220,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 162,
@@ -241,7 +241,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 163,
@@ -262,7 +262,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 164,
@@ -283,7 +283,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 165,
@@ -304,7 +304,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 166,
@@ -325,7 +325,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 167,
@@ -346,7 +346,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 168,
@@ -367,7 +367,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 169,
@@ -388,7 +388,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 170,
@@ -409,7 +409,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 171,
@@ -430,7 +430,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 172,
@@ -451,7 +451,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 173,
@@ -472,7 +472,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 174,
@@ -493,7 +493,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 175,
@@ -514,7 +514,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 176,
@@ -535,7 +535,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 177,
@@ -556,7 +556,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 178,
@@ -577,7 +577,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 179,
@@ -598,7 +598,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 180,
@@ -619,7 +619,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 181,
@@ -640,7 +640,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 182,
@@ -661,7 +661,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 183,
@@ -682,7 +682,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 184,
@@ -703,7 +703,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 185,
@@ -724,7 +724,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 186,
@@ -745,7 +745,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 187,
@@ -766,7 +766,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 188,
@@ -787,7 +787,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 189,
@@ -808,7 +808,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 190,
@@ -829,7 +829,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 191,
@@ -850,7 +850,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 192,
@@ -871,7 +871,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 193,
@@ -892,7 +892,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 194,
@@ -913,7 +913,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 195,
@@ -934,7 +934,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 196,
@@ -955,7 +955,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 197,
@@ -976,7 +976,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 198,
@@ -997,7 +997,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 199,
@@ -1018,7 +1018,7 @@ class SyncSeeder extends Seeder
             ]);
         }
 
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@gmail.com')->first();
         if ($user) {
             ObjetLouable::insert([
                 'id' => 200,
