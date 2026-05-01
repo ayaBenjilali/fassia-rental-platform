@@ -1,13 +1,21 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-12 bg-royal-sand min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+            <!-- Welcome Header (Matching Profile Style) -->
+            <div class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div>
+                    <h1 class="text-4xl font-bold text-royal-dark font-heading">Publications</h1>
+                    <p class="text-gray-500 mt-2">Gestion des annonces de <strong>{{ $user->nom ?? $user->name }}</strong>.</p>
+                </div>
+                <a href="{{ route('profile.edit') }}" class="text-[10px] font-black text-royal-gold hover:text-royal-dark transition uppercase tracking-[0.2em] border-b border-royal-gold/20 pb-1">
+                    &larr; Retour aux comptes
+                </a>
+            </div>
+
             <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                <div class="px-8 py-6 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
-                    <div>
-                        <h2 class="text-2xl font-bold text-royal-dark font-heading">Publications de {{ $user->nom ?? $user->name }}</h2>
-                        <p class="text-sm text-gray-500 mt-1">{{ $user->email }} • {{ $objets->total() }} publications au total</p>
-                    </div>
-                    <a href="{{ route('profile.edit') }}" class="text-sm font-bold text-royal-gold hover:underline uppercase tracking-widest">&larr; Retour aux comptes</a>
+                <div class="px-8 py-4 border-b border-gray-100 bg-gray-50/50">
+                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">{{ $objets->total() }} publications trouvées</p>
                 </div>
 
                 <div class="p-8">
