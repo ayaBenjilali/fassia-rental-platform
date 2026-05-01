@@ -71,7 +71,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('reservations', ReservationController::class);
     Route::resource('messages', MessageController::class);
     Route::resource('avis', AvisController::class)->except(['index', 'show']);
-    Route::resource('paiements', PaiementController::class);
+    // Paiements Stripe
+    Route::post('/paiements/checkout/{reservation}', [PaiementController::class, 'checkout'])->name('paiements.checkout');
+    Route::get('/paiements/success', [PaiementController::class, 'success'])->name('paiements.success');
+    Route::get('/paiements/cancel', [PaiementController::class, 'cancel'])->name('paiements.cancel');
+    Route::resource('paiements', PaiementController::class)->except(['create', 'store']);
 
     // Cart Routes
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
