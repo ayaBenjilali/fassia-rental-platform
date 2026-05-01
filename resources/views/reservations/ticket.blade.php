@@ -247,7 +247,7 @@
     <div class="ticket">
         <div class="ticket-header">
             <h1>Ticket d'expédition</h1>
-            <span class="logo">L'Fassia</span>
+            <span class="logo">Fassia</span>
         </div>
 
         <div class="ticket-ref">
@@ -347,7 +347,7 @@
         </div>
 
         <div class="ticket-footer">
-            <strong>L'Fassia</strong> — Plateforme de location d'articles traditionnels marocains<br>
+            <strong>Fassia</strong> — Plateforme de location d'articles traditionnels marocains<br>
             Ticket généré le {{ now()->format('d/m/Y à H:i') }}
         </div>
     </div>
