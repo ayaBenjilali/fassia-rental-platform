@@ -14,8 +14,14 @@
             </div>
 
             <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                <div class="px-8 py-4 border-b border-gray-100 bg-gray-50/50">
+                <div class="px-8 py-4 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                     <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">{{ $objets->total() }} publications trouvées</p>
+                    @if(session('success'))
+                        <div class="flex items-center gap-2 text-green-600 animate-bounce">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-[10px] font-bold uppercase tracking-widest">{{ session('success') }}</span>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="p-8">
@@ -47,10 +53,10 @@
                                     </div>
                                     <div class="p-4 bg-gray-50 border-t border-gray-100 flex gap-2">
                                         <a href="{{ route('objets.show', $objet) }}" target="_blank" class="flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition">Voir</a>
-                                        <form action="{{ route('admin.objets.destroy', $objet->id) }}" method="POST" class="flex-1 m-0">
+                                        <form action="{{ route('admin.objets.destroy', $objet->id) }}" method="POST" class="flex-1 m-0" onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" onclick="if(confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')) this.parentElement.submit();" class="relative z-20 w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-500 hover:text-white transition cursor-pointer">Supprimer</button>
+                                            <button type="submit" class="w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-600 hover:text-white transition">Supprimer</button>
                                         </form>
                                     </div>
                                 </div>
