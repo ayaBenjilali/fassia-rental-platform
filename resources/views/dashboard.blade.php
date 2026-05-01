@@ -187,7 +187,7 @@
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                                 Payée
                                             </span>
-                                            <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="text-[10px] font-bold text-royal-emerald hover:underline flex items-center gap-1">
+                                            <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="bg-royal-emerald text-white text-[9px] font-black px-3 py-1.5 rounded-lg hover:bg-green-800 transition shadow-sm flex items-center gap-1 uppercase tracking-wider">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                                                 Contacter le propriétaire
                                             </a>
@@ -195,7 +195,7 @@
                                     @else
                                         <div class="flex flex-col items-end gap-1">
                                             <span class="px-2 py-1 rounded text-[10px] font-bold bg-gray-100 text-gray-800 uppercase">{{ $reservation->statut }}</span>
-                                            <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="text-[10px] font-bold text-royal-emerald hover:underline flex items-center gap-1">
+                                            <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="bg-royal-emerald text-white text-[9px] font-black px-3 py-1.5 rounded-lg hover:bg-green-800 transition shadow-sm flex items-center gap-1 uppercase tracking-wider">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                                                 Contacter
                                             </a>
@@ -318,7 +318,7 @@
                                              @if($demande->statut == 'en_attente' || $demande->statut == 'en_attente_paiement')
                                                  <div class="flex flex-col items-end gap-2 text-yellow-500">
                                                      <span class="text-[10px] font-black uppercase italic tracking-widest">En attente de paiement du client</span>
-                                                     <a href="{{ route('messages.show', $demande->user->id) }}" class="text-[10px] font-bold text-royal-emerald hover:underline flex items-center gap-1">
+                                                     <a href="{{ route('messages.show', $demande->user->id) }}" class="bg-royal-emerald text-white text-[9px] font-black px-3 py-1.5 rounded-lg hover:bg-green-800 transition shadow-sm flex items-center gap-1 uppercase tracking-wider">
                                                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                                                          Contacter le locataire
                                                      </a>
@@ -329,7 +329,7 @@
                                                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                                                          Imprimer le ticket
                                                      </a>
-                                                     <a href="{{ route('messages.show', $demande->user->id) }}" class="text-[10px] font-bold text-royal-emerald hover:underline flex items-center gap-1">
+                                                     <a href="{{ route('messages.show', $demande->user->id) }}" class="bg-royal-emerald text-white text-[9px] font-black px-3 py-1.5 rounded-lg hover:bg-green-800 transition shadow-sm flex items-center gap-1 uppercase tracking-wider">
                                                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                                                          Contacter le locataire
                                                      </a>
@@ -340,7 +340,7 @@
                                                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                                                          <span class="text-[10px] font-black uppercase italic tracking-widest">Traité</span>
                                                      </div>
-                                                     <a href="{{ route('messages.show', $demande->user->id) }}" class="text-[10px] font-bold text-royal-emerald hover:underline flex items-center gap-1">
+                                                     <a href="{{ route('messages.show', $demande->user->id) }}" class="bg-royal-emerald text-white text-[9px] font-black px-3 py-1.5 rounded-lg hover:bg-green-800 transition shadow-sm flex items-center gap-1 uppercase tracking-wider">
                                                          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                                                          Contacter le locataire
                                                      </a>

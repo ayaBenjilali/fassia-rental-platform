@@ -143,20 +143,18 @@
                     @endforelse
                 </div>
 
-                <!-- Quick replies (messages pré-écrits) -->
+                <!-- Quick replies (messages pré-écrits) - UNIQUEMENT si on vient d'un refus d'annonce -->
                 @php $adminId = \App\Models\User::where('role', 'admin')->first()?->id; @endphp
-                @if($interlocuteur->id == $adminId)
-                <div class="px-4 pt-3 pb-0 bg-[#f0f2f5] flex flex-wrap gap-2">
+                @if($interlocuteur->id == $adminId && request()->has('raison'))
+                <div class="px-4 pt-3 pb-0 bg-[#f0f2f5] flex flex-wrap gap-2 animate-fade-in">
                     @php
                         $templates = [
-                            "Bonjour, pourquoi mon annonce a été refusée ?",
-                            "Je souhaite avoir plus d'informations sur le refus.",
+                            "Bonjour, je souhaite connaître la raison du refus de mon annonce \"" . urldecode(request()->raison) . "\".",
+                            "Pourquoi mon annonce a été refusée ?",
+                            "Plus d'informations sur le refus.",
                             "Puis-je soumettre à nouveau mon annonce après correction ?",
-                            "Bonjour, j'ai une réclamation concernant ma publication.",
+                            "Réclamation concernant ma publication.",
                         ];
-                        if(request()->has('raison')) {
-                            array_unshift($templates, "Bonjour, je souhaite connaître la raison du refus de mon annonce \"" . urldecode(request()->raison) . "\".");
-                        }
                     @endphp
                     @foreach($templates as $tpl)
                         <button type="button"
