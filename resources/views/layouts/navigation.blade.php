@@ -11,19 +11,19 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('objets.index')" :active="request()->routeIs('objets.index')" class="font-medium text-royal-dark hover:text-royal-gold transition">
+                <div class="hidden space-x-6 sm:-my-px sm:ms-6 sm:flex">
+                    <x-nav-link :href="route('objets.index')" :active="request()->routeIs('objets.index')" class="text-xs font-bold text-royal-dark hover:text-royal-gold transition uppercase tracking-widest">
                         {{ __('Catalogue') }}
                     </x-nav-link>
                     @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="font-medium text-royal-dark hover:text-royal-gold transition">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-xs font-bold text-royal-dark hover:text-royal-gold transition uppercase tracking-widest">
                             {{ __('Tableau de bord') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.index')" class="font-medium text-royal-dark hover:text-royal-gold transition">
+                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.index')" class="text-xs font-bold text-royal-dark hover:text-royal-gold transition uppercase tracking-widest">
                             {{ __('Mes Réservations') }}
                         </x-nav-link>
                         @if(auth()->check() && auth()->user()->role === 'admin')
-                            <x-nav-link :href="route('admin.objets.index')" :active="request()->routeIs('admin.objets.index')" class="font-medium text-royal-dark hover:text-royal-gold transition">
+                            <x-nav-link :href="route('admin.objets.index')" :active="request()->routeIs('admin.objets.index')" class="text-xs font-bold text-royal-gold hover:text-royal-dark transition uppercase tracking-widest">
                                 {{ __('Modération') }}
                             </x-nav-link>
                         @endif
@@ -32,11 +32,11 @@
             </div>
 
             <!-- Settings Dropdown / Login -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-2">
                 <!-- Messages Icon -->
                 @auth
-                    <a href="{{ route('messages.index') }}" class="mr-6 relative group text-royal-gold hover:text-royal-dark transition">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="{{ route('messages.index') }}" class="mr-4 relative group text-royal-gold hover:text-royal-dark transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
                         </svg>
                         @php 
@@ -50,9 +50,9 @@
                     </a>
 
                     <!-- Notifications Bell -->
-                    <div class="relative flex items-center mr-6" x-data="{ openNotifications: false }">
+                    <div class="relative flex items-center mr-4" x-data="{ openNotifications: false }">
                         <button @click="openNotifications = !openNotifications" class="relative group text-royal-gold hover:text-royal-dark transition focus:outline-none">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
                             </svg>
                             @php
@@ -116,8 +116,8 @@
                 @endauth
 
                 <!-- Cart Icon -->
-                <a href="{{ route('cart.index') }}" class="mr-6 relative group text-royal-gold hover:text-royal-dark transition">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="{{ route('cart.index') }}" class="mr-4 relative group text-royal-gold hover:text-royal-dark transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
                     @if(session('cart') && count(session('cart')) > 0)
@@ -129,8 +129,8 @@
 
                 @auth
                     <!-- Publish Button -->
-                    <a href="{{ route('objets.create') }}" class="mr-6 inline-flex items-center px-4 py-2 bg-royal-gold border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:opacity-90 focus:opacity-90 active:opacity-90 focus:outline-none focus:ring-2 focus:ring-royal-gold focus:ring-offset-2 transition ease-in-out duration-150">
-                        {{ __('Publier un article') }}
+                    <a href="{{ route('objets.create') }}" class="mr-4 inline-flex items-center px-4 py-2 bg-royal-gold border border-transparent rounded-full font-bold text-[10px] text-white uppercase tracking-widest hover:opacity-90 transition whitespace-nowrap">
+                        {{ __('Publier') }}
                     </a>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
