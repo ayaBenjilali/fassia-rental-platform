@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users/{user}/posts', [\App\Http\Controllers\AdminController::class, 'userPosts'])->name('admin.users.posts');
     Route::delete('/admin/users/{user}', [\App\Http\Controllers\AdminController::class, 'deleteUser'])->name('admin.users.destroy');
     Route::post('/admin/users/{user}/warn', [\App\Http\Controllers\AdminController::class, 'warnUser'])->name('admin.users.warn');
+    Route::delete('/admin/objets/{objet}', [\App\Http\Controllers\AdminController::class, 'destroyAd'])->name('admin.objets.destroy');
 
     Route::get('/notifications/mark-as-read', function() {
         auth()->user()->unreadNotifications->markAsRead();

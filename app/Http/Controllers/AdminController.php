@@ -125,4 +125,14 @@ class AdminController extends Controller
         
         return view('admin.users.posts', compact('user', 'objets'));
     }
+
+    public function destroyAd(ObjetLouable $objet)
+    {
+        if (auth()->user()->role !== 'admin') { abort(403); }
+        
+        $titre = $objet->titre;
+        $objet->delete();
+
+        return back()->with('success', "L'annonce '{$titre}' a été supprimée définitivement.");
+    }
 }
