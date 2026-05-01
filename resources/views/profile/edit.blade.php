@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="text-2xl font-bold text-royal-dark font-heading">
+            <h2 class="text-xl font-bold text-royal-dark font-heading">
                 {{ __('Mon Profil') }}
             </h2>
             @if(auth()->user()->role !== 'admin')

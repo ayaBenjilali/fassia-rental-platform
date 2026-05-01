@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-serif text-2xl text-royal-emerald leading-tight font-bold tracking-tight">
+            <h2 class="font-serif text-xl text-royal-emerald leading-tight font-bold tracking-tight">
                 {{ __('Modération des Annonces') }}
             </h2>
-            <div class="hidden sm:block text-royal-gold font-bold text-[10px] tracking-[0.3em] uppercase italic">
+            <div class="hidden sm:block text-royal-gold font-bold text-[9px] tracking-[0.2em] uppercase italic">
                 Administration
             </div>
         </div>
