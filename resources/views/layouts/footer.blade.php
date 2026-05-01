@@ -19,7 +19,7 @@
                     <li><a href="{{ route('dashboard') }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Tableau de Bord</a></li>
                     <li><a href="{{ route('reservations.index') }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Mes Réservations</a></li>
                     @if(auth()->check() && auth()->user()->role === 'admin')
-                        <li><a href="{{ route('admin.objets.index') }}" class="text-royal-gold hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">Modération</a></li>
+                        <li><a href="{{ route('admin.objets.index') }}" class="text-white/70 hover:text-white transition-colors text-sm font-medium">Modération</a></li>
                     @endif
                 </ul>
             </div>
