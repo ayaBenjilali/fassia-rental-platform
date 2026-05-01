@@ -148,11 +148,15 @@
                                     </div>
                                     <h4 class="text-xl font-bold text-royal-dark font-heading">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</h4>
                                     <p class="text-gray-400 text-sm mt-1">{{ auth()->user()->email }}</p>
-                                    <div class="mt-8 pt-8 border-t border-gray-50 w-full">
-                                        <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-4">Statut du compte</p>
-                                        <span class="px-4 py-2 bg-royal-emerald/10 text-royal-emerald rounded-full font-bold text-[10px] uppercase tracking-[0.15em] border border-royal-emerald/20 shadow-sm">
-                                            {{ auth()->user()->role === 'admin' ? 'Administrateur' : 'Utilisateur Certifié' }}
-                                        </span>
+                                    <div class="mt-8 pt-8 border-t border-gray-50 w-full grid grid-cols-2 gap-4">
+                                        <div class="text-center border-r border-gray-50">
+                                            <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">Publications</p>
+                                            <span class="text-xl font-black text-royal-dark">{{ auth()->user()->objets()->count() }}</span>
+                                        </div>
+                                        <div class="text-center">
+                                            <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">Membre depuis</p>
+                                            <span class="text-xs font-bold text-royal-dark">{{ auth()->user()->created_at->format('M Y') }}</span>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
