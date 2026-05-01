@@ -150,10 +150,10 @@
                         const start = new Date(this.dateDebut);
                         const end = new Date(this.dateFin);
                         const diffTime = Math.abs(end - start);
-                        // Add 1 because same day rental is considered 1 day minimum.
-                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                        // Same day = 1 day minimum, otherwise the number of days between dates
+                        const diffDays = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
                         
-                        if (start <= end && diffDays > 0) {
+                        if (start <= end) {
                             this.days = diffDays;
                             this.montantTotal = (diffDays * this.prixJour).toFixed(2);
                         } else {

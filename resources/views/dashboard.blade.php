@@ -11,7 +11,7 @@
             @if(session('success'))
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-2xl bg-green-50 border border-green-100 animate-fade-up shadow-sm flex items-center gap-3">
                     <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    <span class="font-bold">{{ session('success') }}</span>
+                    <span class="font-bold">{!! nl2br(e(session('success'))) !!}</span>
                 </div>
             @endif
 
@@ -173,24 +173,14 @@
                                 <div class="text-right">
                                     @if($reservation->statut == 'en_attente' || $reservation->statut == 'en_attente_paiement')
                                         <div class="flex flex-col items-end gap-2">
-                                            <span class="px-2 py-1 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 uppercase">En attente de paiement</span>
+                                            <span class="px-2 py-1 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 uppercase block mb-1">En attente de paiement</span>
                                             <a href="{{ route('paiements.checkout', $reservation) }}" class="bg-royal-dark hover:bg-black text-white border border-royal-gold/50 text-[10px] font-black px-4 py-2 rounded-lg shadow-lg shadow-royal-dark/20 transition flex items-center gap-2 uppercase tracking-widest active:scale-95">
                                                 <svg class="w-4 h-4 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                                                 Payer {{ number_format($reservation->montant_total, 0) }} DH
                                             </a>
-                                            <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" onsubmit="return confirm('Annuler cette réservation ?')">
-                                                @csrf @method('DELETE')
-                                                <button type="submit" class="text-[10px] text-red-500 hover:underline font-bold mt-1">Annuler</button>
-                                            </form>
                                         </div>
                                     @elseif($reservation->statut == 'confirmee')
-                                        <div class="flex flex-col items-end gap-2">
-                                            <span class="px-2 py-1 rounded text-[10px] font-bold bg-green-100 text-green-800 uppercase">Confirmée</span>
-                                            <a href="{{ route('paiements.checkout', $reservation) }}" class="bg-royal-dark hover:bg-black text-white border border-royal-gold/50 text-[10px] font-black px-4 py-2 rounded-lg shadow-lg shadow-royal-dark/20 transition flex items-center gap-2 uppercase tracking-widest active:scale-95">
-                                                <svg class="w-4 h-4 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                                                Payer {{ number_format($reservation->montant_total, 0) }} DH
-                                            </a>
-                                        </div>
+                                        <span class="px-2 py-1 rounded text-[10px] font-bold bg-green-100 text-green-800 uppercase">Confirmée</span>
                                     @elseif($reservation->statut == 'payee')
                                         <span class="px-3 py-1.5 rounded-lg text-[10px] font-black bg-emerald-100 text-emerald-800 uppercase flex items-center justify-end gap-1 border border-emerald-200">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
