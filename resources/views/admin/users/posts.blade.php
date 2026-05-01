@@ -50,7 +50,7 @@
                                         <form action="{{ route('admin.objets.destroy', $objet) }}" method="POST" class="flex-1" onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-100 transition">Retirer</button>
+                                            <button type="submit" class="w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-100 transition">Supprimer</button>
                                         </form>
                                     </div>
                                 </div>
