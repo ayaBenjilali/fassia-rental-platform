@@ -75,7 +75,7 @@
                              x-transition:enter-start="opacity-0 scale-95"
                              x-transition:enter-end="opacity-100 scale-100"
                              style="top: 65px !important; width: 450px !important;"
-                             class="absolute right-[-20px] bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-gray-100 z-[100] py-4 overflow-hidden" 
+                             class="absolute right-[-50px] bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-gray-100 z-[100] py-4 overflow-hidden" 
                              x-cloak>
                             <div class="px-8 py-3 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
                                 <span class="text-[10px] font-black text-royal-dark uppercase tracking-[0.2em]">Notifications</span>

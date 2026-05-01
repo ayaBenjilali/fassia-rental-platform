@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\ObjetLouable;
 use Illuminate\Http\Request;
 
@@ -14,11 +15,32 @@ class AdminController extends Controller
         }
 
         $objets = ObjetLouable::where('statut', ObjetLouable::STATUT_EN_ATTENTE)
+            ->whereHas('user', function ($query) {
+                $query->where('role', '!=', 'admin');
+            })
             ->with(['user', 'photos'])
             ->latest()
-            ->get();
+            ->paginate(10, ['*'], 'pending_page');
 
-        return view('admin.objets.index', compact('objets'));
+        $historique = ObjetLouable::whereIn('statut', [ObjetLouable::STATUT_APPROUVE, ObjetLouable::STATUT_REJETE])
+            ->whereHas('user', function ($query) {
+                $query->where('role', '!=', 'admin');
+            })
+            ->with(['user', 'photos'])
+            ->latest()
+            ->paginate(10, ['*'], 'history_page');
+
+        $adminId = auth()->id();
+
+        // Messages reçus par l'admin (réclamations), groupés par expéditeur
+        $reclamations = Message::where('destinataire_id', $adminId)
+            ->with('expediteur')
+            ->latest()
+            ->get()
+            ->groupBy('expediteur_id')
+            ->filter(fn($conv) => $conv->first()->expediteur?->role !== 'admin');
+
+        return view('admin.objets.index', compact('objets', 'historique', 'reclamations'));
     }
 
     public function approuver(ObjetLouable $objet)

@@ -91,6 +91,13 @@
                                 </div>
                                 <div class="flex flex-col gap-2 min-w-[100px]">
                                     <a href="{{ route('objets.edit', $objet) }}" class="text-[10px] font-bold uppercase tracking-wider bg-white text-green-600 px-3 py-1.5 rounded-lg border border-green-200 hover:bg-green-50 transition text-center">Modifier</a>
+                                    @if($objet->statut === \App\Models\ObjetLouable::STATUT_REJETE)
+                                        <a href="{{ route('messages.show', \App\Models\User::where('role', 'admin')->first()->id) }}?raison={{ urlencode($objet->titre) }}"
+                                           class="text-[10px] font-bold uppercase tracking-wider bg-white text-amber-600 px-3 py-1.5 rounded-lg border border-amber-200 hover:bg-amber-50 transition text-center flex items-center justify-center gap-1">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                                            Demander la raison
+                                        </a>
+                                    @endif
                                     <div x-data="{ showModal: false }" class="w-full">
                                         <!-- Bouton déclencheur -->
                                         <button @click="showModal = true" type="button" title="Supprimer cette annonce" class="text-sm font-medium bg-white text-red-600 px-4 py-1.5 rounded-md border border-red-300 hover:bg-red-50 transition text-center shadow-sm w-full cursor-pointer">Supprimer</button>

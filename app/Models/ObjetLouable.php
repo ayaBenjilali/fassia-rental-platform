@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class ObjetLouable extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     const STATUT_EN_ATTENTE = 'en_attente';
     const STATUT_APPROUVE = 'approuve';

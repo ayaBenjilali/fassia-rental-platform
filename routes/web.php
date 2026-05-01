@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Public read-only routes must come AFTER auth group to prevent {objet} matching "create"
-Route::resource('objets', ObjetLouableController::class)->only(['index', 'show']);
+Route::resource('objets', ObjetLouableController::class)->only(['index']);
+Route::get('/objets/{objet}', [ObjetLouableController::class, 'show'])->name('objets.show')->withTrashed();
 
 require __DIR__.'/auth.php';

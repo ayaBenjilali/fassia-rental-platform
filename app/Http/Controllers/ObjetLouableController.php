@@ -112,6 +112,15 @@ class ObjetLouableController extends Controller
 
     public function show(ObjetLouable $objet)
     {
+        // Sécurité : Si l'annonce n'est pas approuvée, on vérifie qui essaie de la voir
+        if ($objet->statut !== ObjetLouable::STATUT_APPROUVE) {
+            $user = auth()->user();
+            // Si pas connecté, ou si ce n'est ni l'admin ni le propriétaire -> Accès refusé
+            if (!$user || ($user->role !== 'admin' && $user->id !== $objet->user_id)) {
+                abort(403, 'Cette annonce n\'est pas encore disponible au public.');
+            }
+        }
+
         $objet->load('photos', 'user');
         return view('objets.show', ['objetLouable' => $objet]);
     }

@@ -55,7 +55,14 @@ class MessageController extends Controller
 
         $validated['expediteur_id'] = auth()->id();
 
-        Message::create($validated);
+        $message = Message::create($validated);
+
+        // Notifier le destinataire
+        $message->destinataire->notify(new \App\Notifications\AdStatusChanged(
+            "Nouveau message de " . (auth()->user()->nom ?? auth()->user()->name) . " : " . \Illuminate\Support\Str::limit($message->contenu, 50),
+            null, // Pas d'annonce spécifique ici
+            'message'
+        ));
 
         if ($request->ajax()) {
             return response()->json(['success' => true]);

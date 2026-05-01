@@ -143,6 +143,31 @@
                     @endforelse
                 </div>
 
+                <!-- Quick replies (messages pré-écrits) -->
+                @php $adminId = \App\Models\User::where('role', 'admin')->first()?->id; @endphp
+                @if($interlocuteur->id == $adminId)
+                <div class="px-4 pt-3 pb-0 bg-[#f0f2f5] flex flex-wrap gap-2">
+                    @php
+                        $templates = [
+                            "Bonjour, pourquoi mon annonce a été refusée ?",
+                            "Je souhaite avoir plus d'informations sur le refus.",
+                            "Puis-je soumettre à nouveau mon annonce après correction ?",
+                            "Bonjour, j'ai une réclamation concernant ma publication.",
+                        ];
+                        if(request()->has('raison')) {
+                            array_unshift($templates, "Bonjour, je souhaite connaître la raison du refus de mon annonce \"" . urldecode(request()->raison) . "\".");
+                        }
+                    @endphp
+                    @foreach($templates as $tpl)
+                        <button type="button"
+                                onclick="document.querySelector('[x-ref=messageInput]').value = '{{ addslashes($tpl) }}'"
+                                class="text-[9px] font-bold px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-600 hover:border-royal-gold hover:text-royal-gold transition-all duration-200 shadow-sm">
+                            {{ $tpl }}
+                        </button>
+                    @endforeach
+                </div>
+                @endif
+
                 <!-- Input Area -->
                 <div class="p-4 bg-[#f0f2f5] flex items-center gap-4 relative" x-data="{ 
                     showEmojis: false,
@@ -193,17 +218,10 @@
                         @csrf
                         <input type="hidden" name="destinataire_id" value="{{ $interlocuteur->id }}">
                         <input type="text" name="contenu" placeholder="Écrivez votre message..." required x-ref="messageInput"
+                               value="{{ request()->has('raison') ? 'Bonjour, je souhaite connaître la raison du refus de mon annonce "' . urldecode(request()->raison) . '".' : '' }}"
                                class="flex-1 bg-white border-none rounded-xl px-5 py-3 text-sm shadow-sm focus:ring-0 transition">
                         
                         <button type="submit" class="w-12 h-12 bg-royal-emerald text-white rounded-full flex items-center justify-center shadow-lg hover:brightness-110 active:scale-95 transition">
-                            <svg class="w-6 h-6 rotate-45 -mt-0.5 -mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-="submit" class="w-12 h-12 bg-royal-emerald text-white rounded-full flex items-center justify-center shadow-lg hover:brightness-110 active:scale-95 transition">
                             <svg class="w-6 h-6 rotate-45 -mt-0.5 -mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
                         </button>
                     </form>
@@ -217,4 +235,5 @@
         const container = document.getElementById('messages-container');
         container.scrollTop = container.scrollHeight;
     </script>
+
 </x-app-layout>
