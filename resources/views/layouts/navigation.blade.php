@@ -130,7 +130,7 @@
                 @auth
                     <!-- Publish Button -->
                     <a href="{{ route('objets.create') }}" class="mr-4 inline-flex items-center px-4 py-2 bg-royal-gold border border-transparent rounded-full font-semibold text-xs text-white uppercase tracking-widest hover:opacity-90 transition whitespace-nowrap">
-                        {{ __('Publier') }}
+                        {{ __('Publier un article') }}
                     </a>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
