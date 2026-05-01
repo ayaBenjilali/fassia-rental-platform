@@ -14,24 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // On crée l'administrateur de test s'il n'existe pas déjà
-        User::updateOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test Admin',
-                'nom' => 'Admin',
-                'prenom' => 'Test',
-                'role' => 'admin',
-                'password' => bcrypt('password'), // Mot de passe par défaut
-            ]
-        );
-
-        // On lance le remplissage des accessoires de luxe
+        // Appel du seeder de synchronisation généré à partir de la BDD locale
+        $this->call([
+            SyncSeeder::class,
+        ]);
+        
+        // Vous pouvez commenter/décommenter les autres seeders si besoin :
+        /*
         $this->call([
             CaftanSeeder::class,
             AccessoireSeeder::class,
             SacSeeder::class,
             TalonSeeder::class,
         ]);
+        */
     }
 }
