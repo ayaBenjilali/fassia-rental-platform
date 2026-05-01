@@ -151,7 +151,7 @@
                                     <div class="mt-8 pt-8 border-t border-gray-50 w-full grid grid-cols-2 gap-4">
                                         <div class="text-center border-r border-gray-50">
                                             <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">Publications</p>
-                                            <span class="text-xl font-black text-royal-dark">{{ auth()->user()->objets()->count() }}</span>
+                                            <span class="text-xl font-black text-royal-dark">{{ auth()->user()->objetsLouables()->count() }}</span>
                                         </div>
                                         <div class="text-center">
                                             <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">Membre depuis</p>
