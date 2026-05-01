@@ -57,7 +57,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 155,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Majesté Pourpre\"',
+                'titre' => 'Caftan "Majesté Pourpre"',
                 'description' => 'Incarnez la grâce et le mystère avec ce caftan d\'un prune profond absolument envoûtant. Réalisé dans un satin de soie luxueux.',
                 'prix' => '550.00',
                 'localisation' => 'FES',
@@ -78,7 +78,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 156,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Sauge Royale\"',
+                'titre' => 'Caftan "Sauge Royale"',
                 'description' => 'Alliez noblesse et fraîcheur avec ce caftan en satin de soie vert sauge. Sublimé par des broderies artisanales ton sur ton.',
                 'prix' => '500.00',
                 'localisation' => 'MEKNES',
@@ -99,7 +99,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 157,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Émeraude & Or\"',
+                'titre' => 'Caftan "Émeraude & Or"',
                 'description' => 'L\'alliance parfaite de la tradition et du luxe absolu. Velours émeraude épais orné de broderies dorées Maalem.',
                 'prix' => '600.00',
                 'localisation' => 'FES',
@@ -120,7 +120,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 158,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Fleur de Menthe\"',
+                'titre' => 'Caftan "Fleur de Menthe"',
                 'description' => 'Douceur absolue en crêpe de soie vert menthe. Broderies florales ton sur ton et perlage délicat.',
                 'prix' => '450.00',
                 'localisation' => 'FES',
@@ -141,7 +141,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 159,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Bronze Impérial\"',
+                'titre' => 'Caftan "Bronze Impérial"',
                 'description' => 'Élégance à l\'état pur en velours chocolat profond. Broderies dorées Maalem majestueuses.',
                 'prix' => '650.00',
                 'localisation' => 'MEKNES',
@@ -162,7 +162,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 160,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Nuit Boréale\"',
+                'titre' => 'Caftan "Nuit Boréale"',
                 'description' => 'Élégance contemporaine en satin vert paon avec broderies argentées géométriques.',
                 'prix' => '500.00',
                 'localisation' => 'CASA',
@@ -183,7 +183,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 161,
                 'user_id' => $user->id,
-                'titre' => 'Takchita \"Éclat d\'Améthyste\"',
+                'titre' => 'Takchita "Éclat d\'Améthyste"',
                 'description' => 'Luxe et raffinement en duo velours violet profond et satin améthyste.',
                 'prix' => '700.00',
                 'localisation' => 'CASA',
@@ -204,7 +204,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 162,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Lumière Pastel\"',
+                'titre' => 'Caftan "Lumière Pastel"',
                 'description' => 'Jaune pastel délicat et solaire en crêpe de soie léger. Broderies florales dorées.',
                 'prix' => '450.00',
                 'localisation' => 'MEKNES',
@@ -225,7 +225,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 163,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Éclat de Bronze\"',
+                'titre' => 'Caftan "Éclat de Bronze"',
                 'description' => 'Satin de soie bronze noble. Buste recouvert de broderies dorées Maalem rappelant les parures antiques.',
                 'prix' => '550.00',
                 'localisation' => 'RABAT',
@@ -246,7 +246,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 164,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Café de Nuit\"',
+                'titre' => 'Caftan "Café de Nuit"',
                 'description' => 'Velours chocolat noir avec col officier et ceinture dorée sculpturale. Élégance minimaliste.',
                 'prix' => '600.00',
                 'localisation' => 'RABAT',
@@ -267,7 +267,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 165,
                 'user_id' => $user->id,
-                'titre' => 'Takchita \"Aube Dorée\"',
+                'titre' => 'Takchita "Aube Dorée"',
                 'description' => 'Vieux rose délicat et satin cuivré. Broderies or Maalem et ceinture sculpturale.',
                 'prix' => '500.00',
                 'localisation' => 'FES',
@@ -288,7 +288,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 166,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Rouge Rubis\"',
+                'titre' => 'Caftan "Rouge Rubis"',
                 'description' => 'Rouge incandescent en soie jacquard avec motifs floraux tissés. Allure incendiaire.',
                 'prix' => '500.00',
                 'localisation' => 'TANGER',
@@ -309,7 +309,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 167,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Soleil d\'Orient\"',
+                'titre' => 'Caftan "Soleil d\'Orient"',
                 'description' => 'Jaune canari vibrant en crêpe de soie avec broderies florales blanc écru.',
                 'prix' => '450.00',
                 'localisation' => 'KENITRA',
@@ -330,7 +330,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 168,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Champagne Impérial\"',
+                'titre' => 'Caftan "Champagne Impérial"',
                 'description' => 'Velours de soie champagne avec broderies artisanales dorées et ceinture sculpturale.',
                 'prix' => '600.00',
                 'localisation' => 'KENITRA',
@@ -351,7 +351,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 169,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Aurore de Velours\"',
+                'titre' => 'Caftan "Aurore de Velours"',
                 'description' => 'Fusion velours fuchsia et jupe plissée soleil dorée. Silhouette modernité absolue.',
                 'prix' => '750.00',
                 'localisation' => 'CASA',
@@ -372,7 +372,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 170,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Jardin d\'Oasis\"',
+                'titre' => 'Caftan "Jardin d\'Oasis"',
                 'description' => 'Velours de soie vert mousse avec broderies florales ton sur ton d\'une finesse incomparable.',
                 'prix' => '600.00',
                 'localisation' => 'MEKNES',
@@ -393,7 +393,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 171,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Éclipse Royale\"',
+                'titre' => 'Caftan "Éclipse Royale"',
                 'description' => 'Velours noir et jupe plissée soleil bronze antique. L\'invitation au glamour oriental.',
                 'prix' => '750.00',
                 'localisation' => 'RABAT',
@@ -414,7 +414,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 172,
                 'user_id' => $user->id,
-                'titre' => 'Takchita \"Rêve d\'Azur\"',
+                'titre' => 'Takchita "Rêve d\'Azur"',
                 'description' => 'Chiffon de soie bleu aqua léger avec broderies multicolores et dorées.',
                 'prix' => '500.00',
                 'localisation' => 'FES',
@@ -435,7 +435,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 173,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Rubis d\'Orient\"',
+                'titre' => 'Caftan "Rubis d\'Orient"',
                 'description' => 'Crêpe de soie lourd bordeaux avec broderies or Maalem. Noblesse et distinction.',
                 'prix' => '500.00',
                 'localisation' => 'TANGER',
@@ -456,7 +456,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 174,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Éclat d\'Améthyste\"',
+                'titre' => 'Caftan "Éclat d\'Améthyste"',
                 'description' => 'Soie satinée violet électrique avec broderies argentées géométriques et florales.',
                 'prix' => '500.00',
                 'localisation' => 'AGADIR',
@@ -477,7 +477,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 175,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Douceur d\'Ivoire\"',
+                'titre' => 'Caftan "Douceur d\'Ivoire"',
                 'description' => 'Crêpe de soie crème avec broderies magenta et bordeaux. Subtilité et raffinement.',
                 'prix' => '450.00',
                 'localisation' => 'AGADIR',
@@ -498,7 +498,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 176,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Éclat de Corail\"',
+                'titre' => 'Caftan "Éclat de Corail"',
                 'description' => 'Rayonnez de fraîcheur avec ce caftan d\'un corail vibrant. Broderies géométriques ton sur ton.',
                 'prix' => '450.00',
                 'localisation' => 'MARRAKECH',
@@ -519,7 +519,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 177,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Brise Argentée\"',
+                'titre' => 'Caftan "Brise Argentée"',
                 'description' => 'Élégance discrète en bleu glacé. Broderies raffinées aux nuances argentées et lilas.',
                 'prix' => '450.00',
                 'localisation' => 'FES',
@@ -540,7 +540,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 178,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Lumière Safran\"',
+                'titre' => 'Caftan "Lumière Safran"',
                 'description' => 'Éclatant et majestueux jaune safran avec de riches broderies vertes et dorées.',
                 'prix' => '500.00',
                 'localisation' => 'MEKNES',
@@ -561,7 +561,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 179,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Émeraude Royale\"',
+                'titre' => 'Caftan "Émeraude Royale"',
                 'description' => 'Fusion de noblesse et de fraîcheur émeraude. Silhouette fluide et broderies dorées.',
                 'prix' => '480.00',
                 'localisation' => 'CASA',
@@ -582,7 +582,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 180,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Perle Dorée\"',
+                'titre' => 'Caftan "Perle Dorée"',
                 'description' => 'Sobre, chic et intemporel beige doré. Éclat discret pour une allure distinguée.',
                 'prix' => '430.00',
                 'localisation' => 'RABAT',
@@ -603,7 +603,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 181,
                 'user_id' => $user->id,
-                'titre' => 'Caftan \"Neige Impériale\"',
+                'titre' => 'Caftan "Neige Impériale"',
                 'description' => 'Pur et spectaculaire blanc ivoire. Détails floraux en relief sur le bas de la robe.',
                 'prix' => '550.00',
                 'localisation' => 'TANGER',
@@ -624,7 +624,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 182,
                 'user_id' => $user->id,
-                'titre' => 'Parure \"Carré d\'Orient\" (Collier & Boucles)',
+                'titre' => 'Parure "Carré d\'Orient" (Collier & Boucles)',
                 'description' => 'Ensemble élégant comprenant un collier à pendentif carré émeraude et ses boucles d\'oreilles assorties en or rose.',
                 'prix' => '210.00',
                 'localisation' => 'Fès, Maroc',
@@ -645,7 +645,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 183,
                 'user_id' => $user->id,
-                'titre' => 'Grand Ensemble \"Cascade Royale\" (Choker, Collier & Boucles)',
+                'titre' => 'Grand Ensemble "Cascade Royale" (Choker, Collier & Boucles)',
                 'description' => 'Une parure majestueuse composée d\'un choker rigide, d\'un long collier à franges et de boucles d\'oreilles pendantes.',
                 'prix' => '350.00',
                 'localisation' => 'Fès, Maroc',
@@ -666,7 +666,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 184,
                 'user_id' => $user->id,
-                'titre' => 'Duo de Manchettes \"Art Déco\"',
+                'titre' => 'Duo de Manchettes "Art Déco"',
                 'description' => 'Paire de bracelets larges dorés avec motifs géométriques et pierres vertes centrales.',
                 'prix' => '140.00',
                 'localisation' => 'Fès, Maroc',
@@ -687,7 +687,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 185,
                 'user_id' => $user->id,
-                'titre' => 'Collier \"Symphonie de Jade\"',
+                'titre' => 'Collier "Symphonie de Jade"',
                 'description' => 'Somptueux collier à 5 rangs de perles vertes reliés par des ornements dorés finement ciselés.',
                 'prix' => '160.00',
                 'localisation' => 'Fès, Maroc',
@@ -708,7 +708,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 186,
                 'user_id' => $user->id,
-                'titre' => 'Set de Bagues & Boucles \"Minimalisme\"',
+                'titre' => 'Set de Bagues & Boucles "Minimalisme"',
                 'description' => 'Assortiment de 4 bagues géométriques et d\'une boucle d\'oreille moderne en or rose scintillante.',
                 'prix' => '110.00',
                 'localisation' => 'Fès, Maroc',
@@ -729,7 +729,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 187,
                 'user_id' => $user->id,
-                'titre' => 'Parure \"Larmes de Diamant\" (Collier & Boucles)',
+                'titre' => 'Parure "Larmes de Diamant" (Collier & Boucles)',
                 'description' => 'Collier cascade en cristaux brillants accompagné de ses boucles d\'oreilles puces assorties.',
                 'prix' => '300.00',
                 'localisation' => 'Fès, Maroc',
@@ -750,7 +750,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 188,
                 'user_id' => $user->id,
-                'titre' => 'Boucles d\'Oreilles \"Lustre de Cristal\"',
+                'titre' => 'Boucles d\'Oreilles "Lustre de Cristal"',
                 'description' => 'Imposantes boucles d\'oreilles en forme de losange articulé, serties de zircons pour un éclat maximal.',
                 'prix' => '120.00',
                 'localisation' => 'Fès, Maroc',
@@ -771,7 +771,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 189,
                 'user_id' => $user->id,
-                'titre' => 'Parure \"Sultan\" (Collier & Boucles)',
+                'titre' => 'Parure "Sultan" (Collier & Boucles)',
                 'description' => 'Pendentif traditionnel en or monté sur un cordon de soie vert émeraude, avec boucles d\'oreilles assorties.',
                 'prix' => '130.00',
                 'localisation' => 'Fès, Maroc',
@@ -792,7 +792,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 190,
                 'user_id' => $user->id,
-                'titre' => 'Collier \"Rivière de Lumière\"',
+                'titre' => 'Collier "Rivière de Lumière"',
                 'description' => 'Collier multi-rangs de cristaux alternant motifs circulaires et gouttes de lumière.',
                 'prix' => '250.00',
                 'localisation' => 'Fès, Maroc',
@@ -813,7 +813,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 191,
                 'user_id' => $user->id,
-                'titre' => 'Parure \"Éclat Céleste\" (Collier & Boucles)',
+                'titre' => 'Parure "Éclat Céleste" (Collier & Boucles)',
                 'description' => 'Collier asymétrique en diamants de synthèse et boucles d\'oreilles pendantes assorties.',
                 'prix' => '200.00',
                 'localisation' => 'Fès, Maroc',
@@ -834,7 +834,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 192,
                 'user_id' => $user->id,
-                'titre' => 'Parure \"Aube Rose\" (Collier & Boucles)',
+                'titre' => 'Parure "Aube Rose" (Collier & Boucles)',
                 'description' => 'Collier en chaîne or rose avec pendentif ciselé et boucles d\'oreilles assorties avec perles.',
                 'prix' => '160.00',
                 'localisation' => 'Fès, Maroc',
@@ -855,7 +855,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 193,
                 'user_id' => $user->id,
-                'titre' => 'Ensemble \"Sultana\" (Choker & Boucles)',
+                'titre' => 'Ensemble "Sultana" (Choker & Boucles)',
                 'description' => 'Ras-du-cou rigide avec médaillon central et boucles d\'oreilles style palais marocain.',
                 'prix' => '170.00',
                 'localisation' => 'Fès, Maroc',
@@ -876,7 +876,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 194,
                 'user_id' => $user->id,
-                'titre' => 'Duo de Bagues d\'Exception \"Zellige\"',
+                'titre' => 'Duo de Bagues d\'Exception "Zellige"',
                 'description' => 'Deux bagues massives en or rose (une carrée, une octogonale) serties d\'une émeraude centrale.',
                 'prix' => '120.00',
                 'localisation' => 'Fès, Maroc',
@@ -897,7 +897,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 195,
                 'user_id' => $user->id,
-                'titre' => 'Set \"Grelots Nomades\" (Bagues & Bracelets)',
+                'titre' => 'Set "Grelots Nomades" (Bagues & Bracelets)',
                 'description' => 'Ensemble de 3 bagues et 3 bracelets en or rose ornés de petites pampilles mobiles (coins).',
                 'prix' => '140.00',
                 'localisation' => 'Fès, Maroc',
@@ -918,7 +918,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 196,
                 'user_id' => $user->id,
-                'titre' => 'Parure \"Émeraude Royale\" (Choker & Boucles)',
+                'titre' => 'Parure "Émeraude Royale" (Choker & Boucles)',
                 'description' => 'Choker 3 rangs serti d\'émeraudes et boucles d\'oreilles puces assorties en diamant de synthèse.',
                 'prix' => '310.00',
                 'localisation' => 'Fès, Maroc',
@@ -939,7 +939,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 197,
                 'user_id' => $user->id,
-                'titre' => 'Bracelet \"Serpent Royal\" (Multi-pierres)',
+                'titre' => 'Bracelet "Serpent Royal" (Multi-pierres)',
                 'description' => 'Bracelet articulé serpent s\'enroulant sur le bras, serti de rubis, saphirs et émeraudes.',
                 'prix' => '250.00',
                 'localisation' => 'Fès, Maroc',
@@ -960,7 +960,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 198,
                 'user_id' => $user->id,
-                'titre' => 'Le Grand Plastron \"Hizam\" de Mariée',
+                'titre' => 'Le Grand Plastron "Hizam" de Mariée',
                 'description' => 'Parure de buste complète (Collier, Bretelles et Ceinture) en or finement ciselé au Maalem.',
                 'prix' => '550.00',
                 'localisation' => 'Fès, Maroc',
@@ -981,7 +981,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 199,
                 'user_id' => $user->id,
-                'titre' => 'La Mdamma \"Émeraude Impériale\"',
+                'titre' => 'La Mdamma "Émeraude Impériale"',
                 'description' => 'Ceinture large sculptée en or, sertie de dômes d\'émeraudes magnifiques.',
                 'prix' => '300.00',
                 'localisation' => 'Fès, Maroc',
@@ -1002,7 +1002,7 @@ class SyncSeeder extends Seeder
             ObjetLouable::insert([
                 'id' => 200,
                 'user_id' => $user->id,
-                'titre' => 'Collier \"Moussem\" Perles & Émeraude',
+                'titre' => 'Collier "Moussem" Perles & Émeraude',
                 'description' => 'Multi-rangs de perles d\'eau douce se terminant sur un pendentif émeraude massif.',
                 'prix' => '190.00',
                 'localisation' => 'Fès, Maroc',
