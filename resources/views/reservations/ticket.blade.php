@@ -63,11 +63,10 @@
             text-transform: uppercase;
         }
 
-        .header-logo {
-            height: 45px;
-            width: auto;
-            object-contain: contain;
-            filter: brightness(0) invert(1); /* Pour rendre le logo blanc/doré sur fond noir si besoin, ou juste garder tel quel */
+        .ticket-header .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #D4AF37;
         }
 
         .ticket-ref {
@@ -248,7 +247,7 @@
     <div class="ticket">
         <div class="ticket-header">
             <h1>Ticket d'expédition</h1>
-            <img src="{{ asset('images/logo_fassia.jpeg') }}" alt="Logo L'Fassia" class="header-logo">
+            <span class="logo">L'Fassia</span>
         </div>
 
         <div class="ticket-ref">
