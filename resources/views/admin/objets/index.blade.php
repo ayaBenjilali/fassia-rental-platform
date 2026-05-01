@@ -1,21 +1,21 @@
 <x-app-layout>
+    <x-slot name="header">
+        <div class="flex items-center justify-between">
+            <h2 class="font-serif text-2xl text-royal-emerald leading-tight font-bold tracking-tight">
+                {{ __('Modération des Annonces') }}
+            </h2>
+            <div class="hidden sm:block text-royal-gold font-bold text-[10px] tracking-[0.3em] uppercase italic">
+                Administration
+            </div>
+        </div>
+    </x-slot>
+
     <div class="py-12 bg-royal-sand min-h-screen relative overflow-hidden">
         <!-- Decorative elements -->
         <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-royal-emerald/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-royal-gold/5 rounded-full blur-3xl"></div>
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 relative z-10">
-            
-            <!-- Welcome Header (Matching Profile Style) -->
-            <div class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div>
-                    <h1 class="text-4xl font-bold text-royal-dark font-heading">Modération</h1>
-                    <p class="text-gray-500 mt-2">Gérez les annonces en attente et les réclamations des membres.</p>
-                </div>
-                <div class="hidden sm:block text-royal-gold font-bold text-[10px] tracking-[0.3em] uppercase italic border-b border-royal-gold/20 pb-1">
-                    Administration de Prestige
-                </div>
-            </div>
             
             <div class="bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-white/50 overflow-hidden">
                 <div class="px-10 py-8 border-b border-gray-100 flex justify-between items-center bg-white/50">

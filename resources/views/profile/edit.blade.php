@@ -1,20 +1,19 @@
 <x-app-layout>
+    <x-slot name="header">
+        <div class="flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-royal-dark font-heading">
+                {{ __('Mon Profil') }}
+            </h2>
+            @if(auth()->user()->role !== 'admin')
+                <a href="{{ route('dashboard') }}" class="bg-royal-emerald text-white px-4 py-2 rounded-xl font-bold text-xs shadow-md hover:bg-green-800 transition flex items-center gap-2">
+                    Mes Publications
+                </a>
+            @endif
+        </div>
+    </x-slot>
+
     <div class="py-12 bg-royal-sand min-h-screen" x-data="{ activeTab: '{{ auth()->user()->role === 'admin' ? 'accounts' : 'profile' }}' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            <!-- Welcome Header -->
-            <div class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div>
-                    <h1 class="text-4xl font-bold text-royal-dark font-heading">Mon Espace</h1>
-                    <p class="text-gray-500 mt-2">Gérez vos informations personnelles et vos activités sur Fassia.</p>
-                </div>
-                @if(auth()->user()->role !== 'admin')
-                    <a href="{{ route('dashboard') }}" class="bg-royal-emerald text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-lg shadow-emerald-200 hover:bg-green-800 transition flex items-center gap-2 group">
-                        <svg class="w-5 h-5 group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        Mes Publications
-                    </a>
-                @endif
-            </div>
 
             <!-- Tab Navigation -->
             <div class="flex flex-wrap gap-4 mb-8">
