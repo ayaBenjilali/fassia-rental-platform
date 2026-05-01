@@ -53,11 +53,17 @@
                                     </div>
                                     <div class="p-4 bg-gray-50 border-t border-gray-100 flex gap-2">
                                         <a href="{{ route('objets.show', $objet) }}" target="_blank" class="flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition">Voir</a>
-                                        <form action="{{ route('admin.objets.destroy', $objet->id) }}" method="POST" class="flex-1 m-0" onsubmit="return confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-600 hover:text-white transition">Supprimer</button>
-                                        </form>
+                                        <div class="flex-1">
+                                            <a href="javascript:void(0)" 
+                                               onclick="if(confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')) document.getElementById('delete-form-{{ $objet->id }}').submit();"
+                                               class="block w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-600 hover:text-white transition cursor-pointer">
+                                                Supprimer
+                                            </a>
+                                            <form id="delete-form-{{ $objet->id }}" action="{{ route('admin.objets.destroy', $objet->id) }}" method="POST" class="hidden">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
