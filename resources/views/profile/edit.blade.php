@@ -127,19 +127,34 @@
                         </div>
                         <div class="lg:col-span-1">
                             <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 p-8 flex flex-col items-center text-center">
-                                <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-royal-emerald to-royal-gold p-1 mb-6">
-                                    <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-3xl font-black text-royal-emerald shadow-inner">
-                                        {{ strtoupper(substr(auth()->user()->nom ?? auth()->user()->name, 0, 1)) }}
+                                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="w-full flex flex-col items-center" id="photo-form">
+                                    @csrf
+                                    @method('patch')
+                                    <div class="relative group cursor-pointer" onclick="document.getElementById('profile_photo_input').click()">
+                                        <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-royal-emerald to-royal-gold p-1 mb-6 transition-transform group-hover:scale-105 duration-300">
+                                            <div class="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden shadow-inner">
+                                                @if(auth()->user()->photo)
+                                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" class="w-full h-full object-cover">
+                                                @else
+                                                    <span class="text-4xl font-black text-royal-emerald">{{ strtoupper(substr(auth()->user()->nom ?? auth()->user()->name, 0, 1)) }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <!-- Overlay edit icon -->
+                                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity mb-6">
+                                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        </div>
+                                        <input type="file" id="profile_photo_input" name="photo" class="hidden" onchange="document.getElementById('photo-form').submit()">
                                     </div>
-                                </div>
-                                <h4 class="text-xl font-bold text-royal-dark font-heading">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</h4>
-                                <p class="text-gray-400 text-sm mt-1">{{ auth()->user()->email }}</p>
-                                <div class="mt-8 pt-8 border-t border-gray-50 w-full">
-                                    <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-4">Statut du compte</p>
-                                    <span class="px-4 py-2 bg-royal-emerald/10 text-royal-emerald rounded-full font-bold text-[10px] uppercase tracking-[0.15em] border border-royal-emerald/20">
-                                        {{ auth()->user()->role === 'admin' ? 'Administrateur' : 'Utilisateur Certifié' }}
-                                    </span>
-                                </div>
+                                    <h4 class="text-xl font-bold text-royal-dark font-heading">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</h4>
+                                    <p class="text-gray-400 text-sm mt-1">{{ auth()->user()->email }}</p>
+                                    <div class="mt-8 pt-8 border-t border-gray-50 w-full">
+                                        <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-4">Statut du compte</p>
+                                        <span class="px-4 py-2 bg-royal-emerald/10 text-royal-emerald rounded-full font-bold text-[10px] uppercase tracking-[0.15em] border border-royal-emerald/20 shadow-sm">
+                                            {{ auth()->user()->role === 'admin' ? 'Administrateur' : 'Utilisateur Certifié' }}
+                                        </span>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
