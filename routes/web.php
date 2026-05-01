@@ -53,7 +53,11 @@ Route::middleware('auth')->group(function () {
         $notification = auth()->user()->notifications()->findOrFail($id);
         $notification->markAsRead();
         
-        // Redirect based on type or data
+        // Redirect based on notification data or user role
+        if (!empty($notification->data['redirect_url'])) {
+            return redirect()->to($notification->data['redirect_url']);
+        }
+        
         if (auth()->user()->role === 'admin') {
             return redirect()->route('admin.objets.index');
         }
@@ -71,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('reservations', ReservationController::class);
     Route::resource('messages', MessageController::class);
     Route::resource('avis', AvisController::class)->except(['index', 'show']);
+    // Ticket d'expédition
+    Route::get('/reservations/{reservation}/ticket', [ReservationController::class, 'ticket'])->name('reservations.ticket');
     // Paiements Stripe
     Route::get('/paiements/checkout/{reservation}', [PaiementController::class, 'checkout'])->name('paiements.checkout');
     Route::get('/paiements/success', [PaiementController::class, 'success'])->name('paiements.success');

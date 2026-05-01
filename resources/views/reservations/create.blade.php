@@ -89,7 +89,7 @@
                             </div>
                             <div>
                                 <x-input-label for="telephone" :value="__('Téléphone')" class="text-gray-700" />
-                                <x-text-input id="telephone" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="text" name="telephone" :value="old('telephone', auth()->user()->tel)" required />
+                                <x-text-input id="telephone" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="tel" name="telephone" :value="old('telephone', auth()->user()->tel)" maxlength="10" pattern="[0-9]{10}" placeholder="0612345678" required />
                                 <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
                             </div>
                             <div>

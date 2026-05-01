@@ -34,7 +34,7 @@ class ReservationController extends Controller
             'montant_total' => 'required|numeric|min:0',
             'nom' => 'required|string|max:255',
             'ville' => 'required|string|max:255',
-            'telephone' => 'required|string|max:20',
+            'telephone' => 'required|string|size:10|regex:/^[0-9]{10}$/',
             'adresse' => 'required|string',
             'cin' => 'required|string|max:50',
         ]);
@@ -139,6 +139,17 @@ class ReservationController extends Controller
         ));
 
         return back()->with('success', 'La réservation a été refusée.');
+    }
+
+    public function ticket(Reservation $reservation)
+    {
+        // Seul le propriétaire de l'objet peut voir le ticket
+        if ($reservation->objetLouable->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $reservation->load(['objetLouable.photos', 'user', 'paiement']);
+        return view('reservations.ticket', compact('reservation'));
     }
 
     public function destroy(Reservation $reservation)

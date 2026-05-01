@@ -79,7 +79,8 @@ class PaiementController extends Controller
                 $objet->user->notify(new \App\Notifications\AdStatusChanged(
                     "Nouvelle demande de location PAYÉE pour votre article '{$objet->titre}'. Le paiement a été validé automatiquement.",
                     $objet->id,
-                    'success'
+                    'success',
+                    route('dashboard') . '#demandes-recues'
                 ));
                 
                 $msg = "Le livreur vous contactera pour la livraison.\n\n🔒 Pour garantir la sécurité de la location, une vérification d'identité (CIN) sera effectuée par le livreur lors de la remise et de la récupération de l'article.\n\nMerci pour votre confiance.";
