@@ -38,27 +38,6 @@ class SyncSeeder extends Seeder
             ]
         );
 
-        User::updateOrCreate(
-            ['email' => 'ayabenjilali27@gmail.com'],
-            [
-                'name' => 'aya',
-                'nom' => 'aya',
-                'prenom' => 'aya',
-                'role' => 'client',
-                'password' => Hash::make('12341234'),
-            ]
-        );
-
-        User::updateOrCreate(
-            ['email' => 'ayabenjilali9@gmail.com'],
-            [
-                'name' => 'rrr',
-                'nom' => 'rr',
-                'prenom' => 'rr',
-                'role' => 'client',
-                'password' => Hash::make('12341234'),
-            ]
-        );
 
         User::updateOrCreate(
             ['email' => 'lina@gmail.com'],
