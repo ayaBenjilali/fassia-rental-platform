@@ -29,14 +29,19 @@ class ReservationController extends Controller
     {
         $validated = $request->validate([
             'date_debut' => 'required|date|after_or_equal:today',
-            'date_fin' => 'required|date|after:date_debut',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
             'objet_louable_id' => 'required|exists:objet_louables,id',
             'montant_total' => 'required|numeric|min:0',
+            'nom' => 'required|string|max:255',
+            'ville' => 'required|string|max:255',
+            'telephone' => 'required|string|max:20',
+            'adresse' => 'required|string',
+            'cin' => 'required|string|max:50',
         ]);
 
         // Check for availability
         $overlap = Reservation::where('objet_louable_id', $validated['objet_louable_id'])
-            ->where('statut', 'confirmee')
+            ->whereIn('statut', ['confirmee', 'payee'])
             ->where(function ($query) use ($validated) {
                 $query->whereBetween('date_debut', [$validated['date_debut'], $validated['date_fin']])
                     ->orWhereBetween('date_fin', [$validated['date_debut'], $validated['date_fin']])
@@ -52,19 +57,11 @@ class ReservationController extends Controller
         }
 
         $validated['user_id'] = auth()->id();
-        $validated['statut'] = 'en_attente';
+        $validated['statut'] = 'en_attente_paiement';
 
-        Reservation::create($validated);
+        $reservation = Reservation::create($validated);
 
-        // Notify Owner
-        $objet = \App\Models\ObjetLouable::find($validated['objet_louable_id']);
-        $objet->user->notify(new \App\Notifications\AdStatusChanged(
-            "Nouvelle demande de location pour votre article '{$objet->titre}'.",
-            $objet->id,
-            'info'
-        ));
-
-        return to_route('reservations.index')->with('success', 'Demande de réservation envoyée avec succès.');
+        return redirect()->route('paiements.checkout', $reservation);
     }
 
     public function show(Reservation $reservation)

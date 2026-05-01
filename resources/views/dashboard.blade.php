@@ -171,22 +171,25 @@
                                     </p>
                                 </div>
                                 <div class="text-right">
-                                    @if($reservation->statut == 'en_attente')
-                                        <span class="px-2 py-1 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 uppercase block mb-1">En attente</span>
-                                        <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" onsubmit="return confirm('Annuler cette demande ?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="text-[10px] text-red-500 hover:underline font-bold">Annuler</button>
-                                        </form>
+                                    @if($reservation->statut == 'en_attente' || $reservation->statut == 'en_attente_paiement')
+                                        <div class="flex flex-col items-end gap-2">
+                                            <span class="px-2 py-1 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 uppercase">En attente de paiement</span>
+                                            <a href="{{ route('paiements.checkout', $reservation) }}" class="bg-royal-dark hover:bg-black text-white border border-royal-gold/50 text-[10px] font-black px-4 py-2 rounded-lg shadow-lg shadow-royal-dark/20 transition flex items-center gap-2 uppercase tracking-widest active:scale-95">
+                                                <svg class="w-4 h-4 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                                Payer {{ number_format($reservation->montant_total, 0) }} DH
+                                            </a>
+                                            <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" onsubmit="return confirm('Annuler cette réservation ?')">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="text-[10px] text-red-500 hover:underline font-bold mt-1">Annuler</button>
+                                            </form>
+                                        </div>
                                     @elseif($reservation->statut == 'confirmee')
                                         <div class="flex flex-col items-end gap-2">
                                             <span class="px-2 py-1 rounded text-[10px] font-bold bg-green-100 text-green-800 uppercase">Confirmée</span>
-                                            <form action="{{ route('paiements.checkout', $reservation) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="bg-royal-dark hover:bg-black text-white border border-royal-gold/50 text-[10px] font-black px-4 py-2 rounded-lg shadow-lg shadow-royal-dark/20 transition flex items-center gap-2 uppercase tracking-widest active:scale-95">
-                                                    <svg class="w-4 h-4 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                                                    Payer {{ number_format($reservation->montant_total, 0) }} DH
-                                                </button>
-                                            </form>
+                                            <a href="{{ route('paiements.checkout', $reservation) }}" class="bg-royal-dark hover:bg-black text-white border border-royal-gold/50 text-[10px] font-black px-4 py-2 rounded-lg shadow-lg shadow-royal-dark/20 transition flex items-center gap-2 uppercase tracking-widest active:scale-95">
+                                                <svg class="w-4 h-4 text-royal-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                                Payer {{ number_format($reservation->montant_total, 0) }} DH
+                                            </a>
                                         </div>
                                     @elseif($reservation->statut == 'payee')
                                         <span class="px-3 py-1.5 rounded-lg text-[10px] font-black bg-emerald-100 text-emerald-800 uppercase flex items-center justify-end gap-1 border border-emerald-200">
@@ -287,10 +290,10 @@
                                             <div class="text-lg font-black text-royal-dark tracking-tighter">{{ number_format($demande->montant_total, 0) }} <span class="text-[10px] text-royal-gold">DH</span></div>
                                         </td>
                                         <td class="px-8 py-6 text-center">
-                                            @if($demande->statut == 'en_attente')
+                                            @if($demande->statut == 'en_attente' || $demande->statut == 'en_attente_paiement')
                                                 <div class="flex flex-col items-center gap-1">
                                                     <span class="px-3 py-1 rounded-full text-[9px] font-black bg-yellow-400 text-white uppercase shadow-sm">En attente</span>
-                                                    <span class="text-[8px] text-gray-300 font-bold uppercase italic">Action requise</span>
+                                                    <span class="text-[8px] text-yellow-600 font-bold uppercase italic tracking-widest">Paiement en cours</span>
                                                 </div>
                                             @elseif($demande->statut == 'confirmee')
                                                 <div class="flex flex-col items-center gap-1">
@@ -310,16 +313,16 @@
                                             @endif
                                         </td>
                                         <td class="px-8 py-6 text-right">
-                                            @if($demande->statut == 'en_attente')
-                                                <div class="flex justify-end gap-3">
-                                                    <form action="{{ route('reservations.accept', $demande) }}" method="POST">
-                                                        @csrf @method('PATCH')
-                                                        <button type="submit" class="bg-royal-emerald text-white text-[10px] font-black px-5 py-2.5 rounded-xl hover:bg-green-800 transition shadow-lg shadow-green-100 active:scale-95 uppercase tracking-wider">Accepter</button>
-                                                    </form>
-                                                    <form action="{{ route('reservations.reject', $demande) }}" method="POST">
-                                                        @csrf @method('PATCH')
-                                                        <button type="submit" class="bg-white border-2 border-red-50 text-red-500 hover:bg-red-50 hover:border-red-100 text-[10px] font-black px-5 py-2.5 rounded-xl transition active:scale-95 uppercase tracking-wider">Refuser</button>
-                                                    </form>
+                                            @if($demande->statut == 'en_attente' || $demande->statut == 'en_attente_paiement')
+                                                <div class="flex justify-end items-center gap-2 text-yellow-500">
+                                                    <span class="text-[10px] font-black uppercase italic tracking-widest">En attente de paiement du client</span>
+                                                </div>
+                                            @elseif($demande->statut == 'payee')
+                                                <div class="flex justify-end items-center gap-2 text-indigo-500">
+                                                    <button onclick="window.print()" class="bg-indigo-600 text-white text-[10px] font-black px-5 py-2.5 rounded-xl hover:bg-indigo-800 transition shadow-lg shadow-indigo-100 active:scale-95 uppercase tracking-wider flex items-center gap-2">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                                                        Imprimer le ticket
+                                                    </button>
                                                 </div>
                                             @else
                                                 <div class="flex justify-end items-center gap-2 text-gray-300">

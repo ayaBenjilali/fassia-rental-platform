@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Reservation extends Model
 {
     protected $fillable = [
-        'date_debut', 'date_fin', 'statut', 'montant_total', 'user_id', 'objet_louable_id'
+        'date_debut', 'date_fin', 'statut', 'montant_total', 'user_id', 'objet_louable_id',
+        'nom', 'ville', 'telephone', 'adresse', 'cin'
     ];
 
     public function user(): BelongsTo

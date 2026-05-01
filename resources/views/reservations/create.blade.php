@@ -60,7 +60,7 @@
                         </div>
                         @endif
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                             <div>
                                 <x-input-label for="date_debut" :value="__('Date de retrait')" class="text-gray-700" />
                                 <x-text-input id="date_debut" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="date" name="date_debut" x-model="dateDebut" @change="calculateTotal" min="{{ date('Y-m-d') }}" required />
@@ -74,7 +74,41 @@
                             </div>
                         </div>
 
-                        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 mb-10">
+                        <h3 class="text-xl font-heading text-royal-dark font-bold mb-6 mt-8">Vos informations de livraison</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <x-input-label for="nom" :value="__('Nom complet')" class="text-gray-700" />
+                                <x-text-input id="nom" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="text" name="nom" :value="old('nom', auth()->user()->nom . ' ' . auth()->user()->prenom)" required />
+                                <x-input-error :messages="$errors->get('nom')" class="mt-2" />
+                            </div>
+                            <div>
+                                <x-input-label for="cin" :value="__('Numéro de CIN')" class="text-gray-700" />
+                                <x-text-input id="cin" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="text" name="cin" :value="old('cin')" placeholder="ex: AB123456" required />
+                                <x-input-error :messages="$errors->get('cin')" class="mt-2" />
+                            </div>
+                            <div>
+                                <x-input-label for="telephone" :value="__('Téléphone')" class="text-gray-700" />
+                                <x-text-input id="telephone" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="text" name="telephone" :value="old('telephone', auth()->user()->tel)" required />
+                                <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
+                            </div>
+                            <div>
+                                <x-input-label for="ville" :value="__('Ville')" class="text-gray-700" />
+                                <x-text-input id="ville" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="text" name="ville" :value="old('ville')" required />
+                                <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+                            </div>
+                            <div class="sm:col-span-2">
+                                <x-input-label for="adresse" :value="__('Adresse complète')" class="text-gray-700" />
+                                <x-text-input id="adresse" class="block mt-1 w-full border-gray-300 rounded-lg focus:ring-royal-emerald" type="text" name="adresse" :value="old('adresse', auth()->user()->adr)" required />
+                                <x-input-error :messages="$errors->get('adresse')" class="mt-2" />
+                            </div>
+                            <div class="sm:col-span-2">
+                                <x-input-label for="pays" :value="__('Pays')" class="text-gray-700" />
+                                <x-text-input id="pays" class="block mt-1 w-full border-gray-300 bg-gray-100 rounded-lg text-gray-500 cursor-not-allowed" type="text" name="pays" value="Maroc uniquement" readonly />
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 mb-10 mt-8">
                             <div class="flex justify-between items-center mb-4">
                                 <span class="text-gray-600 font-medium">Durée de la location</span>
                                 <span class="font-bold text-royal-dark bg-white px-3 py-1 rounded-md border border-gray-200" x-text="days + ' jour(s)'"></span>
@@ -91,8 +125,8 @@
 
                         <div class="flex flex-col-reverse sm:flex-row items-center justify-end gap-4 mt-8 pt-8 border-t border-gray-100">
                             <a href="{{ url()->previous() }}" class="w-full sm:w-auto text-center text-gray-500 hover:text-gray-800 font-medium sm:mr-4 transition">Annuler</a>
-                            <button type="submit" class="w-full sm:w-auto inline-flex justify-center items-center px-8 py-4 bg-royal-dark border border-transparent rounded-full font-bold text-white uppercase tracking-widest hover:bg-gray-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed" x-bind:disabled="days <= 0">
-                                Confirmer la réservation
+                            <button type="submit" class="w-full sm:w-auto inline-flex justify-center items-center px-8 py-4 bg-royal-emerald border border-transparent rounded-full font-bold text-white uppercase tracking-widest hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed" x-bind:disabled="days <= 0">
+                                Réserver et Payer
                             </button>
                         </div>
                     </form>

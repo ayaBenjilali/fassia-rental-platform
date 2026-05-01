@@ -10,13 +10,13 @@ class PaiementController extends Controller
 {
     public function checkout(Reservation $reservation)
     {
-        // On s'assure que la réservation est confirmée et appartient à l'utilisateur
-        if ($reservation->statut !== 'confirmee' || $reservation->user_id !== auth()->id()) {
+        // On s'assure que la réservation appartient à l'utilisateur
+        if ($reservation->user_id !== auth()->id() || !in_array($reservation->statut, ['en_attente_paiement', 'confirmee'])) {
             return back()->with('error', 'Cette réservation ne peut pas être payée pour le moment.');
         }
 
         // Vérifier s'il y a déjà un paiement
-        if ($reservation->paiement) {
+        if ($reservation->paiement || $reservation->statut === 'payee') {
             return back()->with('error', 'Cette réservation a déjà été payée.');
         }
 
@@ -62,19 +62,29 @@ class PaiementController extends Controller
                 $reservation = \App\Models\Reservation::findOrFail($reservationId);
                 
                 // 1. Enregistrer le paiement en base
-                Paiement::create([
-                    'montant' => $session->amount_total / 100,
-                    'date_paie' => now(),
-                    'statut' => 'valide',
-                    'reservation_id' => $reservation->id,
-                ]);
+                Paiement::firstOrCreate(
+                    ['reservation_id' => $reservation->id],
+                    [
+                        'montant' => $session->amount_total / 100,
+                        'date_paie' => now(),
+                        'statut' => 'valide',
+                    ]
+                );
 
                 // 2. Mettre à jour le statut de la réservation
                 $reservation->update(['statut' => 'payee']);
 
-                // 3. Optionnel : Envoyer une notification au propriétaire ici
+                // 3. Envoyer une notification au propriétaire
+                $objet = $reservation->objetLouable;
+                $objet->user->notify(new \App\Notifications\AdStatusChanged(
+                    "Nouvelle demande de location PAYÉE pour votre article '{$objet->titre}'. Le paiement a été validé automatiquement.",
+                    $objet->id,
+                    'success'
+                ));
                 
-                return redirect()->route('dashboard')->with('success', 'Paiement réussi ! Votre réservation est validée.');
+                $msg = "Le livreur vous contactera pour la livraison.\n\n🔒 Pour garantir la sécurité de la location, une vérification d'identité (CIN) sera effectuée par le livreur lors de la remise et de la récupération de l'article.\n\nMerci pour votre confiance.";
+
+                return redirect()->route('dashboard')->with('success', $msg);
             }
         } catch (\Exception $e) {
             return redirect()->route('dashboard')->with('error', 'Erreur lors de la vérification du paiement : ' . $e->getMessage());
