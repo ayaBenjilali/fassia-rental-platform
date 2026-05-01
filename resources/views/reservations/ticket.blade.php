@@ -23,6 +23,25 @@
             border: 2px solid #1a1a1a;
             border-radius: 16px;
             overflow: hidden;
+            position: relative; /* Pour le watermark */
+        }
+
+        /* Watermark Logo */
+        .ticket::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            width: 400px;
+            height: 400px;
+            background-image: url("{{ asset('images/logo_fassia.jpeg') }}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Header */
@@ -33,6 +52,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 10;
         }
 
         .ticket-header h1 {
@@ -56,6 +77,8 @@
             justify-content: space-between;
             align-items: center;
             font-size: 13px;
+            position: relative;
+            z-index: 10;
         }
 
         .ticket-ref strong {
@@ -66,6 +89,8 @@
         /* Sections */
         .ticket-body {
             padding: 24px 32px;
+            position: relative;
+            z-index: 10;
         }
 
         .section {
@@ -134,6 +159,8 @@
             font-size: 11px;
             color: #6b7280;
             border-top: 1px dashed #d1d5db;
+            position: relative;
+            z-index: 10;
         }
 
         .ticket-footer strong {
