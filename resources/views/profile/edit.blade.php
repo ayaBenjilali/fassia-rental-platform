@@ -12,15 +12,15 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-royal-sand min-h-screen" x-data="{ activeTab: '{{ auth()->user()->role === 'admin' ? 'accounts' : 'profile' }}' }">
+    <div class="py-12 bg-royal-sand min-h-screen" x-data="{ activeTab: 'profile' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <!-- Tab Navigation -->
             <div class="flex flex-wrap gap-4 mb-8">
+                <button @click="activeTab = 'profile'" :class="activeTab === 'profile' ? 'bg-royal-emerald text-white shadow-lg shadow-emerald-100' : 'bg-white text-gray-500 hover:bg-gray-50'" class="px-8 py-3 rounded-2xl font-bold text-sm transition-all duration-300 uppercase tracking-widest">Informations Profil</button>
                 @if(auth()->user()->role === 'admin')
                     <button @click="activeTab = 'accounts'" :class="activeTab === 'accounts' ? 'bg-royal-gold text-white shadow-lg shadow-gold-100' : 'bg-white text-gray-500 hover:bg-gray-50'" class="px-8 py-3 rounded-2xl font-bold text-sm transition-all duration-300 uppercase tracking-widest">Gestion des Comptes</button>
                 @endif
-                <button @click="activeTab = 'profile'" :class="activeTab === 'profile' ? 'bg-royal-emerald text-white shadow-lg shadow-emerald-100' : 'bg-white text-gray-500 hover:bg-gray-50'" class="px-8 py-3 rounded-2xl font-bold text-sm transition-all duration-300 uppercase tracking-widest">Informations Profil</button>
                 <button @click="activeTab = 'security'" :class="activeTab === 'security' ? 'bg-royal-dark text-white shadow-lg shadow-dark-100' : 'bg-white text-gray-500 hover:bg-gray-50'" class="px-8 py-3 rounded-2xl font-bold text-sm transition-all duration-300 uppercase tracking-widest">Sécurité & Mot de passe</button>
             </div>
 
