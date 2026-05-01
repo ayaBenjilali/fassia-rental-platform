@@ -23,7 +23,7 @@ class SyncSeeder extends Seeder
                 'nom' => 'Admin',
                 'prenom' => 'Test',
                 'role' => 'admin',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
             ]
         );
 
@@ -34,7 +34,7 @@ class SyncSeeder extends Seeder
                 'nom' => 'aya',
                 'prenom' => 'aya',
                 'role' => 'client',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
             ]
         );
 
@@ -45,7 +45,7 @@ class SyncSeeder extends Seeder
                 'nom' => 'aya',
                 'prenom' => 'aya',
                 'role' => 'client',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
             ]
         );
 
@@ -56,7 +56,7 @@ class SyncSeeder extends Seeder
                 'nom' => 'rr',
                 'prenom' => 'rr',
                 'role' => 'client',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
             ]
         );
 
@@ -67,7 +67,7 @@ class SyncSeeder extends Seeder
                 'nom' => 'el mehdi',
                 'prenom' => 'lina',
                 'role' => 'user',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('12341234'),
             ]
         );
 
