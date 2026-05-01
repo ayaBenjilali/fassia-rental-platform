@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/objets', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.objets.index');
     Route::post('/admin/objets/{objet}/approuver', [\App\Http\Controllers\AdminController::class, 'approuver'])->name('admin.objets.approuver');
     Route::post('/admin/objets/{objet}/rejeter', [\App\Http\Controllers\AdminController::class, 'rejeter'])->name('admin.objets.rejeter');
+    Route::get('/admin/users/{user}/posts', [\App\Http\Controllers\AdminController::class, 'userPosts'])->name('admin.users.posts');
+    Route::delete('/admin/users/{user}', [\App\Http\Controllers\AdminController::class, 'deleteUser'])->name('admin.users.destroy');
+    Route::post('/admin/users/{user}/warn', [\App\Http\Controllers\AdminController::class, 'warnUser'])->name('admin.users.warn');
 
     Route::get('/notifications/mark-as-read', function() {
         auth()->user()->unreadNotifications->markAsRead();

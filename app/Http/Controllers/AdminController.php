@@ -82,4 +82,47 @@ class AdminController extends Controller
 
         return back()->with('success', 'L\'annonce a été rejetée.');
     }
+    public function deleteUser(\App\Models\User $user)
+    {
+        if (auth()->user()->role !== 'admin') { abort(403); }
+        
+        $name = $user->nom ?? $user->name;
+        $user->delete();
+
+        return back()->with('success', "Le compte de {$name} a été supprimé.");
+    }
+
+    public function warnUser(\App\Models\User $user, Request $request)
+    {
+        if (auth()->user()->role !== 'admin') { abort(403); }
+        
+        $request->validate([
+            'message' => 'required|string|max:500',
+        ]);
+
+        // Envoyer une notification d'avertissement
+        $user->notify(new \App\Notifications\AdStatusChanged(
+            "AVERTISSEMENT : " . $request->message,
+            null,
+            'error'
+        ));
+
+        // Optionnel : Envoyer aussi un message privé de la part de l'admin
+        Message::create([
+            'expediteur_id' => auth()->id(),
+            'destinataire_id' => $user->id,
+            'contenu' => "⚠️ AVERTISSEMENT ADMINISTRATIF : " . $request->message,
+        ]);
+
+        return back()->with('success', "Un avertissement a été envoyé à l'utilisateur.");
+    }
+
+    public function userPosts(\App\Models\User $user)
+    {
+        if (auth()->user()->role !== 'admin') { abort(403); }
+        
+        $objets = $user->objets()->latest()->paginate(15);
+        
+        return view('admin.users.posts', compact('user', 'objets'));
+    }
 }

@@ -16,9 +16,18 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+        $data = ['user' => $user];
+
+        if ($user->role === 'admin') {
+            // Liste de tous les utilisateurs (sauf les admins) avec le nombre de leurs posts
+            $data['users'] = \App\Models\User::where('role', '!=', 'admin')
+                ->withCount('objets')
+                ->latest()
+                ->get();
+        }
+
+        return view('profile.edit', $data);
     }
 
     /**
