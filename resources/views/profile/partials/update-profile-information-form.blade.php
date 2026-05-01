@@ -20,7 +20,7 @@
             <!-- Username -->
             <div class="col-span-full">
                 <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Nom d'utilisateur (Pseudo)</label>
-                <input id="name" name="name" type="text" class="w-full bg-gray-50 border-gray-100 rounded-2xl p-4 text-sm focus:ring-royal-gold focus:border-royal-gold transition shadow-inner" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name" />
+                <input id="name" name="name" type="text" class="w-full bg-gray-50 border-gray-100 rounded-2xl p-4 text-sm focus:ring-royal-gold focus:border-royal-gold transition shadow-inner" value="{{ old('name', $user->name) }}" required autocomplete="name" />
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
