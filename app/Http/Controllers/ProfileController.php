@@ -22,7 +22,7 @@ class ProfileController extends Controller
         if ($user->role === 'admin') {
             // Liste de tous les utilisateurs (sauf les admins) avec le nombre de leurs posts
             $data['users'] = \App\Models\User::where('role', '!=', 'admin')
-                ->withCount('objets')
+                ->withCount('objetsLouables')
                 ->latest()
                 ->get();
         }

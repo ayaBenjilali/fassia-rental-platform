@@ -64,7 +64,7 @@
                                         </td>
                                         <td class="px-8 py-5 text-center">
                                             <a href="{{ route('admin.users.posts', $u) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-royal-emerald/10 text-royal-emerald rounded-lg font-bold text-[10px] uppercase tracking-wider hover:bg-royal-emerald hover:text-white transition group">
-                                                <span>{{ $u->objets_count }} posts</span>
+                                                <span>{{ $u->objets_louables_count }} posts</span>
                                                 <svg class="w-3 h-3 transform group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                             </a>
                                         </td>
