@@ -12,8 +12,7 @@
     <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
 
     <style>
-        .flatpickr-day.flatpickr-disabled, 
-        .flatpickr-day.flatpickr-disabled:hover {
+        .flatpickr-day.is-reserved {
             background: #fee2e2 !important; /* light red */
             color: #ef4444 !important; /* red */
             text-decoration: line-through;
@@ -21,11 +20,6 @@
             border-color: #fecaca !important;
         }
         
-        /* Custom tooltip for disabled days (simplified version using title) */
-        .flatpickr-day.flatpickr-disabled::after {
-            content: attr(data-tooltip);
-        }
-
         .reserved-legend {
             display: flex;
             align-items: center;
@@ -198,7 +192,9 @@
                         minDate: "today",
                         disable: this.reservedDates,
                         onDayCreate: function(dObj, dStr, fp, dayElem) {
-                            if (self.reservedDates.includes(fp.formatDate(dayElem.dateObj, "Y-m-d"))) {
+                            const dateStr = fp.formatDate(dayElem.dateObj, "Y-m-d");
+                            if (self.reservedDates.includes(dateStr)) {
+                                dayElem.classList.add("is-reserved");
                                 dayElem.setAttribute("title", "Date déjà réservée");
                             }
                         },
