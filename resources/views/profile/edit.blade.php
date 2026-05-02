@@ -68,43 +68,63 @@
                                             </a>
                                         </td>
                                         <td class="px-8 py-5 text-right">
-                                            <div class="flex justify-end gap-2" x-data="{ openWarn: false }">
+                                            <div class="flex justify-end gap-2" x-data="{ openWarn: false, openDelete: false }">
                                                 <!-- Warn Action -->
                                                 <button @click="openWarn = true" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition" title="Envoyer un avertissement">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                                 </button>
 
                                                 <!-- Delete Action -->
-                                                <form action="{{ route('admin.users.destroy', $u) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce compte définitivement ?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Supprimer le compte">
-                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                                                    </button>
-                                                </form>
+                                                <button @click="openDelete = true" class="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Supprimer le compte">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                </button>
+
+                                                <!-- Delete Modal Overlay -->
+                                                <template x-teleport="body">
+                                                    <div x-show="openDelete" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center bg-royal-dark/60 backdrop-blur-md px-4" x-transition.opacity>
+                                                        <div @click.away="openDelete = false" class="bg-white rounded-[2rem] p-10 shadow-2xl w-full max-w-md text-left transform" x-transition.scale.origin.bottom>
+                                                            <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-red-600 mb-6">
+                                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                            </div>
+                                                            <h4 class="text-2xl font-bold text-royal-dark font-heading mb-2">Supprimer le compte</h4>
+                                                            <p class="text-gray-500 text-sm mb-8 leading-relaxed">Êtes-vous sûr de vouloir supprimer définitivement le compte de <strong>{{ $u->nom }} {{ $u->prenom }}</strong> ? Cette action est irréversible et supprimera toutes ses annonces.</p>
+                                                            
+                                                            <div class="flex gap-4">
+                                                                <button type="button" @click="openDelete = false" class="flex-1 py-4 text-gray-400 font-bold text-[10px] uppercase tracking-widest hover:bg-gray-50 rounded-2xl transition">Annuler</button>
+                                                                <form action="{{ route('admin.users.destroy', $u) }}" method="POST" class="flex-1">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="w-full py-4 bg-red-500 text-white rounded-2xl font-bold text-[10px] uppercase tracking-widest hover:bg-red-600 shadow-lg shadow-red-200 transition">Confirmer</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
 
                                                 <!-- Warn Modal Overlay -->
-                                                <div x-show="openWarn" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center bg-royal-dark/60 backdrop-blur-md px-4" x-transition.opacity>
-                                                    <div @click.away="openWarn = false" class="bg-white rounded-[2rem] p-10 shadow-2xl w-full max-w-md text-left transform" x-transition.scale.origin.bottom>
-                                                        <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6">
-                                                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                                <template x-teleport="body">
+                                                    <div x-show="openWarn" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center bg-royal-dark/60 backdrop-blur-md px-4" x-transition.opacity>
+                                                        <div @click.away="openWarn = false" class="bg-white rounded-[2rem] p-10 shadow-2xl w-full max-w-md text-left transform" x-transition.scale.origin.bottom>
+                                                            <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-6">
+                                                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                                            </div>
+                                                            <h4 class="text-2xl font-bold text-royal-dark font-heading mb-2">Envoyer un avertissement</h4>
+                                                            <p class="text-gray-500 text-sm mb-6">Informez <strong>{{ $u->nom }} {{ $u->prenom }}</strong> d'un manquement aux règles de la plateforme.</p>
+                                                            
+                                                            <form action="{{ route('admin.users.warn', $u) }}" method="POST">
+                                                                @csrf
+                                                                <div class="mb-6">
+                                                                    <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Message de l'administrateur</label>
+                                                                    <textarea name="message" rows="4" required class="w-full rounded-2xl border-gray-100 focus:ring-amber-500 focus:border-amber-500 text-sm p-4 placeholder-gray-300" placeholder="Ex: Votre annonce contient des images non conformes..."></textarea>
+                                                                </div>
+                                                                <div class="flex gap-4">
+                                                                    <button type="button" @click="openWarn = false" class="flex-1 py-4 text-gray-400 font-bold text-[10px] uppercase tracking-widest hover:bg-gray-50 rounded-2xl transition">Annuler</button>
+                                                                    <button type="submit" class="flex-1 py-4 bg-amber-500 text-white rounded-2xl font-bold text-[10px] uppercase tracking-widest hover:bg-amber-600 shadow-lg shadow-amber-200 transition">Envoyer</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                        <h4 class="text-2xl font-bold text-royal-dark font-heading mb-2">Envoyer un avertissement</h4>
-                                                        <p class="text-gray-500 text-sm mb-6">Informez <strong>{{ $u->nom }} {{ $u->prenom }}</strong> d'un manquement aux règles de la plateforme.</p>
-                                                        
-                                                        <form action="{{ route('admin.users.warn', $u) }}" method="POST">
-                                                            @csrf
-                                                            <div class="mb-6">
-                                                                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Message de l'administrateur</label>
-                                                                <textarea name="message" rows="4" required class="w-full rounded-2xl border-gray-100 focus:ring-amber-500 focus:border-amber-500 text-sm p-4 placeholder-gray-300" placeholder="Ex: Votre annonce contient des images non conformes..."></textarea>
-                                                            </div>
-                                                            <div class="flex gap-4">
-                                                                <button type="button" @click="openWarn = false" class="flex-1 py-4 text-gray-400 font-bold text-[10px] uppercase tracking-widest hover:bg-gray-50 rounded-2xl transition">Annuler</button>
-                                                                <button type="submit" class="flex-1 py-4 bg-amber-500 text-white rounded-2xl font-bold text-[10px] uppercase tracking-widest hover:bg-amber-600 shadow-lg shadow-amber-200 transition">Envoyer</button>
-                                                            </div>
-                                                        </form>
                                                     </div>
-                                                </div>
+                                                </template>
                                             </div>
                                         </td>
                                     </tr>
