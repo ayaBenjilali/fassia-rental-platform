@@ -29,14 +29,18 @@ php artisan storage:link
 echo.
 
 :: 5. Base de donnees (SQLite)
-echo [5/5] Preparation de la base de donnees...
-:: On s'assure que le fichier sqlite existe
+echo [5/6] Preparation de la base de donnees...
 if not exist database\database.sqlite (
     echo Creation du fichier database.sqlite...
     type nul > database\database.sqlite
 )
-echo Migration et ajout des accessoires (Seeding)...
 php artisan migrate --seed
+echo.
+
+:: 6. Designer (Nouveau)
+echo [6/6] Installation et compilation du design (CSS/Tailwind)...
+call npm install
+call npm run build
 echo.
 
 echo ===========================================
