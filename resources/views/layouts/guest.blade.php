@@ -68,7 +68,7 @@
                     <div class="mb-2 text-center md:text-left opacity-0 animate-fade-up stagger-1 relative z-10">
                         <div class="flex items-center justify-center md:justify-start gap-3 mb-1">
                             <img src="{{ asset('images/logo_fassia.jpeg') }}" class="h-7 w-7 rounded-full border border-royal-gold shadow-sm" alt="">
-                            <h2 class="font-heading text-xl text-royal-dark tracking-wide">L'Fassia</h2>
+                            <h2 class="font-heading text-xl text-royal-dark tracking-wide">Fassia</h2>
                         </div>
                         <div class="w-8 h-[1px] bg-royal-gold/40"></div>
                     </div>

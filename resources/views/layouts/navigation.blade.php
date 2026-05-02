@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/') }}" class="flex items-center">
-                        <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-14 w-auto object-contain hover:opacity-80 transition">
+                        <img src="{{ asset('images/logo_text.png') }}" alt="Fassia" class="h-14 w-auto object-contain hover:opacity-80 transition">
                     </a>
                 </div>
 
