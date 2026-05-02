@@ -19,7 +19,7 @@
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/p6.png');"></div>
 
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 flex-1 w-full relative z-10">
-            <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col h-[700px]">
+            <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col h-[75vh] min-h-[500px]">
                 <!-- Chat Header -->
                 <div class="px-6 py-4 border-b border-gray-100 bg-white flex items-center justify-between shadow-sm">
                     <div class="flex items-center gap-4" x-show="!showSearch">
@@ -83,7 +83,7 @@
                 </div>
 
                 <!-- Messages Container -->
-                <div class="flex-1 overflow-y-auto p-8 space-y-6" id="messages-container" style="background-color: #efeae2;">
+                <div class="flex-1 overflow-y-auto min-h-0 p-8 space-y-6" id="messages-container" style="background-color: #efeae2;">
                     @php $lastDate = null; @endphp
                     @forelse($messages as $message)
                         @php 

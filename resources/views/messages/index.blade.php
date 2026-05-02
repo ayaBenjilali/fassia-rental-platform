@@ -7,7 +7,7 @@
 
     <div class="py-12 bg-[#f0f2f5] min-h-screen">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[700px]">
+            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[75vh] min-h-[500px]">
                 
                 <!-- Sidebar (List of Conversations) -->
                 <div class="w-full md:w-[350px] border-r border-gray-100 flex flex-col bg-white">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     
-                    <div class="flex-1 overflow-y-auto divide-y divide-gray-50">
+                    <div class="flex-1 overflow-y-auto min-h-0 divide-y divide-gray-50">
                         @forelse($conversations as $interlocuteurId => $messages)
                             @php 
                                 $interlocuteur = \App\Models\User::find($interlocuteurId);
