@@ -28,7 +28,7 @@ class SyncSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'aya@gmail.com'],
+            ['email' => 'ayabenjilali27@gmail.com'],
             [
                 'name' => 'aya',
                 'nom' => 'aya',
@@ -40,7 +40,7 @@ class SyncSeeder extends Seeder
 
 
         User::updateOrCreate(
-            ['email' => 'lina@gmail.com'],
+            ['email' => 'elmehdilina39@gmail.com'],
             [
                 'name' => 'lina',
                 'nom' => 'el mehdi',
