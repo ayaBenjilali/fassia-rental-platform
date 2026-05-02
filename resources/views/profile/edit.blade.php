@@ -13,7 +13,7 @@
     </x-slot>
 
     <div class="py-12 bg-royal-sand min-h-screen" x-data="{ activeTab: 'profile' }">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
             <!-- Tab Navigation -->
             <div class="flex flex-wrap gap-4 mb-8">
@@ -118,37 +118,56 @@
 
                 <!-- Profile Information Tab -->
                 <div x-show="activeTab === 'profile'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2">
-                            <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 p-10">
-                                @include('profile.partials.update-profile-information-form')
+                    <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+                        <div style="flex: 2; min-width: 320px;">
+                            <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
+                                {{-- Header de la card --}}
+                                <div style="padding: 32px 40px 24px; border-bottom: 1px solid #f3f4f6; background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);">
+                                    <div style="display: flex; align-items: center; gap: 14px;">
+                                        <div style="width: 44px; height: 44px; border-radius: 14px; background: rgba(190,24,93,0.08); display: flex; align-items: center; justify-content: center;">
+                                            <svg width="20" height="20" fill="none" stroke="#be185d" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.25rem; font-weight: 800; color: #1a1a2e; margin: 0; font-family: var(--font-heading, serif);">Informations Personnelles</h3>
+                                            <p style="font-size: 0.8rem; color: #9ca3af; margin: 2px 0 0 0;">Mettez à jour vos informations de profil</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Formulaire --}}
+                                <div style="padding: 36px 40px;">
+                                    @include('profile.partials.update-profile-information-form')
+                                </div>
                             </div>
                         </div>
-                        <div class="lg:col-span-1">
-                            <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 p-8 flex flex-col items-center text-center">
-                                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="w-full flex flex-col items-center" id="photo-form">
+                        <div style="flex: 1; min-width: 260px;">
+                            <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 p-8" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="w-full" id="photo-form" style="display: flex; flex-direction: column; align-items: center;">
                                     @csrf
                                     @method('patch')
-                                    <div class="relative group cursor-pointer" onclick="document.getElementById('profile_photo_input').click()">
-                                        <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-royal-emerald to-royal-gold p-1 mb-6 transition-transform group-hover:scale-105 duration-300">
-                                            <div class="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden shadow-inner">
+                                    
+                                    {{-- Avatar --}}
+                                    <div class="relative group cursor-pointer" onclick="document.getElementById('profile_photo_input').click()" style="margin-bottom: 1.5rem;">
+                                        <div style="width: 112px; height: 112px; border-radius: 9999px; background: linear-gradient(135deg, #be185d, #D4AF37); padding: 3px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s;">
+                                            <div style="width: 100%; height: 100%; border-radius: 9999px; background: white; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                                                 @if(auth()->user()->photo)
-                                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" class="w-full h-full object-cover">
+                                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" style="width: 100%; height: 100%; object-fit: cover;">
                                                 @else
-                                                    <span class="text-4xl font-black text-royal-emerald">{{ strtoupper(substr(auth()->user()->nom ?? auth()->user()->name, 0, 1)) }}</span>
+                                                    <span style="font-size: 2.25rem; font-weight: 900; color: #be185d;">{{ strtoupper(substr(auth()->user()->nom ?? auth()->user()->name, 0, 1)) }}</span>
                                                 @endif
                                             </div>
                                         </div>
-                                        <!-- Overlay edit icon -->
-                                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity mb-6">
+                                        {{-- Hover icon --}}
+                                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                         </div>
                                         <input type="file" id="profile_photo_input" name="photo" class="hidden" onchange="document.getElementById('photo-form').submit()">
                                     </div>
+
                                     <h4 class="text-xl font-bold text-royal-dark font-heading">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</h4>
                                     <p class="text-gray-400 text-sm mt-1">{{ auth()->user()->email }}</p>
+
                                     <div class="mt-8 pt-8 border-t border-gray-50 w-full grid grid-cols-2 gap-4">
-                                        <div class="text-center border-r border-gray-50">
+                                        <div class="text-center" style="border-right: 1px solid #f9fafb;">
                                             <p class="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] mb-1">Publications</p>
                                             <span class="text-xl font-black text-royal-dark">{{ auth()->user()->objetsLouables()->count() }}</span>
                                         </div>
@@ -167,13 +186,48 @@
 
                 <!-- Security Tab -->
                 <div x-show="activeTab === 'security'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 p-10">
-                            @include('profile.partials.update-password-form')
+                    <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+
+                        {{-- Card Mot de passe --}}
+                        <div style="flex: 1; min-width: 300px;">
+                            <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
+                                <div style="padding: 28px 36px 20px; border-bottom: 1px solid #f3f4f6; background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(190,24,93,0.08); display: flex; align-items: center; justify-content: center;">
+                                            <svg width="18" height="18" fill="none" stroke="#be185d" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.1rem; font-weight: 800; color: #1a1a2e; margin: 0;">Changer le mot de passe</h3>
+                                            <p style="font-size: 0.75rem; color: #9ca3af; margin: 2px 0 0 0;">Utilisez un mot de passe long et sécurisé</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 32px 36px;">
+                                    @include('profile.partials.update-password-form')
+                                </div>
+                            </div>
                         </div>
-                        <div class="bg-red-50/20 rounded-[2.5rem] border border-red-100/50 p-10">
-                            @include('profile.partials.delete-user-form')
+
+                        {{-- Card Suppression --}}
+                        <div style="flex: 1; min-width: 300px;">
+                            <div style="background: #fff8f8; border-radius: 2.5rem; border: 1.5px solid #fecaca; overflow: hidden; box-shadow: 0 10px 40px rgba(239,68,68,0.05);">
+                                <div style="padding: 28px 36px 20px; border-bottom: 1px solid #fee2e2; background: linear-gradient(135deg, #fff0f0 0%, #fff8f8 100%);">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(239,68,68,0.1); display: flex; align-items: center; justify-content: center;">
+                                            <svg width="18" height="18" fill="none" stroke="#ef4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.1rem; font-weight: 800; color: #991b1b; margin: 0;">Zone dangereuse</h3>
+                                            <p style="font-size: 0.75rem; color: #f87171; margin: 2px 0 0 0;">Supprimer définitivement le compte</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="padding: 32px 36px;">
+                                    @include('profile.partials.delete-user-form')
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 

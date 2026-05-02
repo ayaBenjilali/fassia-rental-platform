@@ -52,20 +52,29 @@
                                             </td>
                                             <td class="p-4">
                                                 @if($reservation->statut == 'en_attente')
-                                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-yellow-100 text-yellow-800">En attente</span>
-                                                @elseif($reservation->statut == 'confirmee')
-                                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800">Confirmée</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-yellow-100 text-yellow-800 border border-yellow-200">En attente</span>
+                                                @elseif($reservation->statut == 'En_attente_paiement' || $reservation->statut == 'en_attente_paiement')
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-orange-100 text-orange-700 border border-orange-200">Paiement requis</span>
+                                                @elseif($reservation->statut == 'confirmee' || $reservation->statut == 'Payee' || $reservation->statut == 'payee')
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-100 text-green-700 border border-green-200">Payée</span>
                                                 @elseif($reservation->statut == 'annulee')
-                                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-800">Annulée</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-red-100 text-red-700 border border-red-200">Annulée</span>
                                                 @else
-                                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-800">{{ ucfirst($reservation->statut) }}</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-700 border border-gray-200">{{ ucfirst($reservation->statut) }}</span>
                                                 @endif
                                             </td>
                                             <td class="p-4 text-right flex justify-end items-center gap-2">
                                                 @if($reservation->objetLouable)
-                                                    <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="bg-royal-emerald text-white text-[10px] font-black px-4 py-2 rounded-lg hover:bg-green-800 transition shadow-sm hover:shadow-md flex items-center gap-1 uppercase tracking-wider" title="Contacter le propriétaire">
+                                                    <a href="{{ route('messages.show', $reservation->objetLouable->user_id ?? $reservation->objetLouable->utilisateur_id) }}" class="bg-white border border-[#be185d] text-[#be185d] text-[10px] font-black px-4 py-2 rounded-lg hover:bg-pink-50 transition shadow-sm flex items-center gap-1 uppercase tracking-wider">
                                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                                                         Contacter
+                                                    </a>
+                                                @endif
+
+                                                @if($reservation->statut == 'En_attente_paiement' || $reservation->statut == 'en_attente_paiement')
+                                                    <a href="{{ route('paiements.checkout', $reservation) }}" class="bg-[#be185d] text-white text-[10px] font-black px-4 py-2 rounded-lg hover:brightness-110 transition shadow-md flex items-center gap-1 uppercase tracking-widest">
+                                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                                        Payer
                                                     </a>
                                                 @endif
 

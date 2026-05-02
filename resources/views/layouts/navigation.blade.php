@@ -72,10 +72,10 @@
                         <div x-show="openNotifications" 
                              @click.away="openNotifications = false" 
                              x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             style="width: 450px !important;"
-                             class="fixed right-4 top-20 mt-2 bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-gray-100 z-[100] py-4 overflow-hidden" 
+                             x-transition:enter-start="opacity-0 translate-y-[-10px]"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             style="position: fixed; top: 80px; right: 16px; width: 420px; z-index: 9999;"
+                             class="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-gray-100 py-4 overflow-hidden" 
                              x-cloak>
                             <div class="px-8 py-3 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
                                 <span class="text-[10px] font-black text-royal-dark uppercase tracking-[0.2em]">Notifications</span>
@@ -134,7 +134,7 @@
                     </a>
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-royal-dark bg-white hover:text-royal-gold focus:outline-none transition ease-in-out duration-150">
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-royal-dark bg-transparent hover:text-royal-gold focus:outline-none transition ease-in-out duration-150">
                                 <div class="flex items-center gap-2">
                                     <div class="w-8 h-8 rounded-full bg-royal-gold/10 flex items-center justify-center overflow-hidden border border-royal-gold/20">
                                         @if(Auth::user()->photo)

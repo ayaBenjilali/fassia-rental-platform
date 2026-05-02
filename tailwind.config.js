@@ -17,13 +17,12 @@ export default {
             },
             colors: {
                 royal: {
-                    gold: '#C59A6D',       // Doré classique pour contraster avec le rose
-                    lightgold: '#FDF7F8',  // Soft Blush pour les arrières-plans
-                    emerald: '#A01556',    // Deep Fuchsia / Magenta (Remplacement de l'émeraude)
-                    lightemerald: '#D84B7F',// Magenta/Rose plus clair 
-                    sand: '#F8F9FA',       // Clean Off-White
-                    dark: '#2A0B1A',       // Un noir teinté de bordeaux profond
-                    blue: '#A01556',       // Remplacé par fuchsia aussi pour sécurité
+                    gold: '#C59A6D',       
+                    lightgold: '#FDF7F8',  
+                    emerald: '#be185d',    // Le vrai Rose Bordeaux
+                    lightemerald: '#db2777',
+                    sand: '#F8F9FA',       
+                    dark: '#1a1a2e',       
                 }
             },
         },

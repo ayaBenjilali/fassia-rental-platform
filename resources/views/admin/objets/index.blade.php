@@ -189,7 +189,7 @@
                                         @else
                                             <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 border border-red-200 text-[9px] font-black uppercase tracking-widest">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                                Annonce non accordée
+                                                Refusée
                                             </span>
                                         @endif
                                     </td>

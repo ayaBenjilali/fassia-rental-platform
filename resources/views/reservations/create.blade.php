@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_green.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
 
     <style>
         .flatpickr-day.is-reserved {
@@ -177,28 +177,27 @@
                                 dayElem.classList.add("is-reserved");
                                 dayElem.setAttribute("title", "Date déjà réservée");
                             }
-                        },
-                        onChange: function() {
-                            self.calculateTotal();
                         }
                     };
 
                     this.fpStart = flatpickr("#date_debut", {
                         ...config,
-                        onChange: function(selectedDates) {
+                        onChange: function(selectedDates, dateStr) {
                             if (selectedDates.length > 0) {
                                 self.fpEnd.set('minDate', selectedDates[0]);
                             }
+                            self.dateDebut = dateStr;
                             self.calculateTotal();
                         }
                     });
 
                     this.fpEnd = flatpickr("#date_fin", {
                         ...config,
-                        onChange: function(selectedDates) {
+                        onChange: function(selectedDates, dateStr) {
                             if (selectedDates.length > 0) {
                                 self.fpStart.set('maxDate', selectedDates[0]);
                             }
+                            self.dateFin = dateStr;
                             self.calculateTotal();
                         }
                     });

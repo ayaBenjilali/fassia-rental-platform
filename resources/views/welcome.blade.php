@@ -11,7 +11,7 @@
                     Louez des tenues traditionnelles somptueuses pour vos événements spéciaux. Caftans, bijoux, sacs et accessoires d'exception avec une touche de luxe.
                 </p>
                 <div class="mt-8 flex justify-center lg:justify-start">
-                    <a href="{{ route('objets.index') }}" class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-full text-white bg-royal-emerald hover:bg-green-800 shadow-xl transition transform hover:-translate-y-1">
+                    <a href="{{ route('objets.index') }}" class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-full text-white bg-royal-emerald hover:brightness-110 shadow-xl transition transform hover:-translate-y-1">
                         Découvrir la collection
                     </a>
                 </div>
@@ -68,7 +68,7 @@
                                     <div class="flex justify-between items-start gap-4">
                                         <div class="flex-1 min-w-0">
                                             <a href="{{ route('objets.show', $objet) }}" class="block">
-                                                <h4 class="text-xl font-bold text-royal-emerald font-heading truncate group-hover:text-blue-800 transition">{{ $objet->titre }}</h4>
+                                                <h4 class="text-xl font-bold text-royal-emerald font-heading truncate group-hover:text-pink-800 transition">{{ $objet->titre }}</h4>
                                             </a>
                                         </div>
                                         <div class="text-xl font-extrabold text-royal-dark text-right shrink-0">

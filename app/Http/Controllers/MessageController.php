@@ -37,11 +37,17 @@ class MessageController extends Controller
             $q->where('expediteur_id', $interlocuteurId)->where('destinataire_id', $userId);
         })->oldest()->get();
 
-        // Marquer comme lus
+        // Marquer comme lus (Messages)
         Message::where('destinataire_id', $userId)
             ->where('expediteur_id', $interlocuteurId)
             ->whereNull('lu_a')
             ->update(['lu_a' => now()]);
+
+        // Marquer comme lues (Notifications)
+        auth()->user()->unreadNotifications
+            ->where('data.type', 'message')
+            ->where('data.sender_id', $interlocuteurId)
+            ->markAsRead();
 
         return view('messages.show', compact('messages', 'interlocuteur'));
     }
@@ -57,11 +63,12 @@ class MessageController extends Controller
 
         $message = Message::create($validated);
 
-        // Notifier le destinataire
         $message->destinataire->notify(new \App\Notifications\AdStatusChanged(
             "Nouveau message de " . (auth()->user()->nom ?? auth()->user()->name) . " : " . \Illuminate\Support\Str::limit($message->contenu, 50),
-            null, // Pas d'annonce spécifique ici
-            'message'
+            null,
+            'message',
+            route('messages.show', auth()->id()), // Redirige vers la conversation avec moi
+            auth()->id()
         ));
 
         if ($request->ajax()) {

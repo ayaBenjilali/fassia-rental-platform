@@ -7,10 +7,10 @@
 
     <div class="py-12 bg-[#f0f2f5] min-h-screen">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[75vh] min-h-[500px]">
+            <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-row h-[calc(100vh-150px)] min-h-[600px]">
                 
                 <!-- Sidebar (List of Conversations) -->
-                <div class="w-full md:w-[350px] border-r border-gray-100 flex flex-col bg-white">
+                <div class="w-[420px] border-r border-gray-100 flex flex-col bg-white">
                     <div class="p-6 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
                         <h3 class="text-xl font-bold text-royal-dark font-heading">Messages</h3>
                         <div class="flex gap-3 text-gray-400">
@@ -67,7 +67,7 @@
                 </div>
 
                 <!-- Main Chat Area (Placeholder) - Elegant Version -->
-                <div class="hidden md:flex flex-1 bg-white flex-col items-center justify-center text-center p-16 relative overflow-hidden">
+                <div class="flex flex-1 bg-white flex-col items-center justify-start text-center pt-32 pb-60 px-16 relative overflow-hidden">
                     <!-- Subtle background elements -->
                     <div class="absolute top-0 right-0 w-64 h-64 bg-royal-gold/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
                     <div class="absolute bottom-0 left-0 w-64 h-64 bg-royal-emerald/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
