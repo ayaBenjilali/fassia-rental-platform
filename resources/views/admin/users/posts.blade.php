@@ -55,7 +55,7 @@
                                         <a href="{{ route('objets.show', $objet) }}" target="_blank" class="flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-100 transition">Voir</a>
                                         <div class="flex-1">
                                             <a href="javascript:void(0)" 
-                                               onclick="if(confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')) document.getElementById('delete-form-{{ $objet->id }}').submit();"
+                                               onclick="if(window.confirm('Voulez-vous vraiment supprimer cette annonce définitivement ?')) { document.getElementById('delete-form-{{ $objet->id }}').submit(); } else { return false; }"
                                                class="block w-full text-center py-2 text-[10px] font-black uppercase tracking-widest bg-red-50 text-red-600 border border-red-100 rounded-lg hover:bg-red-600 hover:text-white transition cursor-pointer">
                                                 Supprimer
                                             </a>

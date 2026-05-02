@@ -3,8 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
             <!-- Brand Section -->
             <div class="col-span-1 md:col-span-1">
-                <a href="{{ url('/') }}" class="flex items-center mb-4">
-                    <img src="{{ asset('images/logo_text.png') }}" alt="L'Fassia" class="h-10 w-auto opacity-100">
+                <a href="{{ url('/') }}" class="inline-flex p-2 bg-white rounded-xl mb-4 shadow-sm border border-royal-gold/10">
+                    <img src="{{ asset('images/logo_text.png') }}" alt="Fassia" class="h-10 w-auto">
                 </a>
                 <p class="text-white/60 text-sm leading-relaxed font-light italic">
                     L'excellence de la tradition marocaine au service de votre élégance. Louez des pièces d'exception pour vos moments inoubliables.

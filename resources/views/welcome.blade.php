@@ -22,7 +22,7 @@
                 <div class="absolute w-72 h-[350px] md:w-[400px] md:h-[500px] bg-royal-gold/10 rounded-3xl mix-blend-multiply filter blur-xl top-4 right-4"></div>
                 <!-- Decorative Custom Logo -->
                 <div class="relative w-72 h-[350px] md:w-[400px] md:h-[500px] rounded-3xl border border-white/50 shadow-2xl bg-white flex flex-col items-center justify-center overflow-hidden">
-                    <img src="{{ asset('images/logo_fassia.jpeg') }}" alt="{{ config('app.name', 'L\'Fassia') }} Logo" class="w-full h-full object-contain p-1 transition-transform duration-700 hover:scale-105">
+                    <img src="{{ asset('images/logo_fassia.jpeg') }}" alt="{{ config('app.name', 'Fassia') }} Logo" class="w-full h-full object-contain p-1 transition-transform duration-700 hover:scale-105">
                 </div>
             </div>
         </div>
