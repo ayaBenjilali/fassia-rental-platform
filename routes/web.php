@@ -78,7 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('photos', \App\Http\Controllers\PhotoController::class)->only(['destroy']);
     Route::resource('reservations', ReservationController::class);
     Route::resource('messages', MessageController::class);
-    Route::resource('avis', AvisController::class)->except(['index', 'show']);
+    Route::post('/objets/{objet}/avis', [\App\Http\Controllers\AvisController::class, 'store'])->name('objets.avis.store');
+    Route::resource('avis', AvisController::class)->except(['index', 'show', 'store']);
     // Ticket d'expédition
     Route::get('/reservations/{reservation}/ticket', [ReservationController::class, 'ticket'])->name('reservations.ticket');
     // Paiements Stripe

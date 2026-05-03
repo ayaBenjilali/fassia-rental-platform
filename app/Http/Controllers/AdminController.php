@@ -100,14 +100,16 @@ class AdminController extends Controller
             'message' => 'required|string|max:500',
         ]);
 
-        // Envoyer une notification d'avertissement
+        // Envoyer une notification d'avertissement avec redirection vers la discussion
         $user->notify(new \App\Notifications\AdStatusChanged(
             "AVERTISSEMENT : " . $request->message,
             null,
-            'error'
+            'error',
+            route('messages.show', auth()->id()), // Redirection vers le chat avec l'admin
+            auth()->id() // ID de l'admin (sender)
         ));
 
-        // Optionnel : Envoyer aussi un message privé de la part de l'admin
+        // Envoyer aussi un message privé de la part de l'admin
         Message::create([
             'expediteur_id' => auth()->id(),
             'destinataire_id' => $user->id,

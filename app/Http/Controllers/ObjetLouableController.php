@@ -121,7 +121,7 @@ class ObjetLouableController extends Controller
             }
         }
 
-        $objet->load('photos', 'user');
+        $objet->load(['photos', 'user', 'avis.user']);
         return view('objets.show', ['objetLouable' => $objet]);
     }
 
