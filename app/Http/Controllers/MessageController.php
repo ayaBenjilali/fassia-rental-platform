@@ -63,13 +63,6 @@ class MessageController extends Controller
 
         $message = Message::create($validated);
 
-        $message->destinataire->notify(new \App\Notifications\AdStatusChanged(
-            "Nouveau message de " . (auth()->user()->nom ?? auth()->user()->name) . " : " . \Illuminate\Support\Str::limit($message->contenu, 50),
-            null,
-            'message',
-            route('messages.show', auth()->id()), // Redirige vers la conversation avec moi
-            auth()->id()
-        ));
 
         if ($request->ajax()) {
             return response()->json(['success' => true]);
