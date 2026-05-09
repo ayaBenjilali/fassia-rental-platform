@@ -62,8 +62,12 @@
                                     <input type="text" name="search" 
                                            form="filterForm"
                                            value="{{ request('search') }}" 
+                                           oninput="this.form.submit()"
+                                           onfocus="var val=this.value; this.value=''; this.value=val;"
+                                           autofocus
                                            placeholder="Rechercher par style, couleur, tissu..." 
                                            class="w-full px-5 py-3 rounded-xl border-gray-200 focus:border-royal-gold focus:ring-royal-gold transition-all shadow-sm group-hover:shadow-md bg-gray-50/50 focus:bg-white text-sm">
+
                                 </div>
                                 <!-- Icône de recherche juste à côté -->
                                 <button type="submit" form="filterForm" class="bg-royal-gold text-white p-3 rounded-xl shadow-md hover:bg-royal-dark hover:scale-105 transition active:scale-95 flex items-center justify-center shrink-0">
