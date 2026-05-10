@@ -47,7 +47,7 @@
                 <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm font-medium uppercase tracking-wider">Réservations en cours</p>
-                        <p class="text-4xl font-extrabold text-royal-dark mt-2 font-heading">{{ \App\Models\Reservation::where('user_id', Auth::id())->where('statut', 'en_attente')->count() }}</p>
+                        <p class="text-4xl font-extrabold text-royal-dark mt-2 font-heading">{{ \App\Models\Reservation::where('user_id', Auth::id())->where('statut', 'payee')->count() }}</p>
                     </div>
                     <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-blue-500">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>

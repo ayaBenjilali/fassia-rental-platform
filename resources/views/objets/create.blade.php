@@ -308,6 +308,7 @@
                 type: '{{ old('type') }}',
                 titleExists: false,
                 imageUrls: [],
+                accumulatedFiles: [],
                 isSubmitting: false,
                 touched: {
                     titre: !!'{{ old('titre') }}',
@@ -361,18 +362,28 @@
                 
                 fileChosen(event) {
                     this.touched.photos = true;
-                    const files = event.target.files;
-                    if (files.length === 0) return;
+                    const newFiles = Array.from(event.target.files);
+                    if (newFiles.length === 0) return;
 
-                    // Clear old URLs if needed (though multiple can be added sequentially in logic, here we replace for simplicity or add)
-                    // Release old ones
+                    // Ajouter les nouveaux fichiers à la liste accumulée
+                    this.accumulatedFiles = this.accumulatedFiles.concat(newFiles);
+
+                    // Mettre à jour l'input natif avec tous les fichiers via DataTransfer
+                    const dataTransfer = new DataTransfer();
+                    this.accumulatedFiles.forEach(file => {
+                        dataTransfer.items.add(file);
+                    });
+                    event.target.files = dataTransfer.files;
+
+                    // Nettoyer les anciennes URLs pour éviter les fuites de mémoire
                     this.imageUrls.forEach(url => URL.revokeObjectURL(url));
                     this.imageUrls = []; 
                     
-                    for(let i = 0; i < files.length; i++) {
-                        const src = URL.createObjectURL(files[i]);
+                    // Créer les URLs de prévisualisation pour toutes les images
+                    this.accumulatedFiles.forEach(file => {
+                        const src = URL.createObjectURL(file);
                         this.imageUrls.push(src);
-                    }
+                    });
                 }
             }
         }
