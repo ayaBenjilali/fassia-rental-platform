@@ -117,7 +117,7 @@
                                         </div>
                                     </div>
 
-                                    <a :href="`{{ route('reservations.index') }}${selectedCount > 0 ? '?items=' + selectedItems.join(',') : ''}`" 
+                                    <a :href="`{{ route('reservations.create') }}${selectedCount > 0 ? '?items=' + selectedItems.join(',') : ''}`" 
                                        class="block w-full text-white text-center py-3.5 px-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
                                        :class="selectedCount > 0 ? 'bg-royal-dark hover:bg-gray-800' : 'bg-gray-400 pointer-events-none'">
                                         Réserver <span x-text="selectedCount"></span> article(s)

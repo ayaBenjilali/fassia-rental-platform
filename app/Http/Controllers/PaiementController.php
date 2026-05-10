@@ -8,36 +8,48 @@ use Illuminate\Http\Request;
 
 class PaiementController extends Controller
 {
-    public function checkout(Reservation $reservation)
+    public function checkout(Request $request)
     {
-        // On s'assure que la réservation appartient à l'utilisateur
-        if ($reservation->user_id !== auth()->id() || !in_array($reservation->statut, ['en_attente_paiement', 'confirmee'])) {
-            return back()->with('error', 'Cette réservation ne peut pas être payée pour le moment.');
+        $ids = explode(',', $request->query('ids'));
+        $reservations = Reservation::whereIn('id', $ids)->get();
+
+        if ($reservations->isEmpty()) {
+            return back()->with('error', 'Aucune réservation trouvée.');
         }
 
-        // Vérifier s'il y a déjà un paiement
-        if ($reservation->paiement || $reservation->statut === 'payee') {
-            return back()->with('error', 'Cette réservation a déjà été payée.');
+        // Vérifier l'appartenance et le statut
+        foreach ($reservations as $reservation) {
+            if ($reservation->user_id !== auth()->id() || !in_array($reservation->statut, ['en_attente_paiement', 'confirmee'])) {
+                return back()->with('error', 'Une ou plusieurs réservations ne peuvent pas être payées.');
+            }
+            if ($reservation->paiement || $reservation->statut === 'payee') {
+                return back()->with('error', 'Une réservation a déjà été payée.');
+            }
         }
 
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        // Création de la session Stripe
-        $session = \Stripe\Checkout\Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
+        $lineItems = [];
+        foreach ($reservations as $reservation) {
+            $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'mad', // Dirham Marocain
+                    'currency' => 'mad',
                     'product_data' => [
                         'name' => 'Location : ' . $reservation->objetLouable->titre,
                         'description' => 'Du ' . \Carbon\Carbon::parse($reservation->date_debut)->format('d/m/Y') . ' au ' . \Carbon\Carbon::parse($reservation->date_fin)->format('d/m/Y'),
                     ],
-                    'unit_amount' => $reservation->montant_total * 100, // Stripe demande des centimes
+                    'unit_amount' => $reservation->montant_total * 100,
                 ],
                 'quantity' => 1,
-            ]],
+            ];
+        }
+
+        // Création de la session Stripe
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('paiements.success') . '?session_id={CHECKOUT_SESSION_ID}&reservation_id=' . $reservation->id,
+            'success_url' => route('paiements.success') . '?session_id={CHECKOUT_SESSION_ID}&reservation_ids=' . implode(',', $ids),
             'cancel_url' => route('paiements.cancel'),
         ]);
 
@@ -47,9 +59,9 @@ class PaiementController extends Controller
     public function success(Request $request)
     {
         $sessionId = $request->get('session_id');
-        $reservationId = $request->get('reservation_id');
+        $reservationIds = array_filter(explode(',', $request->get('reservation_ids')));
 
-        if (!$sessionId || !$reservationId) {
+        if (!$sessionId || empty($reservationIds)) {
             return redirect()->route('dashboard')->with('error', 'Paiement invalide.');
         }
 
@@ -59,31 +71,36 @@ class PaiementController extends Controller
             $session = \Stripe\Checkout\Session::retrieve($sessionId);
 
             if ($session->payment_status == 'paid') {
-                $reservation = \App\Models\Reservation::findOrFail($reservationId);
+                $reservations = \App\Models\Reservation::whereIn('id', $reservationIds)->get();
                 
-                // 1. Enregistrer le paiement en base
-                Paiement::firstOrCreate(
-                    ['reservation_id' => $reservation->id],
-                    [
-                        'montant' => $session->amount_total / 100,
-                        'date_paie' => now(),
-                        'statut' => 'valide',
-                    ]
-                );
+                foreach ($reservations as $reservation) {
+                    // 1. Enregistrer le paiement en base (proportionnel)
+                    Paiement::firstOrCreate(
+                        ['reservation_id' => $reservation->id],
+                        [
+                            'montant' => $reservation->montant_total,
+                            'date_paie' => now(),
+                            'statut' => 'valide',
+                        ]
+                    );
 
-                // 2. Mettre à jour le statut de la réservation
-                $reservation->update(['statut' => 'payee']);
+                    // 2. Mettre à jour le statut de la réservation
+                    $reservation->update(['statut' => 'payee']);
 
-                // 3. Envoyer une notification au propriétaire
-                $objet = $reservation->objetLouable;
-                $objet->user->notify(new \App\Notifications\AdStatusChanged(
-                    "Nouvelle demande de location PAYÉE pour votre article '{$objet->titre}'. Le paiement a été validé automatiquement.",
-                    $objet->id,
-                    'success',
-                    route('dashboard') . '#demandes-recues'
-                ));
+                    // 3. Envoyer une notification au propriétaire
+                    $objet = $reservation->objetLouable;
+                    $objet->user->notify(new \App\Notifications\AdStatusChanged(
+                        "Nouvelle demande de location PAYÉE pour votre article '{$objet->titre}'. Le paiement a été validé automatiquement.",
+                        $objet->id,
+                        'success',
+                        route('dashboard') . '#demandes-recues'
+                    ));
+                }
                 
-                $msg = "Le livreur vous contactera pour la livraison.\n\n🔒 Pour garantir la sécurité de la location, une vérification d'identité (CIN) sera effectuée par le livreur lors de la remise et de la récupération de l'article.\n\nMerci pour votre confiance.";
+                // Vider le panier après paiement réussi
+                \App\Models\CartItem::where('user_id', auth()->id())->delete();
+                
+                $msg = "Paiement réussi ! Le livreur vous contactera pour la livraison.\n\n🔒 Pour garantir la sécurité, une vérification d'identité (CIN) sera effectuée lors de la remise.\n\nMerci pour votre confiance.";
 
                 return redirect()->route('dashboard')->with('success', $msg);
             }

@@ -18,37 +18,44 @@ class ReservationController extends Controller
 
     public function create(\Illuminate\Http\Request $request)
     {
-        $objet = null;
+        $objets = collect();
         $reservedDates = [];
 
         if ($request->has('objet')) {
             $objet = \App\Models\ObjetLouable::with('photos')->find($request->query('objet'));
-            
-            if ($objet) {
-                // Get all confirmed or paid reservations for this object
-                $reservations = Reservation::where('objet_louable_id', $objet->id)
-                    ->whereIn('statut', ['confirmee', 'payee'])
-                    ->where('date_fin', '>=', now()->subDays(3)->toDateString())
-                    ->get();
+            if ($objet) $objets->push($objet);
+        } elseif ($request->has('items')) {
+            $ids = explode(',', $request->query('items'));
+            $objets = \App\Models\ObjetLouable::with('photos')->whereIn('id', $ids)->get();
+        }
 
-                foreach ($reservations as $res) {
-                    // Logistique: 1 jour avant (livraison), 2 jours après (retour + maintenance)
-                    $start = (new \DateTime($res->date_debut))->modify('-1 day');
-                    $end = (new \DateTime($res->date_fin))->modify('+2 days');
+        if ($objets->isNotEmpty()) {
+            // Get all confirmed or paid reservations for these objects
+            $reservations = Reservation::whereIn('objet_louable_id', $objets->pluck('id'))
+                ->whereIn('statut', ['confirmee', 'payee'])
+                ->where('date_fin', '>=', now()->subDays(3)->toDateString())
+                ->get();
 
-                    $period = new \DatePeriod(
-                        $start,
-                        new \DateInterval('P1D'),
-                        $end->modify('+1 day')
-                    );
-                    foreach ($period as $date) {
-                        $reservedDates[] = $date->format('Y-m-d');
-                    }
+            foreach ($reservations as $res) {
+                // Logistique: 1 jour avant (livraison), 2 jours après (retour + maintenance)
+                $start = (new \DateTime($res->date_debut))->modify('-1 day');
+                $end = (new \DateTime($res->date_fin))->modify('+2 days');
+
+                $period = new \DatePeriod(
+                    $start,
+                    new \DateInterval('P1D'),
+                    $end->modify('+1 day')
+                );
+                foreach ($period as $date) {
+                    $reservedDates[] = $date->format('Y-m-d');
                 }
             }
+            // Retirer les doublons de dates
+            $reservedDates = array_values(array_unique($reservedDates));
         }
         
-        return view('reservations.create', compact('objet', 'reservedDates'));
+        $objet = $objets->first(); // Compatibilité avec l'ancienne vue pour le moment
+        return view('reservations.create', compact('objets', 'objet', 'reservedDates'));
     }
 
     public function store(Request $request)
@@ -56,7 +63,7 @@ class ReservationController extends Controller
         $validated = $request->validate([
             'date_debut' => 'required|date|after_or_equal:today',
             'date_fin' => 'required|date|after_or_equal:date_debut',
-            'objet_louable_id' => 'required|exists:objet_louables,id',
+            'objet_louable_ids' => 'required|string',
             'montant_total' => 'required|numeric|min:0',
             'nom' => 'required|string|max:255',
             'ville' => 'required|string|max:255',
@@ -65,28 +72,51 @@ class ReservationController extends Controller
             'cin' => 'required|string|max:50',
         ]);
 
-        // Logic for logistics buffer: new_start must be > old_end + 2 days
-        // and new_end must be < old_start - 1 day
-        // Check for availability with buffer (1 day before, 2 days after)
-        $reservations = Reservation::where('objet_louable_id', $validated['objet_louable_id'])
-            ->whereIn('statut', ['confirmee', 'payee'])
-            ->get();
+        $ids = explode(',', $validated['objet_louable_ids']);
+        $objets = \App\Models\ObjetLouable::whereIn('id', $ids)->get();
+        $reservationsIds = [];
 
-        foreach ($reservations as $res) {
-            $blocked_start = (new \DateTime($res->date_debut))->modify('-1 day')->format('Y-m-d');
-            $blocked_end = (new \DateTime($res->date_fin))->modify('+2 days')->format('Y-m-d');
+        foreach ($objets as $objet) {
+            // Check for availability with buffer (1 day before, 2 days after)
+            $existingReservations = Reservation::where('objet_louable_id', $objet->id)
+                ->whereIn('statut', ['confirmee', 'payee'])
+                ->get();
 
-            if ($validated['date_debut'] <= $blocked_end && $blocked_start <= $validated['date_fin']) {
-                return back()->withInput()->withErrors(['dates' => 'Cet article est indisponible aux dates sélectionnées (incluant les délais de livraison et de maintenance).']);
+            foreach ($existingReservations as $res) {
+                $blocked_start = (new \DateTime($res->date_debut))->modify('-1 day')->format('Y-m-d');
+                $blocked_end = (new \DateTime($res->date_fin))->modify('+2 days')->format('Y-m-d');
+
+                if ($validated['date_debut'] <= $blocked_end && $blocked_start <= $validated['date_fin']) {
+                    return back()->withInput()->withErrors(['dates' => "L'article '{$objet->titre}' est indisponible aux dates sélectionnées."]);
+                }
             }
+
+            // Calcul du montant pour CET objet spécifique
+            $start = new \DateTime($validated['date_debut']);
+            $end = new \DateTime($validated['date_fin']);
+            $diffDays = max(1, $end->diff($start)->days);
+            if ($start > $end) $diffDays = 0;
+            
+            $montantObjet = $diffDays * $objet->prix;
+
+            $reservation = Reservation::create([
+                'user_id' => auth()->id(),
+                'objet_louable_id' => $objet->id,
+                'date_debut' => $validated['date_debut'],
+                'date_fin' => $validated['date_fin'],
+                'statut' => 'en_attente_paiement',
+                'montant_total' => $montantObjet,
+                'nom' => $validated['nom'],
+                'ville' => $validated['ville'],
+                'telephone' => $validated['telephone'],
+                'adresse' => $validated['adresse'],
+                'cin' => $validated['cin'],
+            ]);
+
+            $reservationsIds[] = $reservation->id;
         }
 
-        $validated['user_id'] = auth()->id();
-        $validated['statut'] = 'en_attente_paiement';
-
-        $reservation = Reservation::create($validated);
-
-        return redirect()->route('paiements.checkout', $reservation);
+        return redirect()->route('paiements.checkout', ['ids' => implode(',', $reservationsIds)]);
     }
 
     public function show(Reservation $reservation)

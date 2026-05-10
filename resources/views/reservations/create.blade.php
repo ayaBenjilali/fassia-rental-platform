@@ -25,25 +25,31 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-3xl border border-gray-100 flex flex-col md:flex-row">
                 
-                @if($objet)
+                @if($objets->isNotEmpty())
                 <!-- Resume Section -->
                 <div class="w-full md:w-1/3 bg-gray-50 p-8 sm:p-10 border-r border-gray-100 flex flex-col">
-                    <h3 class="text-sm font-bold tracking-widest text-royal-gold uppercase mb-6">Résumé de l'article</h3>
-                    @if($objet->photos && $objet->photos->count() > 0)
-                        <img src="{{ asset('storage/' . $objet->photos->first()->url_photo) }}" class="w-full h-48 md:h-64 object-cover rounded-xl mb-6 shadow-sm border border-gray-200">
-                    @else
-                        <div class="w-full h-48 md:h-64 bg-gray-200 rounded-xl mb-6 flex items-center justify-center text-gray-400">Sans image</div>
-                    @endif
-                    <p class="font-heading font-bold text-2xl text-royal-dark mb-2 leading-tight">{{ $objet->titre }}</p>
-                    <p class="text-sm text-gray-500 mb-6 flex items-center">
-                        <svg class="w-4 h-4 mr-1 text-royal-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        {{ $objet->localisation }}
-                    </p>
+                    <h3 class="text-sm font-bold tracking-widest text-royal-gold uppercase mb-6">Résumé de la commande ({{ $objets->count() }} articles)</h3>
                     
-                    <div class="mt-auto pt-6 border-t border-gray-200">
+                    <div class="space-y-6 flex-1 overflow-y-auto max-h-[500px] pr-2">
+                    @foreach($objets as $obj)
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-gray-100">
+                            @if($obj->photos && $obj->photos->count() > 0)
+                                <img src="{{ asset('storage/' . $obj->photos->first()->url_photo) }}" class="w-16 h-16 object-cover rounded-lg">
+                            @else
+                                <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center text-[10px] text-gray-400">Sans image</div>
+                            @endif
+                            <div class="flex-1 min-w-0">
+                                <p class="font-heading font-bold text-sm text-royal-dark truncate">{{ $obj->titre }}</p>
+                                <p class="text-xs text-gray-500 font-medium">{{ number_format($obj->prix, 2) }} DH/j</p>
+                            </div>
+                        </div>
+                    @endforeach
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200">
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600 font-medium">Tarif journalier</span>
-                            <span class="font-bold text-xl text-royal-dark">{{ number_format($objet->prix, 2) }} DH</span>
+                            <span class="text-gray-600 font-medium">Tarif journalier total</span>
+                            <span class="font-bold text-xl text-royal-dark">{{ number_format($objets->sum('prix'), 2) }} DH</span>
                         </div>
                     </div>
                 </div>
@@ -53,8 +59,8 @@
                 <div class="w-full md:w-2/3 p-8 sm:p-12">
                     <form method="POST" action="{{ route('reservations.store') }}">
                         @csrf
-                        @if($objet)
-                            <input type="hidden" name="objet_louable_id" value="{{ $objet->id }}">
+                        @if($objets->isNotEmpty())
+                            <input type="hidden" name="objet_louable_ids" value="{{ $objets->pluck('id')->join(',') }}">
                         @endif
 
                         <h3 class="text-2xl font-heading text-royal-dark font-bold mb-8">Détails de location</h3>
@@ -157,7 +163,7 @@
             return {
                 dateDebut: '{{ old('date_debut') }}',
                 dateFin: '{{ old('date_fin') }}',
-                prixJour: {{ $objet ? $objet->prix : 0 }},
+                prixJour: {{ $objets->sum('prix') }},
                 days: 0,
                 montantTotal: '{{ old('montant_total', 0) }}',
                 reservedDates: @json($reservedDates),

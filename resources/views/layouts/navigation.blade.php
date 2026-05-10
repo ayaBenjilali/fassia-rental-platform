@@ -120,10 +120,15 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
-                    @if(session('cart') && count(session('cart')) > 0)
-                        <span class="absolute -top-2 -right-2 bg-royal-emerald text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-sm">
-                            {{ count(session('cart')) }}
-                        </span>
+                    @if(Auth::check())
+                        @php
+                            $cartCount = \App\Models\CartItem::where('user_id', Auth::id())->count();
+                        @endphp
+                        @if($cartCount > 0)
+                            <span class="absolute -top-2 -right-2 bg-royal-emerald text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-sm">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
                     @endif
                 </a>
 

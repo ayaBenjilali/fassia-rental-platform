@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function () {
     // Ticket d'expédition
     Route::get('/reservations/{reservation}/ticket', [ReservationController::class, 'ticket'])->name('reservations.ticket');
     // Paiements Stripe
-    Route::get('/paiements/checkout/{reservation}', [PaiementController::class, 'checkout'])->name('paiements.checkout');
+    Route::get('/paiements/checkout', [PaiementController::class, 'checkout'])->name('paiements.checkout');
     Route::get('/paiements/success', [PaiementController::class, 'success'])->name('paiements.success');
     Route::get('/paiements/cancel', [PaiementController::class, 'cancel'])->name('paiements.cancel');
     Route::resource('paiements', PaiementController::class)->except(['create', 'store']);

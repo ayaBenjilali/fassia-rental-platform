@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ObjetLouable;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -12,20 +14,23 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = session()->get('cart', []);
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('info', 'Veuillez vous connecter pour voir votre panier.');
+        }
+
+        $cartItems = CartItem::where('user_id', Auth::id())->with('objetLouable.photos')->get();
         $items = [];
         $total = 0;
 
-        if (!empty($cart)) {
-            $objets = ObjetLouable::with('photos')->whereIn('id', array_keys($cart))->get();
-            foreach ($objets as $objet) {
+        foreach ($cartItems as $cartItem) {
+            if ($cartItem->objetLouable) {
                 $items[] = [
-                    'objet' => $objet,
-                    'quantity' => $cart[$objet->id]['quantity'],
-                    'subtotal' => $objet->prix * $cart[$objet->id]['quantity'],
-                    'taille' => $cart[$objet->id]['taille'] ?? null
+                    'objet' => $cartItem->objetLouable,
+                    'quantity' => $cartItem->quantity,
+                    'subtotal' => $cartItem->objetLouable->prix * $cartItem->quantity,
+                    'taille' => $cartItem->taille
                 ];
-                $total += $objet->prix * $cart[$objet->id]['quantity'];
+                $total += $cartItem->objetLouable->prix * $cartItem->quantity;
             }
         }
 
@@ -37,25 +42,27 @@ class CartController extends Controller
      */
     public function add(Request $request, $id)
     {
-        $objet = ObjetLouable::findOrFail($id);
-        $cart = session()->get('cart', []);
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('info', 'Veuillez vous connecter pour ajouter des articles au panier.');
+        }
 
-        // Vérifier si l'article est déjà dans le panier
-        if (isset($cart[$id])) {
+        $objet = ObjetLouable::findOrFail($id);
+        
+        $existingItem = CartItem::where('user_id', Auth::id())
+                                ->where('objet_louable_id', $id)
+                                ->first();
+
+        if ($existingItem) {
             return redirect()->back()->with('info', 'Cet article est déjà dans votre panier.');
         }
 
-        $taille = $request->input('taille_selectionnee');
+        CartItem::create([
+            'user_id' => Auth::id(),
+            'objet_louable_id' => $id,
+            'quantity' => 1,
+            'taille' => $request->input('taille_selectionnee')
+        ]);
 
-        $cart[$id] = [
-            "name" => $objet->titre,
-            "quantity" => 1,
-            "price" => $objet->prix,
-            "photo" => $objet->photos->first() ? $objet->photos->first()->url_photo : null,
-            "taille" => $taille
-        ];
-
-        session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Article ajouté au panier !');
     }
 
@@ -64,11 +71,10 @@ class CartController extends Controller
      */
     public function remove($id)
     {
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
+        if (Auth::check()) {
+            CartItem::where('user_id', Auth::id())
+                    ->where('objet_louable_id', $id)
+                    ->delete();
         }
 
         return redirect()->back()->with('success', 'Article retiré du panier.');
@@ -79,7 +85,9 @@ class CartController extends Controller
      */
     public function clear()
     {
-        session()->forget('cart');
+        if (Auth::check()) {
+            CartItem::where('user_id', Auth::id())->delete();
+        }
         return redirect()->back()->with('success', 'Panier vidé.');
     }
 }
