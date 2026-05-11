@@ -78,11 +78,13 @@
                                                     </a>
                                                 @endif
 
-                                                @if($reservation->statut == 'en_attente')
+                                                @if($reservation->statut == 'en_attente' || strtolower($reservation->statut) == 'en_attente_paiement')
                                                     <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-sm border border-red-500 hover:bg-red-50 px-3 py-1 rounded-md transition" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation?')">Annuler</button>
+                                                        <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-[10px] border border-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition shadow-sm uppercase tracking-wider" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation?')">
+                                                            Annuler
+                                                        </button>
                                                     </form>
                                                 @endif
 
