@@ -195,9 +195,9 @@ class ReservationController extends Controller
 
     public function ticket(Reservation $reservation)
     {
-        // Seul le propriétaire de l'objet peut voir le ticket
-        if ($reservation->objetLouable->user_id !== auth()->id()) {
-            abort(403);
+        // Le propriétaire de l'objet ET le locataire peuvent voir le ticket
+        if ($reservation->objetLouable->user_id !== auth()->id() && $reservation->user_id !== auth()->id()) {
+            abort(403, 'Vous n\'êtes pas autorisé à voir ce ticket.');
         }
 
         $reservation->load(['objetLouable.photos', 'user', 'paiement']);

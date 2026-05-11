@@ -85,6 +85,13 @@
                                                         <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-sm border border-red-500 hover:bg-red-50 px-3 py-1 rounded-md transition" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation?')">Annuler</button>
                                                     </form>
                                                 @endif
+
+                                                @if(in_array(strtolower($reservation->statut), ['payee', 'payée']))
+                                                    <a href="{{ route('reservations.ticket', $reservation) }}" target="_blank" class="bg-[#be185d] text-white text-[10px] font-black px-4 py-2 rounded-lg hover:brightness-110 transition shadow-md flex items-center gap-1 uppercase tracking-widest">
+                                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                                                        Ticket
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
