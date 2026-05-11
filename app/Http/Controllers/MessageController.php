@@ -15,8 +15,12 @@ class MessageController extends Controller
         $userId = auth()->id();
         
         // Récupérer les derniers messages groupés par interlocuteur
-        $conversations = Message::where('expediteur_id', $userId)
-            ->orWhere('destinataire_id', $userId)
+        $conversations = Message::where(function($q) use ($userId) {
+                $q->where('expediteur_id', $userId)->where('deleted_by_expediteur', false);
+            })
+            ->orWhere(function($q) use ($userId) {
+                $q->where('destinataire_id', $userId)->where('deleted_by_destinataire', false);
+            })
             ->latest()
             ->get()
             ->groupBy(function ($message) use ($userId) {
@@ -32,9 +36,13 @@ class MessageController extends Controller
         $interlocuteur = \App\Models\User::findOrFail($interlocuteurId);
 
         $messages = Message::where(function($q) use ($userId, $interlocuteurId) {
-            $q->where('expediteur_id', $userId)->where('destinataire_id', $interlocuteurId);
+            $q->where('expediteur_id', $userId)
+              ->where('destinataire_id', $interlocuteurId)
+              ->where('deleted_by_expediteur', false);
         })->orWhere(function($q) use ($userId, $interlocuteurId) {
-            $q->where('expediteur_id', $interlocuteurId)->where('destinataire_id', $userId);
+            $q->where('expediteur_id', $interlocuteurId)
+              ->where('destinataire_id', $userId)
+              ->where('deleted_by_destinataire', false);
         })->oldest()->get();
 
         // Marquer comme lus (Messages)
@@ -77,19 +85,27 @@ class MessageController extends Controller
             abort(403);
         }
         
-        $message->delete();
+        if ($message->expediteur_id === auth()->id()) {
+            $message->update(['deleted_by_expediteur' => true]);
+        }
+        if ($message->destinataire_id === auth()->id()) {
+            $message->update(['deleted_by_destinataire' => true]);
+        }
+        
         return back()->with('success', 'Message supprimé.');
     }
 
     public function destroyDiscussion($interlocuteurId)
     {
-        \App\Models\Message::where(function($query) use ($interlocuteurId) {
-            $query->where('expediteur_id', auth()->id())
-                  ->where('destinataire_id', $interlocuteurId);
-        })->orWhere(function($query) use ($interlocuteurId) {
-            $query->where('expediteur_id', $interlocuteurId)
-                  ->where('destinataire_id', auth()->id());
-        })->delete();
+        // Masquer les messages envoyés par l'utilisateur à cet interlocuteur
+        \App\Models\Message::where('expediteur_id', auth()->id())
+              ->where('destinataire_id', $interlocuteurId)
+              ->update(['deleted_by_expediteur' => true]);
+
+        // Masquer les messages reçus par l'utilisateur de cet interlocuteur
+        \App\Models\Message::where('expediteur_id', $interlocuteurId)
+              ->where('destinataire_id', auth()->id())
+              ->update(['deleted_by_destinataire' => true]);
 
         return redirect()->route('messages.index')->with('success', 'Discussion supprimée.');
     }

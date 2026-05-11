@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Message extends Model
 {
     protected $fillable = [
-        'contenu', 'expediteur_id', 'destinataire_id', 'lu_a'
+        'contenu', 'expediteur_id', 'destinataire_id', 'lu_a', 'deleted_by_expediteur', 'deleted_by_destinataire'
     ];
 
     public function expediteur(): BelongsTo

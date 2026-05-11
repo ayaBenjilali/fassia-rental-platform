@@ -91,6 +91,27 @@ class ReservationController extends Controller
                 }
             }
 
+            // Vérifier si une réservation en attente de paiement existe déjà pour cet objet et ces dates
+            $existingUnpaid = Reservation::where('user_id', auth()->id())
+                ->where('objet_louable_id', $objet->id)
+                ->where('date_debut', $validated['date_debut'])
+                ->where('date_fin', $validated['date_fin'])
+                ->where('statut', 'en_attente_paiement')
+                ->first();
+
+            if ($existingUnpaid) {
+                // Mettre à jour les infos personnelles au cas où elles ont changé
+                $existingUnpaid->update([
+                    'nom' => $validated['nom'],
+                    'ville' => $validated['ville'],
+                    'telephone' => $validated['telephone'],
+                    'adresse' => $validated['adresse'],
+                    'cin' => $validated['cin'],
+                ]);
+                $reservationsIds[] = $existingUnpaid->id;
+                continue;
+            }
+
             // Calcul du montant pour CET objet spécifique
             $start = new \DateTime($validated['date_debut']);
             $end = new \DateTime($validated['date_fin']);

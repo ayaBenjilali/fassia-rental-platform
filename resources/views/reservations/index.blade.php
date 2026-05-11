@@ -72,7 +72,7 @@
                                                 @endif
 
                                                 @if($reservation->statut == 'En_attente_paiement' || $reservation->statut == 'en_attente_paiement')
-                                                    <a href="{{ route('paiements.checkout', $reservation) }}" class="bg-[#be185d] text-white text-[10px] font-black px-4 py-2 rounded-lg hover:brightness-110 transition shadow-md flex items-center gap-1 uppercase tracking-widest">
+                                                    <a href="{{ route('paiements.checkout', ['ids' => $reservation->id]) }}" class="bg-[#be185d] text-white text-[10px] font-black px-4 py-2 rounded-lg hover:brightness-110 transition shadow-md flex items-center gap-1 uppercase tracking-widest">
                                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                                                         Payer
                                                     </a>
