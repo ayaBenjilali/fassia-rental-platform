@@ -79,13 +79,42 @@
                                                 @endif
 
                                                 @if($reservation->statut == 'en_attente' || strtolower($reservation->statut) == 'en_attente_paiement')
-                                                    <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-[10px] border border-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition shadow-sm uppercase tracking-wider" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation?')">
+                                                    <div x-data="{ showModal: false }">
+                                                        <button @click="showModal = true" type="button" class="text-red-500 hover:text-red-700 font-medium text-[10px] border border-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition shadow-sm uppercase tracking-wider">
                                                             Annuler
                                                         </button>
-                                                    </form>
+
+                                                        <!-- Arrière-plan sombre du Modal -->
+                                                        <div x-show="showModal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-50 backdrop-blur-sm transition-opacity" x-transition.opacity>
+                                                            <!-- Fenêtre du Modal -->
+                                                            <div @click.away="showModal = false" x-show="showModal" x-transition.scale.origin.bottom class="relative bg-white rounded-xl shadow-2xl p-6 mx-4 text-center transform transition-all w-[90%]" style="max-width: 350px;">
+                                                                <!-- Icône d'avertissement -->
+                                                                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4 shadow-inner">
+                                                                    <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <!-- Textes -->
+                                                                <h3 class="text-lg font-bold text-gray-900 font-heading mb-2">Annuler la réservation</h3>
+                                                                <p class="text-gray-500 text-sm mb-6 leading-relaxed">
+                                                                    Êtes-vous sûr de vouloir annuler cette réservation ? <br><strong>Cette action est irréversible.</strong>
+                                                                </p>
+                                                                <!-- Boutons d'action -->
+                                                                <div class="flex items-center w-full mt-4" style="gap: 12px;">
+                                                                    <button @click="showModal = false" type="button" class="flex-1 px-2 text-gray-700 text-sm font-bold rounded-lg shadow-sm transition" style="height: 42px; background-color: #ffffff; border: 1px solid #d1d5db;">
+                                                                        Retour
+                                                                    </button>
+                                                                    <form action="{{ route('reservations.destroy', $reservation) }}" method="POST" class="flex-1 m-0 p-0">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="w-full px-2 text-sm font-bold rounded-lg shadow-md transition" style="height: 42px; background-color: #ef4444; color: #ffffff; border: 1px solid #ef4444;">
+                                                                            Oui, annuler
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @endif
 
                                                 @if(in_array(strtolower($reservation->statut), ['payee', 'payée']))
