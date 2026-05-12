@@ -12,7 +12,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::with('objetLouable')->where('user_id', auth()->id() ?? 1)->latest()->get();
+        $reservations = Reservation::with('objetLouable')->where('user_id', auth()->id() ?? 1)->latest()->paginate(10);
         return view('reservations.index', compact('reservations'));
     }
 

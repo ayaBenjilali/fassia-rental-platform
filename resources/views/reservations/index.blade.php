@@ -52,15 +52,15 @@
                                             </td>
                                             <td class="p-4">
                                                 @if($reservation->statut == 'en_attente')
-                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-yellow-100 text-yellow-800 border border-yellow-200">En attente</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-yellow-100 text-yellow-800 border border-yellow-200 whitespace-nowrap">En attente</span>
                                                 @elseif($reservation->statut == 'En_attente_paiement' || $reservation->statut == 'en_attente_paiement')
-                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-orange-100 text-orange-700 border border-orange-200">Paiement requis</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-orange-100 text-orange-700 border border-orange-200 whitespace-nowrap">Paiement requis</span>
                                                 @elseif($reservation->statut == 'confirmee' || $reservation->statut == 'Payee' || $reservation->statut == 'payee')
-                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-100 text-green-700 border border-green-200">Payée</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-100 text-green-700 border border-green-200 whitespace-nowrap">Payée</span>
                                                 @elseif($reservation->statut == 'annulee')
-                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-red-100 text-red-700 border border-red-200">Annulée</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-red-100 text-red-700 border border-red-200 whitespace-nowrap">Annulée</span>
                                                 @else
-                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-700 border border-gray-200">{{ ucfirst($reservation->statut) }}</span>
+                                                    <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-gray-100 text-gray-700 border border-gray-200 whitespace-nowrap">{{ ucfirst($reservation->statut) }}</span>
                                                 @endif
                                             </td>
                                             <td class="p-4 text-right flex justify-end items-center gap-2">
@@ -129,6 +129,12 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        @if($reservations->hasPages())
+                            <div class="mt-8 px-2">
+                                {{ $reservations->links() }}
+                            </div>
+                        @endif
                     @else
                         <div class="text-center py-16 text-gray-500">
                             <svg class="mx-auto h-16 w-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
