@@ -33,12 +33,21 @@ class AdminController extends Controller
         $adminId = auth()->id();
 
         // Messages reçus par l'admin (réclamations), groupés par expéditeur
-        $reclamations = Message::where('destinataire_id', $adminId)
+        // Ne montrer que les conversations où le dernier message vient d'un utilisateur non-admin
+        $reclamations = Message::where(function($q) use ($adminId) {
+                $q->where('expediteur_id', $adminId)->orWhere('destinataire_id', $adminId);
+            })
             ->with('expediteur')
             ->latest()
             ->get()
-            ->groupBy('expediteur_id')
-            ->filter(fn($conv) => $conv->first()->expediteur?->role !== 'admin');
+            ->groupBy(function ($message) use ($adminId) {
+                return $message->expediteur_id === $adminId ? $message->destinataire_id : $message->expediteur_id;
+            })
+            ->filter(function($conv) use ($adminId) {
+                $lastMsg = $conv->first();
+                // Ne montrer que si le dernier message vient d'un utilisateur non-admin
+                return $lastMsg->expediteur_id !== $adminId && $lastMsg->expediteur?->role !== 'admin';
+            });
 
         return view('admin.objets.index', compact('objets', 'historique', 'reclamations'));
     }
